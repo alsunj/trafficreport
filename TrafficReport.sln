@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficReport", "TrafficReport\TrafficReport.csproj", "{4A2A0E83-9E20-47BE-9837-34D87437506A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Domain", "App.Domain\App.Domain.csproj", "{FD25367C-7994-49D9-AB34-C3A19F146FED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Domain", "Base.Domain\Base.Domain.csproj", "{332381EF-03BB-4937-A647-99FD73FEC09E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{3B5049D6-6EE4-4F76-A164-B50447FBFA80}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{FB054599-4CEC-4FF4-9F03-EB015FCC6685}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A2A0E83-9E20-47BE-9837-34D87437506A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A2A0E83-9E20-47BE-9837-34D87437506A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A2A0E83-9E20-47BE-9837-34D87437506A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A2A0E83-9E20-47BE-9837-34D87437506A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD25367C-7994-49D9-AB34-C3A19F146FED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD25367C-7994-49D9-AB34-C3A19F146FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD25367C-7994-49D9-AB34-C3A19F146FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD25367C-7994-49D9-AB34-C3A19F146FED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{332381EF-03BB-4937-A647-99FD73FEC09E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{332381EF-03BB-4937-A647-99FD73FEC09E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{332381EF-03BB-4937-A647-99FD73FEC09E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{332381EF-03BB-4937-A647-99FD73FEC09E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{332381EF-03BB-4937-A647-99FD73FEC09E} = {FB054599-4CEC-4FF4-9F03-EB015FCC6685}
+		{FD25367C-7994-49D9-AB34-C3A19F146FED} = {3B5049D6-6EE4-4F76-A164-B50447FBFA80}
+	EndGlobalSection
+EndGlobal
