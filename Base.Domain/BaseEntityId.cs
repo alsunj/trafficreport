@@ -1,6 +1,14 @@
-﻿namespace Base.Domain;
+﻿using System.Security.AccessControl;
+using Base.Contracts.Domain;
 
-public class BaseEntityId
+namespace Base.Domain;
+
+public abstract class BaseEntityId : BaseEntityId<Guid>, IDomainEntityId
 {
-    public Guid Id { get; set;}
+}
+
+public abstract class BaseEntityId<TKey>: IDomainEntityId<TKey>
+where TKey : IEquatable<TKey>
+{
+    public TKey Id {get;set;}
 }
