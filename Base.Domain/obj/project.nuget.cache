@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GhvyaTlfwcYc28Oa+v+0WP4HfxHJiUQquuqoZ16e5xfsML4A+N0OqtN6WwsbM+wHXMwycbMneJFOKGdK+0Dg/Q==",
+  "dgSpecHash": "U0HTYI93dd8n7/AzkSi8q8mb+OTROL0xeKgU+xb3rM+KQNKhrKpAdFamfN52XbWVSTc7gnK/pFncOeNb5KHeIw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Alex\\Desktop\\TrafficReport\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj",
+  "projectFilePath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

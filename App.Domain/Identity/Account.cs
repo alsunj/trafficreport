@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Base.Domain;
 
-namespace App.Domain;
+namespace App.Domain.Identity;
 
-public class Account : BaseEntityId
+/* currently switched with AppUser
+ public class Account : BaseEntityId
 {
     [MaxLength(128)] 
     public string Username { get; set; }
     
 }
+*/
