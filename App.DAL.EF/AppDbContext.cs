@@ -1,5 +1,4 @@
 ﻿
-using App.Domain;
 using App.Domain.Identity;
 using App.Domain.Violations;
 using Microsoft.AspNetCore.Identity;

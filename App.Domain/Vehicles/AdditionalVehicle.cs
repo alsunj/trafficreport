@@ -1,15 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using App.Domain.Violations;
 using Base.Domain;
 
 namespace App.Domain.Vehicles;
 
 public class AdditionalVehicle : BaseEntityId
 {
-    [MaxLength(128)] 
-    public string AdditionalVehicles { get; set; }
+    public Guid VehicleId { get; set; }
+    public Vehicle? Vehicle { get; set; }
     
-    [MaxLength(128)] 
-    public string Username { get; set; }
-    
-
+    public Guid VehicleViolationId { get; set; }
+    public VehicleViolation? VehicleViolation { get; set; }
 }

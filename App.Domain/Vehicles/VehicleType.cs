@@ -4,10 +4,15 @@ using Base.Domain;
 
 namespace App.Domain.Vehicles;
 
-public class EvidenceType : BaseEntityId
+public class VehicleType : BaseEntityId
 {
-    [MaxLength(128)] 
-    public string? EvidenceTypeName{ get; set; }
+    [MaxLength(128)]
+    public string? VehicleTypeName { get; set; }
     
-    public ICollection<Evidence>? Evidences { get; set; }
+    public EVehicleSize Size { get; set; }
+    public string? Make { get; set; }
+    public string? Model { get; set; }
+
+    public ICollection<Vehicle>? Vehicles { get; set; }
+    
 }
