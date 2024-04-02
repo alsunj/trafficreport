@@ -15,4 +15,5 @@ public class Vehicle : BaseEntityId
     
     public ICollection<VehicleViolation>? VehicleViolations { get; set; }
     public ICollection<AdditionalVehicle>? AdditionalVehicles { get; set; }
+    
 }
