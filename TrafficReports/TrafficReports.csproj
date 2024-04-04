@@ -57,6 +57,16 @@
       <UpToDateCheckInput Remove="Views\Violation\Details.cshtml" />
       <UpToDateCheckInput Remove="Views\Violation\Edit.cshtml" />
       <UpToDateCheckInput Remove="Views\Violation\Index.cshtml" />
+      <UpToDateCheckInput Remove="Views\ViolationType\Create.cshtml" />
+      <UpToDateCheckInput Remove="Views\ViolationType\Delete.cshtml" />
+      <UpToDateCheckInput Remove="Views\ViolationType\Details.cshtml" />
+      <UpToDateCheckInput Remove="Views\ViolationType\Edit.cshtml" />
+      <UpToDateCheckInput Remove="Views\ViolationType\Index.cshtml" />
+      <UpToDateCheckInput Remove="Views\Violation\Create.cshtml" />
+      <UpToDateCheckInput Remove="Views\Violation\Delete.cshtml" />
+      <UpToDateCheckInput Remove="Views\Violation\Details.cshtml" />
+      <UpToDateCheckInput Remove="Views\Violation\Edit.cshtml" />
+      <UpToDateCheckInput Remove="Views\Violation\Index.cshtml" />
     </ItemGroup>
 
 

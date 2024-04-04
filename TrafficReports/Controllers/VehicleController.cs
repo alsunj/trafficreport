@@ -22,7 +22,8 @@ namespace TrafficReports.Controllers
         // GET: Vehicle
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Vehicles.ToListAsync());
+            var appDbContext = _context.Vehicles.Include(v => v.VehicleType);
+            return View(await appDbContext.ToListAsync());
         }
 
         // GET: Vehicle/Details/5
@@ -34,6 +35,7 @@ namespace TrafficReports.Controllers
             }
 
             var vehicle = await _context.Vehicles
+                .Include(v => v.VehicleType)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (vehicle == null)
             {
@@ -46,6 +48,7 @@ namespace TrafficReports.Controllers
         // GET: Vehicle/Create
         public IActionResult Create()
         {
+            ViewData["VehicleTypeId"] = new SelectList(_context.VehicleTypes, "Id", "Id");
             return View();
         }
 
@@ -63,6 +66,7 @@ namespace TrafficReports.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["VehicleTypeId"] = new SelectList(_context.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
             return View(vehicle);
         }
 
@@ -79,6 +83,7 @@ namespace TrafficReports.Controllers
             {
                 return NotFound();
             }
+            ViewData["VehicleTypeId"] = new SelectList(_context.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
             return View(vehicle);
         }
 
@@ -114,6 +119,7 @@ namespace TrafficReports.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["VehicleTypeId"] = new SelectList(_context.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
             return View(vehicle);
         }
 
@@ -126,6 +132,7 @@ namespace TrafficReports.Controllers
             }
 
             var vehicle = await _context.Vehicles
+                .Include(v => v.VehicleType)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (vehicle == null)
             {

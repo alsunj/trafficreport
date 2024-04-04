@@ -12,12 +12,14 @@ public class Comment : BaseEntityId
     
     public DateTime CreatedAt { get; set; }
 
-    public Guid ParentCommentId { get; set; }
+    public Guid? ParentCommentId { get; set; }
     public Comment? ParentComment { get; set; }
     public Guid AccountId { get; set; }
     public AppUser? Account { get; set; }
     
     public Guid VehicleViolationId { get; set; }
     public VehicleViolation? VehicleViolation { get; set; }
+    
+    public ICollection<Comment>? ChildComments { get; set; } = new List<Comment>();
     
 }

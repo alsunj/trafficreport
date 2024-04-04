@@ -3,8 +3,10 @@ Alex Šunjajev
 alsunj@taltech.ee
 222442IACB
 
+dotnet ef migrations   --project App.DAL.EF --startup-project TrafficReports add trafficreport4
+dotnet ef database  --project App.DAL.EF --startup-project TrafficReports update
 
-
+cd TrafficReports 
 dotnet aspnet-codegenerator controller -name ViolationTypeController     -actions -m  App.Domain.Violations.ViolationType       -dc AppDbContext -outDir Controllers --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
 dotnet aspnet-codegenerator controller -name ViolationController        -actions -m  App.Domain.Violations.Violation        -dc AppDbContext -outDir Controllers --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
 dotnet aspnet-codegenerator controller -name VehicleTypeController      -actions -m  App.Domain.Vehicles.VehicleType        -dc AppDbContext -outDir Controllers --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
@@ -18,9 +20,7 @@ dotnet aspnet-codegenerator controller -name VehicleViolationController        -
 
 
 
-SUBJECT TO CHANGE:
---ViolationType
-----Can't insert decimal from UI
+SUBJECTS TO CHANGE:
 
 --VehicleType 
 ----Fix EVehicleSize, cannot choose from UI,
