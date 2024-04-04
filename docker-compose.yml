@@ -1,16 +1,20 @@
 services:
-    sql:
-     image: postgres:16
-     container_name: trafficReport-sql
-     ports:
-        - 5432:5432
-     volumes:
-       - ~/apps/postgres:/var/lib/postgresql/data
-     environment:
-       - POSTGRES_PASSWORD=postgres
-       - POSTGRES_USER=postgres
-     restart: on-failure
-     logging:
+  sql:
+    image: postgres:16
+    container_name: trafficReport-sql
+    ports:
+      # external: internal
+      - 5432:5432
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    restart: on-failure
+    logging:
       options:
-         max-size: 10m
-         max-file: 3
+        max-size: 10m
+        max-file: 3
+
+volumes:
+  sql-volume:

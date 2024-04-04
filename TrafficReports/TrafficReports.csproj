@@ -16,8 +16,14 @@
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.1"/>
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.1"/>
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
         <PackageReference Include="Npgsql" Version="8.0.2" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
     </ItemGroup>
@@ -25,6 +31,42 @@
     <ItemGroup>
       <ProjectReference Include="..\App.DAL.EF\App.DAL.EF.csproj" />
       <ProjectReference Include="..\App.Domain\App.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\VehicleType\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\VehicleType\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\VehicleType\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\VehicleType\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\VehicleType\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ViolationType\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ViolationType\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ViolationType\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ViolationType\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ViolationType\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Violation\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Violation\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Violation\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Violation\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Violation\Index.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Views\Violation\Create.cshtml" />
+      <UpToDateCheckInput Remove="Views\Violation\Delete.cshtml" />
+      <UpToDateCheckInput Remove="Views\Violation\Details.cshtml" />
+      <UpToDateCheckInput Remove="Views\Violation\Edit.cshtml" />
+      <UpToDateCheckInput Remove="Views\Violation\Index.cshtml" />
+      <UpToDateCheckInput Remove="Views\ViolationType\Create.cshtml" />
+      <UpToDateCheckInput Remove="Views\ViolationType\Delete.cshtml" />
+      <UpToDateCheckInput Remove="Views\ViolationType\Details.cshtml" />
+      <UpToDateCheckInput Remove="Views\ViolationType\Edit.cshtml" />
+      <UpToDateCheckInput Remove="Views\ViolationType\Index.cshtml" />
+      <UpToDateCheckInput Remove="Views\Violation\Create.cshtml" />
+      <UpToDateCheckInput Remove="Views\Violation\Delete.cshtml" />
+      <UpToDateCheckInput Remove="Views\Violation\Details.cshtml" />
+      <UpToDateCheckInput Remove="Views\Violation\Edit.cshtml" />
+      <UpToDateCheckInput Remove="Views\Violation\Index.cshtml" />
     </ItemGroup>
 
 

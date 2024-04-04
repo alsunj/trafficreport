@@ -1,10 +1,10 @@
-﻿namespace App.Domain.Vehicles;
-
-public enum EVehicleSize
+﻿namespace App.Domain.Vehicles
 {
-    Sedan,
-    Truck,
-    SUV,
-    Hatchback,
-    
+    public enum EVehicleSize
+    {
+        Sedan,
+        Truck,
+        SUV,
+        Hatchback
+    }
 }

@@ -6,5 +6,5 @@ namespace App.Domain.Identity;
 
 public class AppUser : IdentityUser<Guid>
 {
-    public ICollection<Violation>? Violations { get; set; }
+    public ICollection<VehicleViolation>? VehicleViolations { get; set; }
 }

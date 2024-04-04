@@ -27,5 +27,11 @@ public class VehicleViolation : BaseEntityId
     
     public string? LocationName { get; set; }
 
-    public DateTime CreatedAt { get; set; }
+    private DateTime _createdAt;
+
+    public DateTime CreatedAt
+    {
+        get { return _createdAt; }
+        set { _createdAt = DateTime.SpecifyKind(value, DateTimeKind.Utc); }
+    }
 }

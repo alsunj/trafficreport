@@ -5,7 +5,8 @@ namespace App.Domain.Vehicles;
 
 public class Vehicle : BaseEntityId
 {
-    public VehicleType VehicleTypeId { get; set; }
+    public Guid VehicleTypeId { get; set; }
+    public VehicleType? VehicleType { get; set; }
     
     public string? Color { get; set; }
     
@@ -15,4 +16,5 @@ public class Vehicle : BaseEntityId
     
     public ICollection<VehicleViolation>? VehicleViolations { get; set; }
     public ICollection<AdditionalVehicle>? AdditionalVehicles { get; set; }
+    
 }

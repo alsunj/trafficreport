@@ -9,7 +9,7 @@ public class Violation : BaseEntityId
     public ViolationType? ViolationType { get; set; }
 
     public string? ViolationName { get; set; }
-    public decimal Severity { get; set; }
+    public decimal? Severity { get; set; }
 
     public ICollection<VehicleViolation>? VehicleViolations { get; set; }
 }
