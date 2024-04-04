@@ -1,19 +1,25 @@
+@using System.Diagnostics
 @model IEnumerable<App.Domain.Vehicles.VehicleType>
+
 
 @{
     ViewData["Title"] = "Index";
+    Debug.WriteLine("Enum Values Count1123: " ); // Output enum values count
+
 }
 
 <h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
+    
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.VehicleTypeName)
+                
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Size)
@@ -29,13 +35,15 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+    Debug.WriteLine("Enum Values Count: " ); // Output enum values count
+
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.VehicleTypeName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Size)
-            </td>
+                @Html.DisplayFor(model => item.Size)
+                                                                             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Make)
             </td>

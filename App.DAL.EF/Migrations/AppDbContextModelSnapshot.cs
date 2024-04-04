@@ -316,9 +316,6 @@ namespace App.DAL.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("AppUserId")
-                        .HasColumnType("uuid");
-
                     b.Property<decimal?>("Severity")
                         .HasColumnType("numeric");
 
@@ -329,8 +326,6 @@ namespace App.DAL.EF.Migrations
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.HasIndex("ViolationTypeId");
 
@@ -535,7 +530,7 @@ namespace App.DAL.EF.Migrations
             modelBuilder.Entity("App.Domain.Violations.VehicleViolation", b =>
                 {
                     b.HasOne("App.Domain.Identity.AppUser", "Account")
-                        .WithMany()
+                        .WithMany("VehicleViolations")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -561,10 +556,6 @@ namespace App.DAL.EF.Migrations
 
             modelBuilder.Entity("App.Domain.Violations.Violation", b =>
                 {
-                    b.HasOne("App.Domain.Identity.AppUser", null)
-                        .WithMany("Violations")
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("App.Domain.Violations.ViolationType", "ViolationType")
                         .WithMany("Violations")
                         .HasForeignKey("ViolationTypeId")
@@ -622,7 +613,7 @@ namespace App.DAL.EF.Migrations
 
             modelBuilder.Entity("App.Domain.Identity.AppUser", b =>
                 {
-                    b.Navigation("Violations");
+                    b.Navigation("VehicleViolations");
                 });
 
             modelBuilder.Entity("App.Domain.Vehicles.Vehicle", b =>

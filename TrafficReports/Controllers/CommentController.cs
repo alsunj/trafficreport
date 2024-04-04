@@ -61,7 +61,7 @@ namespace TrafficReports.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CommentText,CreatedAt,ParentCommentId,AccountId,VehicleViolationId,Id")] Comment comment)
+        public async Task<IActionResult> Create([Bind("CommentText,CreatedAt,AccountId,VehicleViolationId,Id")] Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +71,24 @@ namespace TrafficReports.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AccountId"] = new SelectList(_context.Users, "Id", "Id", comment.AccountId);
-            ViewData["ParentCommentId"] = new SelectList(_context.Comments, "Id", "Id", comment.ParentCommentId);
+            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "Id", comment.VehicleViolationId);
+            return View(comment);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateChildComment([Bind("CommentText,CreatedAt,ParentCommentId,AccountId,VehicleViolationId")] Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                comment.Id = Guid.NewGuid();
+                _context.Add(comment);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            // If the model state is not valid, reload the dropdown list for ParentCommentId
+            ViewData["ParentCommentId"] = new SelectList(_context.Comments, "Id", "CommentText", comment.ParentCommentId);
+            ViewData["AccountId"] = new SelectList(_context.Users, "Id", "Id", comment.AccountId);
             ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "Id", comment.VehicleViolationId);
             return View(comment);
         }
