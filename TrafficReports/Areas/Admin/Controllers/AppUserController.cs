@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using App.DAL.EF;
 using App.Domain.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TrafficReports.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class AppUserController : Controller
     {
         private readonly AppDbContext _context;
