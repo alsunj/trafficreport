@@ -29,9 +29,5 @@ public class VehicleViolation : BaseEntityId
 
     private DateTime _createdAt;
 
-    public DateTime CreatedAt
-    {
-        get { return _createdAt; }
-        set { _createdAt = DateTime.SpecifyKind(value, DateTimeKind.Utc); }
-    }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 }
