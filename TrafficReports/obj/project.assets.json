@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "AutoMapper/13.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Options": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Azure.Core/1.35.0": {
         "type": "package",
         "dependencies": {
@@ -3127,11 +3143,27 @@
           }
         }
       },
-      "App.DAL.EF/1.0.0": {
+      "App.Contracts.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "App.Domain": "1.0.0",
+          "Base.Contracts.DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/App.Contracts.DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/App.Contracts.DAL.dll": {}
+        }
+      },
+      "App.DAL.EF/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "App.Contracts.DAL": "1.0.0",
+          "App.Domain": "1.0.0",
+          "Base.DAL.EF": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.1",
           "Microsoft.EntityFrameworkCore": "8.0.3",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.2"
@@ -3156,6 +3188,19 @@
           "bin/placeholder/App.Domain.dll": {}
         }
       },
+      "Base.Contracts.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Base.Contracts.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Base.Contracts.DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Base.Contracts.DAL.dll": {}
+        }
+      },
       "Base.Contracts.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -3167,6 +3212,22 @@
         },
         "runtime": {
           "bin/placeholder/Base.Contracts.Domain.dll": {}
+        }
+      },
+      "Base.DAL.EF/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "AutoMapper": "13.0.1",
+          "Base.Contracts.DAL": "1.0.0",
+          "Base.Contracts.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "8.0.4"
+        },
+        "compile": {
+          "bin/placeholder/Base.DAL.EF.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Base.DAL.EF.dll": {}
         }
       },
       "Base.Domain/1.0.0": {
@@ -3187,6 +3248,21 @@
     }
   },
   "libraries": {
+    "AutoMapper/13.0.1": {
+      "sha512": "/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
+      "type": "package",
+      "path": "automapper/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.13.0.1.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/net6.0/AutoMapper.dll",
+        "lib/net6.0/AutoMapper.xml"
+      ]
+    },
     "Azure.Core/1.35.0": {
       "sha512": "hENcx03Jyuqv05F4RBEPbxz29UrM3Nbhnr6Wl6NQpoU9BCIbL3XLentrxDCTrH54NLS11Exxi/o8MYgT/cnKFA==",
       "type": "package",
@@ -8714,6 +8790,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "App.Contracts.DAL/1.0.0": {
+      "type": "project",
+      "path": "../App.Contracts.DAL/App.Contracts.DAL.csproj",
+      "msbuildProject": "../App.Contracts.DAL/App.Contracts.DAL.csproj"
+    },
     "App.DAL.EF/1.0.0": {
       "type": "project",
       "path": "../App.DAL.EF/App.DAL.EF.csproj",
@@ -8724,10 +8805,20 @@
       "path": "../App.Domain/App.Domain.csproj",
       "msbuildProject": "../App.Domain/App.Domain.csproj"
     },
+    "Base.Contracts.DAL/1.0.0": {
+      "type": "project",
+      "path": "../Base.Contracts.DAL/Base.Contracts.DAL.csproj",
+      "msbuildProject": "../Base.Contracts.DAL/Base.Contracts.DAL.csproj"
+    },
     "Base.Contracts.Domain/1.0.0": {
       "type": "project",
       "path": "../Base.Contracts.Domain/Base.Contracts.Domain.csproj",
       "msbuildProject": "../Base.Contracts.Domain/Base.Contracts.Domain.csproj"
+    },
+    "Base.DAL.EF/1.0.0": {
+      "type": "project",
+      "path": "../Base.DAL.EF/Base.DAL.EF.csproj",
+      "msbuildProject": "../Base.DAL.EF/Base.DAL.EF.csproj"
     },
     "Base.Domain/1.0.0": {
       "type": "project",
@@ -8868,5 +8959,16 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Warning As Error: Detected package downgrade: Microsoft.EntityFrameworkCore from 8.0.4 to 8.0.3. Reference the package directly from the project to select a different version. \r\n TrafficReports -> App.DAL.EF -> Base.DAL.EF -> Microsoft.EntityFrameworkCore (>= 8.0.4) \r\n TrafficReports -> App.DAL.EF -> Microsoft.EntityFrameworkCore (>= 8.0.3)",
+      "libraryId": "Microsoft.EntityFrameworkCore",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }
