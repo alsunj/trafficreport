@@ -1,3 +1,4 @@
+using App.Contracts.DAL;
 using App.DAL.EF;
 using App.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +11,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
                        throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
+
+builder.Services.AddScoped<IAppUnitOfWork, AppUOW>();
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.
@@ -21,6 +25,8 @@ builder.Services.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+SetupAppData(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -52,3 +58,44 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+static void SetupAppData(WebApplication app)
+{
+    using var serviceScope = ((IApplicationBuilder) app).ApplicationServices
+        .GetRequiredService<IServiceScopeFactory>()
+        .CreateScope();
+    using var context = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+    context.Database.Migrate();
+
+    using var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+    using var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<AppRole>>();
+
+    var res = roleManager.CreateAsync(new AppRole()
+    {
+        Name = "Admin"
+    }).Result;
+
+    if (!res.Succeeded)
+    {
+        Console.WriteLine(res.ToString());
+    }
+
+    var user = new AppUser()
+    {
+        Email = "admin@eesti.ee",
+        UserName = "admin@eesti.ee",
+    };
+    res = userManager.CreateAsync(user, "Kala.maja1").Result;
+    if (!res.Succeeded)
+    {
+        Console.WriteLine(res.ToString());
+    }
+
+
+    res = userManager.AddToRoleAsync(user, "Admin").Result;
+    if (!res.Succeeded)
+    {
+        Console.WriteLine(res.ToString());
+    }
+}

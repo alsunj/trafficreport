@@ -6,7 +6,7 @@ namespace App.DAL.EF.Repositories;
 
 public class VehicleViolationRepository : BaseEntityRepository<VehicleViolation, VehicleViolation, AppDbContext>,  IVehicleViolationRepository
 {
-    public VehicleViolationRepository(AppDbContext dbContext) : base(dbContext, new DalDummyMapper())
+    public VehicleViolationRepository(AppDbContext dbContext) :  base(dbContext, new DalDummyMapper<VehicleViolation, VehicleViolation>())
     {
     }
 }
