@@ -35,6 +35,8 @@ dotnet aspnet-codegenerator controller -name AppUserController        -actions -
 
 dotnet aspnet-codegenerator controller -name ViolationTypeController     -actions -m  App.Domain.Violations.ViolationType -dc AppDbContext -outDir Areas\Admin\Controllers  --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
 
+dotnet aspnet-codegenerator controller -name ViolationController     -actions -m  App.Domain.Violations.Violation -dc AppDbContext -outDir Areas\Admin\Controllers  --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
+
 
 SUBJECTS TO CHANGE:
 

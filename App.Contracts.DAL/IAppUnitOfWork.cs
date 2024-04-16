@@ -8,8 +8,10 @@ namespace App.Contracts.DAL;
 public interface IAppUnitOfWork : IUnitOfWork
 {
     //repod
-    IVehicleViolationRepository VehicleViolationRepository { get; }
-    
+    IVehicleViolationRepository VehicleViolations { get; }
+    IViolationTypeRepository ViolationTypes { get; }
+    IViolationRepository Violations { get; }
     IEntityRepository<AppUser> Users { get; }
+
 
 }

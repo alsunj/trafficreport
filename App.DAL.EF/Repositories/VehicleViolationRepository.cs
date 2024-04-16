@@ -1,6 +1,5 @@
 ﻿using App.Contracts.DAL.Repositories;
 using App.Domain.Violations;
-using Base.Contracts.DAL;
 
 namespace App.DAL.EF.Repositories;
 

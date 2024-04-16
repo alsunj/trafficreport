@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Contracts.DAL;
+using App.Contracts.DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,17 +15,18 @@ namespace TrafficReports.Areas.Admin.Controllers
     [Area("Admin")]
     public class ViolationTypeController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IAppUnitOfWork _uow;
 
-        public ViolationTypeController(AppDbContext context)
+        public ViolationTypeController(IAppUnitOfWork uow)
         {
-            _context = context;
+            _uow = uow;
         }
 
         // GET: Admin/ViolationType
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ViolationTypes.ToListAsync());
+            var res = await _uow.ViolationTypes.GetAllAsync();
+            return View(res);
         }
 
         // GET: Admin/ViolationType/Details/5
@@ -34,8 +37,8 @@ namespace TrafficReports.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var violationType = await _context.ViolationTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var violationType = await _uow.ViolationTypes
+                .FirstOrDefaultAsync(id.Value);
             if (violationType == null)
             {
                 return NotFound();
@@ -60,8 +63,8 @@ namespace TrafficReports.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 violationType.Id = Guid.NewGuid();
-                _context.Add(violationType);
-                await _context.SaveChangesAsync();
+                _uow.ViolationTypes.Add(violationType);
+                await _uow.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(violationType);
@@ -75,7 +78,7 @@ namespace TrafficReports.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var violationType = await _context.ViolationTypes.FindAsync(id);
+            var violationType = await _uow.ViolationTypes.FirstOrDefaultAsync(id.Value);
             if (violationType == null)
             {
                 return NotFound();
@@ -99,12 +102,12 @@ namespace TrafficReports.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(violationType);
-                    await _context.SaveChangesAsync();
+                    _uow.ViolationTypes.Update(violationType);
+                    await _uow.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ViolationTypeExists(violationType.Id))
+                    if (! await _uow.ViolationTypes.ExistsAsync(violationType.Id))
                     {
                         return NotFound();
                     }
@@ -126,8 +129,8 @@ namespace TrafficReports.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var violationType = await _context.ViolationTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var violationType = await _uow.ViolationTypes
+                .FirstOrDefaultAsync( id.Value);
             if (violationType == null)
             {
                 return NotFound();
@@ -141,19 +144,11 @@ namespace TrafficReports.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var violationType = await _context.ViolationTypes.FindAsync(id);
-            if (violationType != null)
-            {
-                _context.ViolationTypes.Remove(violationType);
-            }
-
-            await _context.SaveChangesAsync();
+            _uow.ViolationTypes.RemoveAsync(id);
+            await _uow.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ViolationTypeExists(Guid id)
-        {
-            return _context.ViolationTypes.Any(e => e.Id == id);
-        }
+
     }
 }

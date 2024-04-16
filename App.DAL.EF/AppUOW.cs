@@ -13,11 +13,21 @@ public class AppUOW : BaseUnitOfWork<AppDbContext>, IAppUnitOfWork
     {
     }
 
-    private IVehicleViolationRepository? _vehicleViolationRepository;
+    private IVehicleViolationRepository? _vehicleViolations;
 
-    public IVehicleViolationRepository VehicleViolationRepository =>
-        _vehicleViolationRepository ?? new VehicleViolationRepository(UowDbContext);
+    public IVehicleViolationRepository VehicleViolations =>
+        _vehicleViolations ?? new VehicleViolationRepository(UowDbContext);
     
+    
+    private IViolationTypeRepository? _violationTypes;
+    public IViolationTypeRepository ViolationTypes =>
+        _violationTypes ?? new ViolationTypeRepository(UowDbContext);
+    
+    private IViolationRepository? _violations;
+
+    public IViolationRepository Violations =>
+        _violations ?? new ViolationRepository(UowDbContext);
+
     private IEntityRepository<AppUser>? _users;
     public IEntityRepository<AppUser> Users => _users ??
                                                new BaseEntityRepository<AppUser, AppUser, AppDbContext>(UowDbContext,

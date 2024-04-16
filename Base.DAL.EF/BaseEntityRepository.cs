@@ -15,8 +15,6 @@ public class BaseEntityRepository<TDomainEntity, TDalEntity, TDbContext> :
         mapper)
     {
     }
-
-
 }
 
 public class BaseEntityRepository<TKey, TDomainEntity, TDalEntity, TDbContext>
@@ -149,6 +147,8 @@ public class BaseEntityRepository<TKey, TDomainEntity, TDalEntity, TDbContext>
     {
         return Mapper.MapLR(await CreateQuery(userId, noTracking).FirstOrDefaultAsync(m => m.Id.Equals(id)));
     }
+
+
 
 
 }
