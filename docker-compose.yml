@@ -1,9 +1,8 @@
 services:
   sql:
     image: postgres:16
-    container_name: trafficReport-sql
+    container_name: trafficreport-sql
     ports:
-      # external: internal
       - 5432:5432
     volumes:
       - ~/apps/postgres:/var/lib/postgresql/data

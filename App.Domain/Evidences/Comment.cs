@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices.JavaScript;
 using App.Domain.Identity;
 using App.Domain.Violations;
 using Base.Domain;
@@ -19,13 +20,7 @@ public class Comment : BaseEntityId
     public VehicleViolation? VehicleViolation { get; set; }
     
     public ICollection<Comment>? ChildComments { get; set; } = new List<Comment>();
-    
-    private DateTime _createdAt;
 
-    public DateTime CreatedAt
-    {
-        get { return _createdAt; }
-        set { _createdAt = DateTime.SpecifyKind(value, DateTimeKind.Utc); }
-    }
-    
+    private DateTime _createdAt { get; set; } = DateTime.Now;
+
 }

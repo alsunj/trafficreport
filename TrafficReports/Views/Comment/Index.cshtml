@@ -16,9 +16,6 @@
                 @Html.DisplayNameFor(model => model.CommentText)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.ParentComment)
             </th>
             <th>
@@ -37,10 +34,7 @@
                 @Html.DisplayFor(modelItem => item.CommentText)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParentComment!.Id)
+                @item.ParentComment?.CommentText
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Account!.Id)

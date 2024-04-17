@@ -1,0 +1,9 @@
+﻿using App.Domain.Violations;
+using Base.Contracts.DAL;
+
+namespace App.Contracts.DAL.Repositories;
+
+public interface IViolationRepository :  IEntityRepository<Violation>
+{
+    public Task<IEnumerable<Violation>> GetAllWithViolationTypesAsync();
+}

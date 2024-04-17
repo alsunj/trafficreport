@@ -16,11 +16,12 @@
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.1"/>
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.1"/>
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.1"/>
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
@@ -49,6 +50,27 @@
       <_ContentIncludedByDefault Remove="Views\Violation\Details.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Violation\Edit.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Violation\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Comment\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Comment\CreateChildComment.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Comment\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Comment\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Comment\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Comment\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\AppUser\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\AppUser\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\AppUser\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\AppUser\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\AppUser\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\ViolationType\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\ViolationType\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\ViolationType\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\ViolationType\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\ViolationType\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\AppUser\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\AppUser\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\AppUser\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\AppUser\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\AppUser\Index.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
@@ -67,6 +89,11 @@
       <UpToDateCheckInput Remove="Views\Violation\Details.cshtml" />
       <UpToDateCheckInput Remove="Views\Violation\Edit.cshtml" />
       <UpToDateCheckInput Remove="Views\Violation\Index.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Areas\Admin\Controllers\" />
+      <Folder Include="Areas\Admin\ViewModels\" />
     </ItemGroup>
 
 

@@ -1,4 +1,5 @@
 
+@using App.Domain.Vehicles
 @model App.Domain.Vehicles.VehicleType
 
 @{
@@ -20,12 +21,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Size" class="control-label"></label>
-                <select asp-for="Size" class="form-control">
-                    @foreach (var enumValue in Enum.GetValues(typeof(App.Domain.Vehicles.EVehicleSize)))
-                    {
-                        <option value="@enumValue">@enumValue</option>
-                    }
-                </select>
+                <select asp-for="Size" asp-items="@Html.GetEnumSelectList<EVehicleSize>()" class="form-control"></select>
                 <span asp-validation-for="Size" class="text-danger"></span>
             </div>
             <div class="form-group">
