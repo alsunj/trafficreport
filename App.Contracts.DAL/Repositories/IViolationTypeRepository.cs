@@ -5,5 +5,5 @@ namespace App.Contracts.DAL.Repositories;
 
 public interface IViolationTypeRepository :  IEntityRepository<ViolationType>
 {
-
+    
 }

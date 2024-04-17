@@ -24,7 +24,7 @@ namespace TrafficReports.Areas.Admin.Controllers
         // GET: Admin/Violation
         public async Task<IActionResult> Index()
         {
-            var res = await _uow.Violations.GetAllAsync();
+            var res = await _uow.Violations.GetAllWithViolationTypesAsync();
             return View(res);
         }
 
@@ -49,6 +49,7 @@ namespace TrafficReports.Areas.Admin.Controllers
         // GET: Admin/Violation/Create
         public IActionResult Create()
         {
+            ViewData["ViolationTypeId"] = new SelectList(_uow.ViolationTypes.GetAll(), "Id", "Id");
             return View();
         }
 
@@ -62,11 +63,12 @@ namespace TrafficReports.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 violation.Id = Guid.NewGuid();
-                _uow.Add(violation);
-                await _context.SaveChangesAsync();
+                _uow.Violations.Add(violation);
+                await _uow.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ViolationTypeId"] = new SelectList(_context.ViolationTypes, "Id", "Id", violation.ViolationTypeId);
+
+            ViewData["ViolationTypeId"] = new SelectList(await _uow.ViolationTypes.GetAllAsync(), "Id", "Id", violation.ViolationTypeId);
             return View(violation);
         }
 
@@ -78,12 +80,12 @@ namespace TrafficReports.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var violation = await _context.Violations.FindAsync(id);
+            var violation = await _uow.Violations.FirstOrDefaultAsync(id.Value);
             if (violation == null)
             {
                 return NotFound();
             }
-            ViewData["ViolationTypeId"] = new SelectList(_context.ViolationTypes, "Id", "Id", violation.ViolationTypeId);
+            ViewData["ViolationTypeId"] = new SelectList(await _uow.ViolationTypes.GetAllAsync(), "Id", "Id", violation.ViolationTypeId);
             return View(violation);
         }
 
@@ -103,12 +105,12 @@ namespace TrafficReports.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(violation);
-                    await _context.SaveChangesAsync();
+                    _uow.Violations.Update(violation);
+                    await _uow.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ViolationExists(violation.Id))
+                    if (! await _uow.Violations.ExistsAsync(violation.Id))
                     {
                         return NotFound();
                     }
@@ -119,7 +121,7 @@ namespace TrafficReports.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ViolationTypeId"] = new SelectList(_context.ViolationTypes, "Id", "Id", violation.ViolationTypeId);
+            ViewData["ViolationTypeId"] = new SelectList(await _uow.ViolationTypes.GetAllAsync(), "Id", "Id", violation.ViolationTypeId);
             return View(violation);
         }
 
@@ -131,9 +133,10 @@ namespace TrafficReports.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var violation = await _context.Violations
-                .Include(v => v.ViolationType)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var violation = await _uow.Violations
+                //    .Include(v => v.ViolationType)
+                //     .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(id.Value);
             if (violation == null)
             {
                 return NotFound();
@@ -147,19 +150,10 @@ namespace TrafficReports.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var violation = await _context.Violations.FindAsync(id);
-            if (violation != null)
-            {
-                _context.Violations.Remove(violation);
-            }
-
-            await _context.SaveChangesAsync();
+            _uow.Violations.RemoveAsync(id);
+            await _uow.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        private bool ViolationExists(Guid id)
-        {
-            return _context.Violations.Any(e => e.Id == id);
-        }
+        
     }
 }

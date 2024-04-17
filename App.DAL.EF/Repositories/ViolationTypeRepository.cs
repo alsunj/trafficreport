@@ -1,5 +1,6 @@
 ﻿using App.Contracts.DAL.Repositories;
 using App.Domain.Violations;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.DAL.EF.Repositories;
 
@@ -8,4 +9,5 @@ public class ViolationTypeRepository : BaseEntityRepository<ViolationType, Viola
     public ViolationTypeRepository(AppDbContext dbContext) :  base(dbContext, new DalDummyMapper<ViolationType, ViolationType>())
     {
     }
+
 }
