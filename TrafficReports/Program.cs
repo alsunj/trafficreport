@@ -1,8 +1,12 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 using App.Contracts.DAL;
 using App.DAL.EF;
 using App.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,11 +20,38 @@ builder.Services.AddScoped<IAppUnitOfWork, AppUOW>();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+
+
+
 builder.Services.
     AddIdentity<AppUser, AppRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddDefaultUI()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+
+JwtSecurityTokenHandler.DefaultInboundClaimFilter.Clear();
+builder.Services
+    .AddAuthentication()
+    .AddCookie(options => { options.SlidingExpiration = true; })
+    .AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = false;
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidIssuer = builder.Configuration.GetValue<string>("JWT:issuer"),
+            ValidAudience = builder.Configuration.GetValue<string>("JWT:audience"),
+            IssuerSigningKey =
+                new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(
+                        builder.Configuration.GetValue<string>("JWT:issuer")
+                    )
+                ),
+            ClockSkew = TimeSpan.Zero,
+
+        };
+
+    });
 
 builder.Services.AddControllersWithViews();
 
@@ -59,6 +90,8 @@ app.MapRazorPages();
 
 app.Run();
 
+
+
 static void SetupAppData(WebApplication app)
 {
     using var serviceScope = ((IApplicationBuilder) app).ApplicationServices
@@ -85,6 +118,7 @@ static void SetupAppData(WebApplication app)
     {
         Email = "admin@eesti.ee",
         UserName = "admin@eesti.ee",
+
     };
     res = userManager.CreateAsync(user, "Kala.maja1").Result;
     if (!res.Succeeded)

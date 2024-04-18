@@ -29,6 +29,9 @@ public class AppDbContext :IdentityDbContext<AppUser, AppRole, Guid, IdentityUse
 
     public DbSet<VehicleViolation> VehicleViolations { get; set; } = default!;
     
+    public  DbSet<AppRefreshToken> RefreshTokens { get; set; } = default!;
+
+    
 
     public AppDbContext(DbContextOptions options) : base(options)
     {
