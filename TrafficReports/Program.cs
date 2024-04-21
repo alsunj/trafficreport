@@ -55,6 +55,10 @@ builder.Services
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddAutoMapper(
+    typeof(App.DAL.EF.AutoMapperProfile)
+);
+
 var app = builder.Build();
 
 SetupAppData(app);
@@ -120,16 +124,33 @@ static void SetupAppData(WebApplication app)
         UserName = "admin@eesti.ee",
 
     };
+    var user1 = new AppUser()
+    {
+        Email = "admins@eesti.ee",
+        UserName = "admin@eesti.ee",
+
+    };
     res = userManager.CreateAsync(user, "Kala.maja1").Result;
     if (!res.Succeeded)
     {
         Console.WriteLine(res.ToString());
     }
-
+    res = userManager.CreateAsync(user1, "Kala.maja1").Result;
+    if (!res.Succeeded)
+    {
+        Console.WriteLine(res.ToString());
+    }
 
     res = userManager.AddToRoleAsync(user, "Admin").Result;
     if (!res.Succeeded)
     {
         Console.WriteLine(res.ToString());
     }
+    res = userManager.AddToRoleAsync(user1, "Admin").Result;
+    if (!res.Succeeded)
+    {
+        Console.WriteLine(res.ToString());
+    }
+    
+    
 }

@@ -1,9 +1,10 @@
-﻿using App.Domain.Violations;
+﻿using DALDTO = App.DAL.DTO;
+
 using Base.Contracts.DAL;
 
 namespace App.Contracts.DAL.Repositories;
 
-public interface IViolationRepository :  IEntityRepository<Violation>
+public interface IViolationRepository :  IEntityRepository<DALDTO.Violation>
 {
-    public Task<IEnumerable<Violation>> GetAllWithViolationTypesAsync();
+    public Task<IEnumerable<DALDTO.Violation>> GetAllWithViolationTypesAsync();
 }

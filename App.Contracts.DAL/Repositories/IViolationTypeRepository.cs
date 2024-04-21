@@ -1,9 +1,9 @@
-﻿using App.Domain.Violations;
+﻿using DALDTO = App.DAL.DTO;
 using Base.Contracts.DAL;
 
 namespace App.Contracts.DAL.Repositories;
 
-public interface IViolationTypeRepository :  IEntityRepository<ViolationType>
+public interface IViolationTypeRepository :  IEntityRepository<DALDTO.ViolationType>
 {
     
 }

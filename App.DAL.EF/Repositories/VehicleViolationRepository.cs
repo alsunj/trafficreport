@@ -1,11 +1,14 @@
 ﻿using App.Contracts.DAL.Repositories;
-using App.Domain.Violations;
+using AutoMapper;
+using DALDTO = App.DAL.DTO;
+using APPDomain = App.Domain;
 
 namespace App.DAL.EF.Repositories;
 
-public class VehicleViolationRepository : BaseEntityRepository<VehicleViolation, VehicleViolation, AppDbContext>,  IVehicleViolationRepository
+public class VehicleViolationRepository : BaseEntityRepository<APPDomain.Violations.VehicleViolation, DALDTO.VehicleViolation, AppDbContext>,  IVehicleViolationRepository
 {
-    public VehicleViolationRepository(AppDbContext dbContext) :  base(dbContext, new DalDummyMapper<VehicleViolation, VehicleViolation>())
+
+    public VehicleViolationRepository(AppDbContext dbContext, IMapper mapper) :  base(dbContext, new DalDomainMapper<APPDomain.Violations.VehicleViolation, DALDTO.VehicleViolation>(mapper))
     {
     }
 }

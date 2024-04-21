@@ -1,4 +1,4 @@
-@model IEnumerable<App.Domain.Violations.ViolationType>
+@model IEnumerable<App.DAL.DTO.ViolationType>
 
 @{
     ViewData["Title"] = "Index";
@@ -15,9 +15,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.ViolationTypeName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Severity)
-            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -26,9 +24,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ViolationTypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Severity)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

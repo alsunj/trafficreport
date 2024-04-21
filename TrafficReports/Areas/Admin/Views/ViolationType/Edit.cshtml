@@ -1,4 +1,4 @@
-@model App.Domain.Violations.ViolationType
+@model App.DAL.DTO.ViolationType
 
 @{
     ViewData["Title"] = "Edit";
@@ -17,11 +17,7 @@
                 <input asp-for="ViolationTypeName" class="form-control" />
                 <span asp-validation-for="ViolationTypeName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Severity" class="control-label"></label>
-                <input asp-for="Severity" class="form-control" />
-                <span asp-validation-for="Severity" class="text-danger"></span>
-            </div>
+
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
