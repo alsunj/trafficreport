@@ -13,10 +13,12 @@ public class ViolationRepository : BaseEntityRepository<APPDomain.Violations.Vio
     {
 
     }
-    public async Task<IEnumerable<DALDTO.Violation>> GetAllWithViolationTypesAsync()
+    public async Task<IEnumerable<DALDTO.Violation>> GetAllSortedAsync(Guid userId)
     {
-        throw new NotImplementedException();
-
-        //return await RepoDbSet.Include(v => v.ViolationType).ToListAsync();
+        var query = CreateQuery(userId);
+        var res = await query.ToListAsync();
+//        query = query.OrderBy(c => c.Violation);
+        
+        return res.Select(e => Mapper.Map(e));
     }
 }
