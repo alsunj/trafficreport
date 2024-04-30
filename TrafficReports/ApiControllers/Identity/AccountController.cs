@@ -3,6 +3,7 @@ using System.Net;
 using System.Security.Claims;
 using App.DAL.EF;
 using App.Domain.Identity;
+using Asp.Versioning;
 using Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -12,9 +13,9 @@ using Microsoft.EntityFrameworkCore;
 using TrafficReport.DTO;
 
 namespace TrafficReport.ApiControllers.Identity;
-
+[ApiVersion( "1,0" )]
 [ApiController]
-[Route("/api/identity/[controller]/[action]")]
+[Route("/api/v{version:apiversion}/identity/[controller]/[action]")]
 public class AccountController : ControllerBase
 {
     private readonly UserManager<AppUser> _userManager;

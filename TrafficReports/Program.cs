@@ -1,11 +1,22 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using App.BLL;
+using App.Contracts.BLL;
 using App.Contracts.DAL;
 using App.DAL.EF;
 using App.Domain.Identity;
+using Asp.Versioning;
+using Asp.Versioning.ApiExplorer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using TrafficReport;
+using TrafficReport.Helpers;
+using AutoMapperProfile = TrafficReport.Helpers.AutoMapperProfile;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,10 +24,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
                        throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 builder.Services.AddScoped<IAppUnitOfWork, AppUOW>();
+builder.Services.AddScoped<IAppBLL, AppBLL>();
+
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -44,7 +60,7 @@ builder.Services
             IssuerSigningKey =
                 new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(
-                        builder.Configuration.GetValue<string>("JWT:issuer")
+                        builder.Configuration.GetValue<string>("JWT:key")
                     )
                 ),
             ClockSkew = TimeSpan.Zero,
@@ -55,9 +71,43 @@ builder.Services
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsAllowAll", policy =>
+    {
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.AllowAnyOrigin();
+    });
+});
+
 builder.Services.AddAutoMapper(
-    typeof(App.DAL.EF.AutoMapperProfile)
+    typeof(App.DAL.EF.AutoMapperProfile),
+    typeof(App.BLL.AutoMapperProfile),
+    typeof(AutoMapperProfile)
 );
+var apiVersioningBuilder = builder.Services.AddApiVersioning(options =>
+{
+    options.ReportApiVersions = true;
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+});
+apiVersioningBuilder.AddApiExplorer(options =>
+{
+    // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
+    // note: the specified format code will format the version as "'v'major[.minor][-status]"
+    options.GroupNameFormat = "'v'VVV";
+
+    // note: this option is only necessary when versioning by url segment. the SubstitutionFormat
+    // can also be used to control the format of the API version in route templates
+    options.SubstituteApiVersionInUrl = true;
+});
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+builder.Services.AddSwaggerGen();
+
+
+
+// configure low level translations
 
 var app = builder.Build();
 
@@ -80,7 +130,26 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseCors("CorsAllowAll");
+
+
+
 app.UseAuthorization();
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+    foreach (var description in provider.ApiVersionDescriptions)
+    {
+        options.SwaggerEndpoint(
+            $"/swagger/{description.GroupName}/swagger.json",
+            description.GroupName.ToUpperInvariant()
+        );
+    }
+    // serve from root
+    // options.RoutePrefix = string.Empty;
+});
+
 
 app.MapControllerRoute(
     name: "area",
@@ -124,33 +193,20 @@ static void SetupAppData(WebApplication app)
         UserName = "admin@eesti.ee",
 
     };
-    var user1 = new AppUser()
-    {
-        Email = "admins@eesti.ee",
-        UserName = "admin@eesti.ee",
 
-    };
     res = userManager.CreateAsync(user, "Kala.maja1").Result;
     if (!res.Succeeded)
     {
         Console.WriteLine(res.ToString());
     }
-    res = userManager.CreateAsync(user1, "Kala.maja1").Result;
-    if (!res.Succeeded)
-    {
-        Console.WriteLine(res.ToString());
-    }
+
 
     res = userManager.AddToRoleAsync(user, "Admin").Result;
     if (!res.Succeeded)
     {
         Console.WriteLine(res.ToString());
     }
-    res = userManager.AddToRoleAsync(user1, "Admin").Result;
-    if (!res.Succeeded)
-    {
-        Console.WriteLine(res.ToString());
-    }
+
     
     
 }

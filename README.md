@@ -42,6 +42,19 @@ dotnet aspnet-codegenerator controller -name VehicleTypeController     -actions 
 dotnet aspnet-codegenerator controller -name VehicleController     -actions -m  App.Domain.Vehicles.Vehicle -dc AppDbContext -outDir Areas\Admin\Controllers  --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
 
 
+ApiControllers
+
+dotnet aspnet-codegenerator controller -name ViolationTypeController   -m  App.Domain.Violations.ViolationType       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+dotnet aspnet-codegenerator controller -name ViolationController   -m  App.Domain.Violations.Violation     -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+dotnet aspnet-codegenerator controller -name VehicleViolationController   -m  App.Domain.Violations.VehicleViolation       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+
+
+
+
+
 SUBJECTS TO CHANGE:
 
 --Comment
