@@ -12,31 +12,26 @@
         <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
     </ItemGroup>
 
+
     <ItemGroup>
-        <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
-        <PackageReference Include="AutoMapper" Version="13.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
-        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.1"/>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.1"/>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.1"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
-        <PackageReference Include="Npgsql" Version="8.0.2" />
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+      <PackageReference Include="Asp.Versioning.Mvc" Version="8.1.0" />
+      <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+      <PackageReference Include="AutoMapper" Version="13.0.1" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
+      <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.4" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -120,6 +115,10 @@
       <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\_StatusMessage.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Error.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
@@ -143,12 +142,51 @@
       <UpToDateCheckInput Remove="Areas\Admin\Views\ViolationType\Details.cshtml" />
       <UpToDateCheckInput Remove="Areas\Admin\Views\ViolationType\Edit.cshtml" />
       <UpToDateCheckInput Remove="Areas\Admin\Views\ViolationType\Index.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\AccessDenied.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\ConfirmEmail.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\ConfirmEmailChange.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\ForgotPassword.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Lockout.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Login.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\LoginWith2fa.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\LoginWithRecoveryCode.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Logout.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\DeletePersonalData.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\Disable2fa.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\DownloadPersonalData.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\Email.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\EnableAuthenticator.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\GenerateRecoveryCodes.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\Index.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\ResetAuthenticator.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\SetPassword.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\ShowRecoveryCodes.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\_Layout.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\_StatusMessage.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Register.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\RegisterConfirmation.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\ResendEmailConfirmation.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\ResetPassword.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\_StatusMessage.cshtml" />
+      <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Areas\Admin\Controllers\" />
       <Folder Include="Areas\Admin\ViewModels\" />
+      <Folder Include="Areas\Admin\Views\Shared\" />
     </ItemGroup>
+
+
 
     <PropertyGroup>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>

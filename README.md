@@ -27,7 +27,9 @@ dotnet aspnet-codegenerator controller -name AppUserController        -actions -
 
 dotnet aspnet-codegenerator controller -name VehicleViolationController        -actions -m  App.Domain.Violations.VehicleViolation        -dc AppDbContext -outDir Controllers --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
 
+identity
 
+dotnet aspnet-codegenerator controller identity -f --userClass=App.Domain.Identity.AppUser -gl
 
 area
 

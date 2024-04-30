@@ -1,3 +1,12 @@
+C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.csproj.AssemblyReference.cache
+C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.AssemblyInfoInputs.cache
+C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.AssemblyInfo.cs
+C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.csproj.CoreCompileInputs.cache
+C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.RazorAssemblyInfo.cache
+C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.RazorAssemblyInfo.cs
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\appsettings.json
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\TrafficReports.staticwebassets.runtime.json
@@ -44,6 +53,7 @@ C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Microsoft.
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.Design.dll
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Sqlite.dll
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
@@ -74,6 +84,7 @@ C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Mono.TextT
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Npgsql.dll
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.Design.dll
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\NuGet.Common.dll
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\NuGet.Configuration.dll
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\NuGet.DependencyResolver.Core.dll
@@ -304,15 +315,6 @@ C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Base.Contr
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Base.Contracts.Domain.pdb
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Base.DAL.EF.pdb
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Base.Domain.pdb
-C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.csproj.AssemblyReference.cache
-C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.AssemblyInfoInputs.cache
-C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.AssemblyInfo.cs
-C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.csproj.CoreCompileInputs.cache
-C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.RazorAssemblyInfo.cache
-C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.RazorAssemblyInfo.cs
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\staticwebassets\msbuild.TrafficReports.Microsoft.AspNetCore.StaticWebAssets.props
