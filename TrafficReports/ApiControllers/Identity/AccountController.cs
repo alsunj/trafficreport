@@ -14,7 +14,6 @@ using TrafficReport.DTO;
 
 namespace TrafficReport.ApiControllers.Identity;
 [ApiVersion("1.0")]
-[ApiVersion("0.9", Deprecated = true)]
 [ApiController]
 [Route("/api/v{version:apiVersion}/identity/[controller]/[action]")]
 public class AccountController : ControllerBase

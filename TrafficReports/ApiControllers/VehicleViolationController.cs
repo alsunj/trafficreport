@@ -12,11 +12,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using TrafficReport.Helpers;
-
+/*
 namespace TrafficReports.ApiControllers
+
 {
+
     [ApiVersion("1.0")]
-    [ApiVersion("0.9", Deprecated = true)]
     [ApiController]
     [Route("api/v{version:ApiVersion}/violations/[controller]/[action]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -127,7 +128,7 @@ namespace TrafficReports.ApiControllers
         [HttpDelete("{id}")]
         [Produces("application/json")]
         [Consumes("application/json")]
-        
+
         public async Task<IActionResult> DeleteVehicleViolation(Guid id)
         {
             var vehicleViolation = await _context.VehicleViolations.FindAsync(id);
@@ -147,4 +148,6 @@ namespace TrafficReports.ApiControllers
             return _context.VehicleViolations.Any(e => e.Id == id);
         }
     }
+
 }
+*/

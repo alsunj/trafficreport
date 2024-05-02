@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace TrafficReport.ApiControllers;
 
 [ApiController]
-[Route("/api/[controller]")]
+[Route("/api/v{version:ApiVersion}")]
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class TestController : ControllerBase
 {

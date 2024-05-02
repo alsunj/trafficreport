@@ -16,19 +16,19 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using TrafficReport.Helpers;
-
+/*
 namespace TrafficReports.ApiControllers
-{
-    [ApiVersion("1.0")]
-    [ApiVersion("0.9", Deprecated = true)]
 
+{
+
+    [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:ApiVersion}/violations/[controller]/[action]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class ViolationController : ControllerBase
     {
-        
+
         private readonly AppDbContext _context;
         private readonly IAppBLL _bll;
         private readonly UserManager<AppUser> _userManager;
@@ -151,3 +151,4 @@ namespace TrafficReports.ApiControllers
         }
     }
 }
+*/
