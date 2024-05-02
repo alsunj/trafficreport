@@ -7,6 +7,7 @@ public class ViolationType: IDomainEntityId
 {
     public Guid Id { get; set; }
     
-    [MaxLength(128)] 
     public string? ViolationTypeName{ get; set; }
+    
+    public decimal? Severity { get; set; }
 }

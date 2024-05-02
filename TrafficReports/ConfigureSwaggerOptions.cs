@@ -29,6 +29,10 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
                 });
         }
 
+        // include xml comments (enable creation in csproj file)
+        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        options.IncludeXmlComments(xmlPath);
 
 
 

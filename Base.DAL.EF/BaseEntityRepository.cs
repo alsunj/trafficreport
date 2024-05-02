@@ -149,7 +149,17 @@ public class BaseEntityRepository<TKey, TDomainEntity, TDalEntity, TDbContext>
     {
         return Mapper.Map(await CreateQuery(userId, noTracking).FirstOrDefaultAsync(m => m.Id.Equals(id)));
     }
+    public virtual async Task<IEnumerable<TDalEntity>> GetAllAsyncWithoutUser(bool noTracking = true)
+    {
+        var query = RepoDbSet.AsQueryable();
 
+        if (noTracking)
+        {
+            query = query.AsNoTracking();
+        }
+
+        return (await query.ToListAsync()).Select(de => Mapper.Map(de));
+    }
 
 
 

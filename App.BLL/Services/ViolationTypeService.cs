@@ -18,9 +18,9 @@ public class ViolationTypeService :
     {
     }
 
-    public async Task<IEnumerable<ViolationType>> GetAllSortedAsync(Guid userId)
+    public async Task<IEnumerable<ViolationType>> GetAllSortedAsync()
     {
-        return (await Repository.GetAllSortedAsync(userId)).Select(e => Mapper.Map(e));
+        return (await Repository.GetAllSortedAsync()).Select(e => Mapper.Map(e));
         
     }
 }

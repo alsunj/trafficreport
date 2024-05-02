@@ -1,5 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using App.Contracts.BLL;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using App.DAL.EF;
@@ -7,8 +12,6 @@ using App.Domain.Identity;
 using App.Domain.Violations;
 using Asp.Versioning;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using TrafficReport.Helpers;
 
@@ -17,37 +20,34 @@ namespace TrafficReports.ApiControllers
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:ApiVersion}/violations/[controller]/[action]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-
     public class ViolationTypeController : ControllerBase
     {
         private readonly AppDbContext _context;
         private readonly IAppBLL _bll;
-        private readonly UserManager<AppUser> _userManager;
         private readonly PublicDTOBllMapper<App.DTO.v1_0.ViolationType, App.BLL.DTO.ViolationType> _mapper;
-        public ViolationTypeController(AppDbContext context, IAppBLL bll, UserManager<AppUser> userManager,
-            IMapper autoMapper) 
+
+
+        public ViolationTypeController(AppDbContext context, IAppBLL bll, UserManager<AppUser> userManager, IMapper autoMapper)
         {
             _context = context;
             _bll = bll;
-            _userManager = userManager;
             _mapper = new PublicDTOBllMapper<App.DTO.v1_0.ViolationType, App.BLL.DTO.ViolationType>(autoMapper);
+
         }
 
         // GET: api/ViolationType
         [HttpGet]
-        [ProducesResponseType<IEnumerable<App.BLL.DTO.ViolationType>>((int) HttpStatusCode.OK)]
-        [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
+        [ProducesResponseType<IEnumerable<App.BLL.DTO.ViolationType>>((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<IEnumerable<App.DTO.v1_0.ViolationType>>> GetViolationTypes()
         {
-            var res = (await _bll.ViolationTypes.GetAllSortedAsync(
-                    Guid.Parse(_userManager.GetUserId(User))
-                ))
+            var res = (await _bll.ViolationTypes.GetAllSortedAsync())
                 .Select(e => _mapper.Map(e))
                 .ToList();
             return Ok(res);
+
         }
 
         // GET: api/ViolationType/5
@@ -118,7 +118,8 @@ namespace TrafficReports.ApiControllers
             return CreatedAtAction("GetViolationType", new
             {
                 version = HttpContext.GetRequestedApiVersion()?.ToString(),
-                id = violationType.Id
+                id = violationType.Id 
+                
             }, violationType);
         }
 

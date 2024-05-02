@@ -12,12 +12,10 @@ public class ViolationTypeRepository : BaseEntityRepository<APPDomain.Violations
     public ViolationTypeRepository(AppDbContext dbContext, IMapper mapper) :  base(dbContext, new DalDomainMapper<APPDomain.Violations.ViolationType, DALDTO.ViolationType>(mapper))
     {
     }
-    public async Task<IEnumerable<DALDTO.ViolationType>> GetAllSortedAsync(Guid userId)
+    public async Task<IEnumerable<DALDTO.ViolationType>> GetAllSortedAsync()
     {
-        var query = CreateQuery(userId);
+        var query = CreateQuery();
         var res = await query.ToListAsync();
-//        query = query.OrderBy(c => c.ViolationType);
-        
         return res.Select(e => Mapper.Map(e));
     }
 }

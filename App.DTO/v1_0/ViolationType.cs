@@ -3,5 +3,9 @@
 public class ViolationType
 {
     public Guid Id { get; set; }
+    
+    public string? ViolationTypeName{ get; set; }
+    
+    public decimal? Severity { get; set; }
 
 }

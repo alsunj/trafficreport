@@ -330,3 +330,4 @@ C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficRep
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.pdb
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\TrafficReports.genruntimeconfig.cache
 C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\obj\Debug\net8.0\ref\TrafficReports.dll
+C:\Users\Alex\Desktop\icd0024-23-24-s\TrafficReports\bin\Debug\net8.0\Swashbuckle.AspNetCore.Annotations.dll

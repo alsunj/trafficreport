@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JJMnqMk3nTqp+kwkmbTlFABeDVW8mMRExW6PWoH9uBXGulFILhKdkeJmGi6IBqxMZhJ5P75t/XFlKgFse/ItoQ==",
+  "dgSpecHash": "z7c2SqhiXtZTxouuHwm5exRPBjkchwjS7o8d0rtBPU9aIdPCtOBRJrD24Y8TU28ghjOn9lZhXNXknxqUhD8zFg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\TrafficReports\\TrafficReports.csproj",
   "expectedPackageFiles": [
@@ -170,6 +170,7 @@
     "C:\\Users\\Alex\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.6\\sqlitepclraw.lib.e_sqlite3.2.1.6.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.1.6\\sqlitepclraw.provider.e_sqlite3.2.1.6.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\swashbuckle.aspnetcore.annotations\\6.5.0\\swashbuckle.aspnetcore.annotations.6.5.0.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",

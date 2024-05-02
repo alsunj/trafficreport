@@ -9,5 +9,5 @@ public interface IViolationTypeRepository :  IEntityRepository<DALDTO.ViolationT
 }
 public interface IViolationTypeRepositoryCustom<TEntity>
 {
-    Task<IEnumerable<TEntity>> GetAllSortedAsync(Guid userId);
+    Task<IEnumerable<TEntity>> GetAllSortedAsync();
 }
