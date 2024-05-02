@@ -27,7 +27,7 @@ namespace TrafficReports.ApiControllers
         private readonly PublicDTOBllMapper<App.DTO.v1_0.ViolationType, App.BLL.DTO.ViolationType> _mapper;
 
 
-        public ViolationTypeController(AppDbContext context, IAppBLL bll, UserManager<AppUser> userManager, IMapper autoMapper)
+        public ViolationTypeController(AppDbContext context, IAppBLL bll, IMapper autoMapper)
         {
             _context = context;
             _bll = bll;
@@ -35,20 +35,17 @@ namespace TrafficReports.ApiControllers
 
         }
 
-        // GET: api/ViolationType
-        [HttpGet]
-        [ProducesResponseType<IEnumerable<App.BLL.DTO.ViolationType>>((int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-        [Produces("application/json")]
-        [Consumes("application/json")]
-        public async Task<ActionResult<IEnumerable<App.DTO.v1_0.ViolationType>>> GetViolationTypes()
-        {
-            var res = (await _bll.ViolationTypes.GetAllSortedAsync())
-                .Select(e => _mapper.Map(e))
-                .ToList();
-            return Ok(res);
-
-        }
+          // GET: api/ViolationType
+          [HttpGet]
+          [ProducesResponseType<ViolationType>((int)HttpStatusCode.OK)]
+          [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+          [Produces("application/json")]
+          [Consumes("application/json")]
+      
+          public async Task<ActionResult<IEnumerable<ViolationType>>> GetViolationTypes()
+          {
+              return await _context.ViolationTypes.ToListAsync();
+          }
 
         // GET: api/ViolationType/5
         [HttpGet("{id}")]
