@@ -12,6 +12,12 @@ public interface IAppUnitOfWork : IUnitOfWork
     IViolationTypeRepository ViolationTypes { get; }
     IViolationRepository Violations { get; }
     IEntityRepository<AppUser> Users { get; }
+    IVehicleTypeRepository VehicleTypes { get; }
+    IVehicleRepository Vehicles { get; }
+    IAdditionalVehicleRepository AdditionalVehicles { get; }
+    IEvidenceTypeRepository EvidenceTypes { get; }
+    IEvidenceRepository Evidences { get; }
+    ICommentRepository Comments { get; }
 
 
 }

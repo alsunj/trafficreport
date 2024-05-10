@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using App.DAL.EF;
 using App.Domain.Evidences;
-
+/*
 namespace TrafficReports.ApiControllers
 {
     [Route("api/[controller]")]
@@ -106,3 +106,4 @@ namespace TrafficReports.ApiControllers
         }
     }
 }
+*/

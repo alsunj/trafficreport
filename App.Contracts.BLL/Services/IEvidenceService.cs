@@ -1,6 +1,9 @@
-﻿namespace App.Contracts.BLL.Services;
+﻿using App.Contracts.DAL.Repositories;
+using Base.Contracts.DAL;
 
-public interface IEvidenceService
+namespace App.Contracts.BLL.Services;
+
+public interface IEvidenceService : IEntityRepository<App.BLL.DTO.Evidence>, IEvidenceRepositoryCustom<App.BLL.DTO.Evidence>
 {
     
 }

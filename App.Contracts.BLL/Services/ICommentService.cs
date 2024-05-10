@@ -1,6 +1,9 @@
-﻿namespace App.Contracts.BLL.Services;
+﻿using App.Contracts.DAL.Repositories;
+using Base.Contracts.DAL;
 
-public interface ICommentService
+namespace App.Contracts.BLL.Services;
+
+public interface ICommentService : IEntityRepository<App.BLL.DTO.Comment>, ICommentRepositoryCustom<App.BLL.DTO.Comment>
 {
     
 }

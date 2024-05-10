@@ -1,6 +1,14 @@
-﻿namespace App.Contracts.DAL.Repositories;
+﻿using Base.Contracts.DAL;
+using DALDTO = App.DAL.DTO;
 
-public interface IEvidenceRepository
+namespace App.Contracts.DAL.Repositories;
+
+
+public interface IEvidenceRepository:  IEntityRepository<DALDTO.Evidence>, IEvidenceRepositoryCustom<DALDTO.Evidence>
 {
-    
+}
+
+public interface IEvidenceRepositoryCustom<TEntity>
+{
+    Task<IEnumerable<TEntity>> GetAllSortedAsync(Guid userId);
 }

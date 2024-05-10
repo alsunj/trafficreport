@@ -1,6 +1,13 @@
-﻿namespace App.Contracts.DAL.Repositories;
+﻿using Base.Contracts.DAL;
+using DALDTO = App.DAL.DTO;
 
-public interface IVehicleRepository
+namespace App.Contracts.DAL.Repositories;
+
+public interface IVehicleRepository:  IEntityRepository<DALDTO.Vehicle>, IVehicleRepositoryCustom<DALDTO.Vehicle>
 {
-    
+}
+
+public interface IVehicleRepositoryCustom<TEntity>
+{
+    Task<IEnumerable<TEntity>> GetAllSortedAsync(Guid userId);
 }

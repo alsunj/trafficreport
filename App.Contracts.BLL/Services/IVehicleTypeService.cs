@@ -1,6 +1,9 @@
-﻿namespace App.Contracts.BLL.Services;
+﻿using App.Contracts.DAL.Repositories;
+using Base.Contracts.DAL;
 
-public interface IVehicleTypeService
+namespace App.Contracts.BLL.Services;
+
+public interface IVehicleTypeService : IEntityRepository<App.BLL.DTO.VehicleType>, IVehicleTypeRepositoryCustom<App.BLL.DTO.VehicleType>
 {
     
 }

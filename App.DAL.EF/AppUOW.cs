@@ -30,6 +30,29 @@ public class AppUOW : BaseUnitOfWork<AppDbContext>, IAppUnitOfWork
 
     public IViolationRepository Violations =>
         _violations ?? new ViolationRepository(UowDbContext, _mapper);
+    private IVehicleTypeRepository? _vehicleTypes;
+    public IVehicleTypeRepository VehicleTypes => 
+        _vehicleTypes ??= new VehicleTypeRepository(UowDbContext, _mapper);
+
+    private IVehicleRepository? _vehicles;
+    public IVehicleRepository Vehicles => 
+        _vehicles ??= new VehicleRepository(UowDbContext, _mapper);
+
+    private IAdditionalVehicleRepository? _additionalVehicles;
+    public IAdditionalVehicleRepository AdditionalVehicles => 
+        _additionalVehicles ??= new AdditionalVehicleRepository(UowDbContext, _mapper);
+
+    private IEvidenceTypeRepository? _evidenceTypes;
+    public IEvidenceTypeRepository EvidenceTypes => 
+        _evidenceTypes ??= new EvidenceTypeRepository(UowDbContext, _mapper);
+
+    private IEvidenceRepository? _evidences;
+    public IEvidenceRepository Evidences => 
+        _evidences ??= new EvidenceRepository(UowDbContext, _mapper);
+
+    private ICommentRepository? _comments;
+    public ICommentRepository Comments => 
+        _comments ??= new CommentRepository(UowDbContext, _mapper);
 
     private IEntityRepository<AppUser>? _users;
     public IEntityRepository<AppUser> Users => _users ??
