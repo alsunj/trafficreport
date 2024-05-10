@@ -7,5 +7,4 @@ public class ViolationType
     public string? ViolationTypeName{ get; set; }
     
     public decimal? Severity { get; set; }
-
 }

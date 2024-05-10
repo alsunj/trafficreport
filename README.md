@@ -52,6 +52,30 @@ dotnet aspnet-codegenerator controller -name ViolationController   -m  App.Domai
 
 dotnet aspnet-codegenerator controller -name VehicleViolationController   -m  App.Domain.Violations.VehicleViolation       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
 
+dotnet aspnet-codegenerator controller -name VehicleViolationController   -m  App.Domain.Violations.VehicleViolation       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+
+dotnet aspnet-codegenerator controller -name VehicleTypeController   -m  App.Domain.Vehicles.VehicleType       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+dotnet aspnet-codegenerator controller -name VehicleController   -m  App.Domain.Vehicles.Vehicle       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+dotnet aspnet-codegenerator controller -name AdditionalVehicleController   -m  App.Domain.Vehicles.AdditionalVehicle       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+
+dotnet aspnet-codegenerator controller -name CommentController   -m  App.Domain.Evidences.Comment       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+dotnet aspnet-codegenerator controller -name EvidenceTypeController   -m  App.Domain.Evidences.EvidenceType      -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+dotnet aspnet-codegenerator controller -name EvidenceController   -m  App.Domain.Evidences.Evidence     -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+
+
+
+
+
+
+
+
 
 
 

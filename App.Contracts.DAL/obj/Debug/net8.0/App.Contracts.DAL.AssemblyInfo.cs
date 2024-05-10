@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("App.Contracts.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c3c4370ab146fd80bf19ac92ea495ecaa2f8e877")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5479bed04339d603f5a7f00842aeebb120f71689")]
 [assembly: System.Reflection.AssemblyProductAttribute("App.Contracts.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("App.Contracts.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

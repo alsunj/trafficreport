@@ -12,15 +12,16 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using TrafficReport.Helpers;
-/*
+
 namespace TrafficReports.ApiControllers
 
 {
 
     [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/v{version:ApiVersion}/violations/[controller]/[action]")]
+    [Route("api/v{version:apiVersion}/violations/[controller]/[action]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
 
 
     public class VehicleViolationController : ControllerBase
@@ -36,36 +37,41 @@ namespace TrafficReports.ApiControllers
             _context = context;
             _bll = bll;
             _userManager = userManager;
-            _mapper = new PublicDTOBllMapper<App.DTO.v1_0.VehicleViolation, App.BLL.DTO.VehicleViolation>(autoMapper);        }
+            _mapper = new PublicDTOBllMapper<App.DTO.v1_0.VehicleViolation, App.BLL.DTO.VehicleViolation>(autoMapper);
+            
+        }
 
 
         // GET: api/VehicleViolation
         [HttpGet]
-        [ProducesResponseType<IEnumerable<App.BLL.DTO.VehicleViolation>>((int) HttpStatusCode.OK)]
+        [ProducesResponseType<IEnumerable<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<IEnumerable<VehicleViolation>>> GetVehicleViolations()
+        public async Task<ActionResult<List<App.DTO.v1_0.VehicleViolation>>> GetVehicleViolations()
         {
-            return await _context.VehicleViolations.ToListAsync();
+            var bllVehicleViolationResult = await _bll.VehicleViolations.GetAllAsync();
+            var bllVehiceViolation =  bllVehicleViolationResult.Select(e => _mapper.Map(e)).ToList();
+            return Ok(bllVehiceViolation);
         }
 
         // GET: api/VehicleViolation/5
         [HttpGet("{id}")]
-        [ProducesResponseType<VehicleViolation>((int) HttpStatusCode.OK)]
+        [ProducesResponseType<IEnumerable<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<VehicleViolation>> GetVehicleViolation(Guid id)
+        public async Task<ActionResult<App.DTO.v1_0.VehicleViolation>> GetVehicleViolation(Guid id)
         {
-            var vehicleViolation = await _context.VehicleViolations.FindAsync(id);
+            var vehicleViolation = await _bll.VehicleViolations.FirstOrDefaultAsync(id);
 
             if (vehicleViolation == null)
             {
                 return NotFound();
             }
 
-            return vehicleViolation;
+            var res = _mapper.Map(vehicleViolation);
+            return Ok(res);
         }
 
         // PUT: api/VehicleViolation/5
@@ -76,44 +82,36 @@ namespace TrafficReports.ApiControllers
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<IActionResult> PutVehicleViolation(Guid id, VehicleViolation vehicleViolation)
+        public async Task<IActionResult> PutVehicleViolation(Guid id, App.DTO.v1_0.VehicleViolation vehicleViolation)
         {
             if (id != vehicleViolation.Id)
             {
-                return BadRequest();
+                return BadRequest("bad request");
             }
 
-            _context.Entry(vehicleViolation).State = EntityState.Modified;
-
-            try
+            if (!await _bll.VehicleViolations.ExistsAsync(id))
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!VehicleViolationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound("id doesnt exist");
             }
 
+            var res = _mapper.Map(vehicleViolation);
+            
+            _bll.VehicleViolations.Update(res);
+            
             return NoContent();
+
         }
 
         // POST: api/VehicleViolation
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        [ProducesResponseType<VehicleViolation>((int) HttpStatusCode.Created)]
+        [ProducesResponseType<IEnumerable<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<VehicleViolation>> PostVehicleViolation(VehicleViolation vehicleViolation)
+        public async Task<ActionResult<App.DTO.v1_0.VehicleViolation>> PostVehicleViolation(App.DTO.v1_0.VehicleViolation vehicleViolation)
         {
-            _context.VehicleViolations.Add(vehicleViolation);
-            await _context.SaveChangesAsync();
+            var mappedVehicleViolation = _mapper.Map(vehicleViolation);
+            _bll.VehicleViolations.Add(mappedVehicleViolation);
 
             return CreatedAtAction("GetVehicleViolation", new
             {
@@ -131,23 +129,22 @@ namespace TrafficReports.ApiControllers
 
         public async Task<IActionResult> DeleteVehicleViolation(Guid id)
         {
-            var vehicleViolation = await _context.VehicleViolations.FindAsync(id);
+            var vehicleViolation = await _bll.VehicleViolations.ExistsAsync(id);
             if (vehicleViolation == null)
             {
                 return NotFound();
             }
 
-            _context.VehicleViolations.Remove(vehicleViolation);
-            await _context.SaveChangesAsync();
+            await _bll.VehicleViolations.RemoveAsync(id);
 
+            
             return NoContent();
         }
 
         private bool VehicleViolationExists(Guid id)
         {
-            return _context.VehicleViolations.Any(e => e.Id == id);
+            return _bll.VehicleViolations.Exists(id);
         }
     }
 
 }
-*/

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Base.Contracts.Domain;
+﻿using Base.Contracts.Domain;
 
 namespace App.DAL.DTO;
 
@@ -7,6 +6,11 @@ public class Violation: IDomainEntityId
 {
     public Guid Id { get; set; }
     
-    [MaxLength(128)] 
+    public Guid ViolationTypeId { get; set; }
+    
     public string? ViolationName { get; set; }
+    
+    public decimal? Severity { get; set; }
+
+
 }

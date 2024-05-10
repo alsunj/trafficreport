@@ -90,6 +90,7 @@ var apiVersioningBuilder = builder.Services.AddApiVersioning(options =>
 {
     options.ReportApiVersions = true;
     options.DefaultApiVersion = new ApiVersion(1, 0);
+    
 });
 apiVersioningBuilder.AddApiExplorer(options =>
 {

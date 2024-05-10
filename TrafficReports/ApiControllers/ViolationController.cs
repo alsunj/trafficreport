@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using App.Contracts.BLL;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using App.DAL.EF;
@@ -16,14 +11,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using TrafficReport.Helpers;
-/*
+
 namespace TrafficReports.ApiControllers
 
 {
 
     [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/v{version:ApiVersion}/violations/[controller]/[action]")]
+    [Route("api/v{version:apiVersion}/violations/[controller]/[action]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class ViolationController : ControllerBase
@@ -44,31 +39,35 @@ namespace TrafficReports.ApiControllers
         }
         // GET: api/Violation
         [HttpGet]
-        [ProducesResponseType<IEnumerable<App.BLL.DTO.Violation>>((int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(List<App.DTO.v1_0.Violation>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<List<Violation>> GetViolations()
+        public async Task<ActionResult<List<App.DTO.v1_0.Violation>>> GetViolations()
         {
-            return await _context.Violations.ToListAsync();
+            var bllViolationResult = await _bll.Violations.GetAllAsync();
+            var bllViolations = bllViolationResult.Select(e => _mapper.Map(e)).ToList();
+            return Ok(bllViolations);
         }
 
         // GET: api/Violation/5
         [HttpGet("{id}")]
-        [ProducesResponseType<Violation>((int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(List<App.DTO.v1_0.Violation>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<Violation>> GetViolation(Guid id)
+        public async Task<ActionResult<App.DTO.v1_0.Violation>> GetViolation(Guid id)
         {
-            var violation = await _context.Violations.FindAsync(id);
+            var violation = await _bll.Violations.FirstOrDefaultAsync(id);
 
             if (violation == null)
             {
                 return NotFound();
             }
 
-            return violation;
+            var res = _mapper.Map(violation);
+
+            return Ok(res);
         }
 
         // PUT: api/Violation/5
@@ -79,30 +78,22 @@ namespace TrafficReports.ApiControllers
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<IActionResult> PutViolation(Guid id, Violation violation)
+        public async Task<IActionResult> PutViolation(Guid id, App.DTO.v1_0.Violation violation)
         {
             if (id != violation.Id)
             {
-                return BadRequest();
+                return BadRequest("bad request");
             }
 
-            _context.Entry(violation).State = EntityState.Modified;
+            if (!await _bll.Violations.ExistsAsync(id))
+            {
+                return NotFound("id doesnt exist");
+            }
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ViolationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            var res = _mapper.Map(violation);
+
+            _bll.Violations.Update(res);
+
 
             return NoContent();
         }
@@ -110,14 +101,13 @@ namespace TrafficReports.ApiControllers
         // POST: api/Violation
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        [ProducesResponseType<Violation>((int) HttpStatusCode.Created)]
+        [ProducesResponseType(typeof(List<App.DTO.v1_0.Violation>), (int)HttpStatusCode.OK)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<Violation>> PostViolation(Violation violation)
+        public async Task<ActionResult<App.DTO.v1_0.Violation>> PostViolation(App.DTO.v1_0.Violation violation)
         {
-            _context.Violations.Add(violation);
-            await _context.SaveChangesAsync();
-
+            var mappedViolations = _mapper.Map(violation);
+            _bll.Violations.Add(mappedViolations);
             return CreatedAtAction("GetViolation", new
             {
                 version = HttpContext.GetRequestedApiVersion()?.ToString(),
@@ -133,22 +123,19 @@ namespace TrafficReports.ApiControllers
         [Consumes("application/json")]
         public async Task<IActionResult> DeleteViolation(Guid id)
         {
-            var violation = await _context.Violations.FindAsync(id);
+            var violation = await _bll.Violations.FirstOrDefaultAsync(id);
             if (violation == null)
             {
                 return NotFound();
             }
 
-            _context.Violations.Remove(violation);
-            await _context.SaveChangesAsync();
-
+            await _bll.Violations.RemoveAsync(id);
             return NoContent();
         }
 
         private bool ViolationExists(Guid id)
         {
-            return _context.Violations.Any(e => e.Id == id);
+            return _bll.Violations.Exists(id);
         }
     }
 }
-*/

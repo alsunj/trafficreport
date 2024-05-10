@@ -8,7 +8,7 @@ namespace App.Domain.Evidences;
 
 public class Comment : BaseEntityId
 {
-    [MaxLength(256)] 
+
     public string? CommentText { get; set; }
     public Guid? ParentCommentId { get; set; }
     
@@ -21,6 +21,6 @@ public class Comment : BaseEntityId
     
     public ICollection<Comment>? ChildComments { get; set; } = new List<Comment>();
 
-    private DateTime _createdAt { get; set; } = DateTime.Now;
+    private DateTime CreatedAt { get; set; } = DateTime.Now;
 
 }

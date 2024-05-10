@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Asp.Versioning;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace TrafficReport.ApiControllers;
 
 [ApiController]
-[Route("/api/v{version:ApiVersion}")]
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]/[action]")]
 public class TestController : ControllerBase
 {
     [HttpGet]

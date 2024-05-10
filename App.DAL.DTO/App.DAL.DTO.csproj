@@ -10,9 +10,4 @@
       <ProjectReference Include="..\Base.Contracts.Domain\Base.Contracts.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Evidences\" />
-      <Folder Include="Vehicles\" />
-    </ItemGroup>
-
 </Project>
