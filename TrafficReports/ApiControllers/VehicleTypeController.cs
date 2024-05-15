@@ -24,7 +24,7 @@ namespace TrafficReports.ApiControllers
         private readonly IAppBLL _bll;
         private readonly PublicDTOBllMapper<App.DTO.v1_0.VehicleType, App.BLL.DTO.VehicleType> _mapper;
 
-        public VehicleTypeController(AppDbContext context, IAppBLL bll, IMapper autoMapper)
+        public VehicleTypeController(IAppBLL bll, IMapper autoMapper)
         {
             _bll = bll;
             _mapper = new PublicDTOBllMapper<App.DTO.v1_0.VehicleType,App.BLL.DTO.VehicleType>(autoMapper);
@@ -75,7 +75,7 @@ namespace TrafficReports.ApiControllers
         {
             if (id != vehicleType.Id)
             {
-                return BadRequest();
+                return BadRequest("bad request");
             }
             if (!await _bll.VehicleTypes.ExistsAsync(id))
             {

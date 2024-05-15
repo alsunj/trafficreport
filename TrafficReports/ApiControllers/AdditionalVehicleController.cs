@@ -1,109 +1,129 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using App.Contracts.BLL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using App.DAL.EF;
 using App.Domain.Vehicles;
-/*
+using Asp.Versioning;
+using AutoMapper;
+using TrafficReport.Helpers;
+
 namespace TrafficReports.ApiControllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
     [ApiController]
+    [Route("api/v{version:apiVersion}/vehicles/[controller]/[action]")]
     public class AdditionalVehicleController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IAppBLL _bll;
+        private readonly PublicDTOBllMapper<App.DTO.v1_0.AdditionalVehicle, App.BLL.DTO.AdditionalVehicle> _mapper; 
 
-        public AdditionalVehicleController(AppDbContext context)
+        public AdditionalVehicleController(IAppBLL bll, IMapper autoMapper)
         {
-            _context = context;
+            _bll = bll;
+            _mapper = new PublicDTOBllMapper<App.DTO.v1_0.AdditionalVehicle, App.BLL.DTO.AdditionalVehicle>(autoMapper);
         }
 
         // GET: api/AdditionalVehicle
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AdditionalVehicle>>> GetAdditionalVehicles()
+        [ProducesResponseType(typeof(List<App.DTO.v1_0.AdditionalVehicle>),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<IEnumerable<App.DTO.v1_0.AdditionalVehicle>>> GetAdditionalVehicles()
         {
-            return await _context.AdditionalVehicles.ToListAsync();
+            var bllAdditionalVehicleResult = await _bll.AdditionalVehicles.GetAllAsync();
+            var bllAdditionalVehicles = bllAdditionalVehicleResult.Select(e =>_mapper.Map(e)).ToList();
+            return Ok(bllAdditionalVehicles);
         }
 
         // GET: api/AdditionalVehicle/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<AdditionalVehicle>> GetAdditionalVehicle(Guid id)
+        [ProducesResponseType(typeof(List<App.DTO.v1_0.AdditionalVehicle>),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<App.DTO.v1_0.AdditionalVehicle>> GetAdditionalVehicle(Guid id)
         {
-            var additionalVehicle = await _context.AdditionalVehicles.FindAsync(id);
+            var additionalVehicle = await _bll.AdditionalVehicles.FirstOrDefaultAsync(id);
 
             if (additionalVehicle == null)
             {
                 return NotFound();
             }
 
-            return additionalVehicle;
+            var res = _mapper.Map(additionalVehicle);
+
+            return Ok(res);
         }
 
         // PUT: api/AdditionalVehicle/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAdditionalVehicle(Guid id, AdditionalVehicle additionalVehicle)
+        [ProducesResponseType((int) HttpStatusCode.NoContent)]
+        [ProducesResponseType((int) HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> PutAdditionalVehicle(Guid id, App.DTO.v1_0.AdditionalVehicle additionalVehicle)
         {
             if (id != additionalVehicle.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(additionalVehicle).State = EntityState.Modified;
+            if (!await _bll.AdditionalVehicles.ExistsAsync(id))
+            {
+                return NotFound("id doesnt exist");
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AdditionalVehicleExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
             }
 
+            var res = _mapper.Map(additionalVehicle);
+            _bll.AdditionalVehicles.Update(res);
             return NoContent();
         }
 
         // POST: api/AdditionalVehicle
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<AdditionalVehicle>> PostAdditionalVehicle(AdditionalVehicle additionalVehicle)
+        [ProducesResponseType(typeof(App.DTO.v1_0.AdditionalVehicle),(int)HttpStatusCode.OK)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<AdditionalVehicle>> PostAdditionalVehicle(App.DTO.v1_0.AdditionalVehicle additionalVehicle)
         {
-            _context.AdditionalVehicles.Add(additionalVehicle);
-            await _context.SaveChangesAsync();
+            var mappedAdditionalVehicles = _mapper.Map(additionalVehicle);
+            _bll.AdditionalVehicles.Add(mappedAdditionalVehicles);
 
             return CreatedAtAction("GetAdditionalVehicle", new { id = additionalVehicle.Id }, additionalVehicle);
         }
 
         // DELETE: api/AdditionalVehicle/5
+        [ProducesResponseType((int) HttpStatusCode.NoContent)]
+        [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [HttpDelete("{id}")]
+        [Produces("application/json")]
+        [Consumes("application/json")] 
         public async Task<IActionResult> DeleteAdditionalVehicle(Guid id)
         {
-            var additionalVehicle = await _context.AdditionalVehicles.FindAsync(id);
+            var additionalVehicle = await _bll.AdditionalVehicles.FirstOrDefaultAsync(id);
             if (additionalVehicle == null)
             {
                 return NotFound();
             }
 
-            _context.AdditionalVehicles.Remove(additionalVehicle);
-            await _context.SaveChangesAsync();
+            await _bll.AdditionalVehicles.RemoveAsync(id);
 
             return NoContent();
         }
 
         private bool AdditionalVehicleExists(Guid id)
         {
-            return _context.AdditionalVehicles.Any(e => e.Id == id);
+            return _bll.AdditionalVehicles.Exists(id);
         }
     }
 }
-*/

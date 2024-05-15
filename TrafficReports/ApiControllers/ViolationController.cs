@@ -19,20 +19,19 @@ namespace TrafficReports.ApiControllers
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:apiVersion}/violations/[controller]/[action]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class ViolationController : ControllerBase
     {
 
-        private readonly AppDbContext _context;
         private readonly IAppBLL _bll;
         private readonly UserManager<AppUser> _userManager;
         private readonly PublicDTOBllMapper<App.DTO.v1_0.Violation, App.BLL.DTO.Violation> _mapper;
 
-        public ViolationController(AppDbContext context, IAppBLL bll, UserManager<AppUser> userManager,
+        public ViolationController(IAppBLL bll, UserManager<AppUser> userManager,
             IMapper autoMapper, PublicDTOBllMapper<App.DTO.v1_0.Violation, App.BLL.DTO.Violation> mapper)
         {
-            _context = context;
+            
             _bll = bll;
             _userManager = userManager;
             _mapper = new PublicDTOBllMapper<App.DTO.v1_0.Violation, App.BLL.DTO.Violation>(autoMapper);

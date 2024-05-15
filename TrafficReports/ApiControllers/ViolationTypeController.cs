@@ -24,7 +24,7 @@ namespace TrafficReports.ApiControllers
         private readonly PublicDTOBllMapper<App.DTO.v1_0.ViolationType, App.BLL.DTO.ViolationType> _mapper;
 
 
-        public ViolationTypeController(AppDbContext context, IAppBLL bll, IMapper autoMapper)
+        public ViolationTypeController(IAppBLL bll, IMapper autoMapper)
         {
             _bll = bll;
             _mapper = new PublicDTOBllMapper<App.DTO.v1_0.ViolationType, App.BLL.DTO.ViolationType>(autoMapper);

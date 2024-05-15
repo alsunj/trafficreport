@@ -1,74 +1,89 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using App.Contracts.BLL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using App.DAL.EF;
 using App.Domain.Vehicles;
-/*
+using Asp.Versioning;
+using AutoMapper;
+using TrafficReport.Helpers;
+
 namespace TrafficReports.ApiControllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
     [ApiController]
+    [Route("api/v{version:apiVersion}/vehicles/[controller]/[action]")]
     public class VehicleController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IAppBLL _bll;
+        private readonly PublicDTOBllMapper<App.DTO.v1_0.Vehicle, App.BLL.DTO.Vehicle> _mapper;
 
-        public VehicleController(AppDbContext context)
+        public VehicleController(IAppBLL bll, IMapper autoMapper)
         {
-            _context = context;
+            _bll = bll;
+            _mapper = new PublicDTOBllMapper<App.DTO.v1_0.Vehicle,App.BLL.DTO.Vehicle>(autoMapper);
         }
 
         // GET: api/Vehicle
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
+        [ProducesResponseType(typeof(List<App.DTO.v1_0.Vehicle>),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<List<App.DTO.v1_0.Vehicle>>> GetVehicles()
         {
-            return await _context.Vehicles.ToListAsync();
+            var bllVehicleControllerResult = await _bll.Vehicles.GetAllAsync();
+            var bllVehicleController = bllVehicleControllerResult.Select(e => _mapper.Map(e)).ToList();
+            return Ok(bllVehicleController);
         }
 
         // GET: api/Vehicle/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Vehicle>> GetVehicle(Guid id)
+        [ProducesResponseType(typeof(List<App.DTO.v1_0.Vehicle>),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<App.DTO.v1_0.Vehicle>> GetVehicle(Guid id)
         {
-            var vehicle = await _context.Vehicles.FindAsync(id);
+            var vehicle = await _bll.Vehicles.FirstOrDefaultAsync(id);
 
             if (vehicle == null)
             {
                 return NotFound();
             }
 
-            return vehicle;
+            var res = _mapper.Map(vehicle);
+            return Ok(res);
         }
 
         // PUT: api/Vehicle/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVehicle(Guid id, Vehicle vehicle)
+        [ProducesResponseType((int) HttpStatusCode.NoContent)]
+        [ProducesResponseType((int) HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> PutVehicle(Guid id, App.DTO.v1_0.Vehicle vehicle)
         {
             if (id != vehicle.Id)
             {
-                return BadRequest();
+                return BadRequest("bad request");
             }
 
-            _context.Entry(vehicle).State = EntityState.Modified;
+            if (!await _bll.Vehicles.ExistsAsync(id))
+            {
+                return NotFound("id doesnt exist");
 
-            try
-            {
-                await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!VehicleExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            var res = _mapper.Map(vehicle);
+            _bll.Vehicles.Update(res);
+
 
             return NoContent();
         }
@@ -76,10 +91,13 @@ namespace TrafficReports.ApiControllers
         // POST: api/Vehicle
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Vehicle>> PostVehicle(Vehicle vehicle)
+        [ProducesResponseType(typeof(App.DTO.v1_0.Vehicle),(int)HttpStatusCode.OK)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<App.DTO.v1_0.Vehicle>> PostVehicle(App.DTO.v1_0.Vehicle vehicle)
         {
-            _context.Vehicles.Add(vehicle);
-            await _context.SaveChangesAsync();
+            var mappedVehicles = _mapper.Map(vehicle);
+            _bll.Vehicles.Add(mappedVehicles);
 
             return CreatedAtAction("GetVehicle", new { id = vehicle.Id }, vehicle);
         }
@@ -88,22 +106,21 @@ namespace TrafficReports.ApiControllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVehicle(Guid id)
         {
-            var vehicle = await _context.Vehicles.FindAsync(id);
+            var vehicle = await _bll.Vehicles.FirstOrDefaultAsync(id);
             if (vehicle == null)
             {
                 return NotFound();
             }
 
-            _context.Vehicles.Remove(vehicle);
-            await _context.SaveChangesAsync();
-
+            await _bll.Vehicles.RemoveAsync(id);
+            
             return NoContent();
         }
 
         private bool VehicleExists(Guid id)
         {
-            return _context.Vehicles.Any(e => e.Id == id);
+            return _bll.Vehicles.Exists(id);
         }
     }
 }
-*/
+

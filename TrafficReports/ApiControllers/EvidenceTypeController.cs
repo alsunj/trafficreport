@@ -1,74 +1,89 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using App.Contracts.BLL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using App.DAL.EF;
 using App.Domain.Evidences;
-/*
+using Asp.Versioning;
+using AutoMapper;
+using TrafficReport.Helpers;
+
 namespace TrafficReports.ApiControllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
     [ApiController]
+    [Route("api/v{version:apiVersion}/evidences/[controller]/[action]")]
     public class EvidenceTypeController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IAppBLL _bll;
+        private readonly PublicDTOBllMapper<App.DTO.v1_0.EvidenceType, App.BLL.DTO.EvidenceType> _mapper; 
 
-        public EvidenceTypeController(AppDbContext context)
+        public EvidenceTypeController(IAppBLL bll, IMapper autoMapper)
         {
-            _context = context;
+            _bll = bll;
+            _mapper = new PublicDTOBllMapper<App.DTO.v1_0.EvidenceType, App.BLL.DTO.EvidenceType>(autoMapper);
         }
 
         // GET: api/EvidenceType
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EvidenceType>>> GetEvidenceTypes()
+        [ProducesResponseType(typeof(List<App.DTO.v1_0.EvidenceType>),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<IEnumerable<App.DTO.v1_0.EvidenceType>>> GetEvidenceTypes()
         {
-            return await _context.EvidenceTypes.ToListAsync();
+            var bllEvidenceTypeResult = await _bll.EvidenceTypes.GetAllAsync();
+            var bllEvidenceTypes = bllEvidenceTypeResult.Select(e => _mapper.Map(e)).ToList();
+            return Ok(bllEvidenceTypes);
         }
 
         // GET: api/EvidenceType/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<EvidenceType>> GetEvidenceType(Guid id)
+        [ProducesResponseType(typeof(List<App.DTO.v1_0.EvidenceType>),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<App.DTO.v1_0.EvidenceType>> GetEvidenceType(Guid id)
         {
-            var evidenceType = await _context.EvidenceTypes.FindAsync(id);
+            var evidenceType = await _bll.EvidenceTypes.FirstOrDefaultAsync(id);
 
             if (evidenceType == null)
             {
                 return NotFound();
             }
 
-            return evidenceType;
+            var res = _mapper.Map(evidenceType);
+            return Ok(res);
         }
 
         // PUT: api/EvidenceType/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEvidenceType(Guid id, EvidenceType evidenceType)
+        [ProducesResponseType((int) HttpStatusCode.NoContent)]
+        [ProducesResponseType((int) HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> PutEvidenceType(Guid id, App.DTO.v1_0.EvidenceType evidenceType)
         {
             if (id != evidenceType.Id)
             {
-                return BadRequest();
+                return BadRequest("bad request");
             }
 
-            _context.Entry(evidenceType).State = EntityState.Modified;
+            if (!await _bll.EvidenceTypes.ExistsAsync(id))
+            {
+                return NotFound("id doesnt exist");
 
-            try
-            {
-                await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EvidenceTypeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+
+            var res = _mapper.Map(evidenceType);
+            _bll.EvidenceTypes.Update(res);
 
             return NoContent();
         }
@@ -76,34 +91,40 @@ namespace TrafficReports.ApiControllers
         // POST: api/EvidenceType
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<EvidenceType>> PostEvidenceType(EvidenceType evidenceType)
+        [ProducesResponseType(typeof(App.DTO.v1_0.EvidenceType),(int)HttpStatusCode.OK)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<EvidenceType>> PostEvidenceType(App.DTO.v1_0.EvidenceType evidenceType)
         {
-            _context.EvidenceTypes.Add(evidenceType);
-            await _context.SaveChangesAsync();
+            var mappedEvidenceTypes = _mapper.Map(evidenceType);
+            _bll.EvidenceTypes.Add(mappedEvidenceTypes);
+            
 
             return CreatedAtAction("GetEvidenceType", new { id = evidenceType.Id }, evidenceType);
         }
 
         // DELETE: api/EvidenceType/5
+        [ProducesResponseType((int) HttpStatusCode.NoContent)]
+        [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [HttpDelete("{id}")]
+        [Produces("application/json")]
+        [Consumes("application/json")] 
         public async Task<IActionResult> DeleteEvidenceType(Guid id)
         {
-            var evidenceType = await _context.EvidenceTypes.FindAsync(id);
+            var evidenceType = await _bll.EvidenceTypes.FirstOrDefaultAsync(id);
             if (evidenceType == null)
             {
                 return NotFound();
             }
 
-            _context.EvidenceTypes.Remove(evidenceType);
-            await _context.SaveChangesAsync();
+            await _bll.EvidenceTypes.RemoveAsync(id);
 
             return NoContent();
         }
 
         private bool EvidenceTypeExists(Guid id)
         {
-            return _context.EvidenceTypes.Any(e => e.Id == id);
+            return  _bll.EvidenceTypes.Exists(id);
         }
     }
 }
-*/
