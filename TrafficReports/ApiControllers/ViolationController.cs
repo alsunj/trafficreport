@@ -28,8 +28,7 @@ namespace TrafficReports.ApiControllers
         private readonly UserManager<AppUser> _userManager;
         private readonly PublicDTOBllMapper<App.DTO.v1_0.Violation, App.BLL.DTO.Violation> _mapper;
 
-        public ViolationController(IAppBLL bll, UserManager<AppUser> userManager,
-            IMapper autoMapper, PublicDTOBllMapper<App.DTO.v1_0.Violation, App.BLL.DTO.Violation> mapper)
+        public ViolationController(IAppBLL bll, UserManager<AppUser> userManager, IMapper autoMapper)
         {
             
             _bll = bll;
