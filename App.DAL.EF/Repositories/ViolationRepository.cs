@@ -1,18 +1,24 @@
 ﻿using App.Contracts.DAL.Repositories;
-using App.Domain.Violations;
+using AutoMapper;
+using DALDTO = App.DAL.DTO;
+using APPDomain = App.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.DAL.EF.Repositories;
 
 
-public class ViolationRepository : BaseEntityRepository<Violation, Violation, AppDbContext>,  IViolationRepository
+public class ViolationRepository : BaseEntityRepository<APPDomain.Violations.Violation, DALDTO.Violation, AppDbContext>,  IViolationRepository
 {
-    public ViolationRepository(AppDbContext dbContext) :  base(dbContext, new DalDummyMapper<Violation, Violation>())
+    public ViolationRepository(AppDbContext dbContext, IMapper mapper) :  base(dbContext, new DalDomainMapper<APPDomain.Violations.Violation, DALDTO.Violation>(mapper))
     {
 
     }
-    public async Task<IEnumerable<Violation>> GetAllWithViolationTypesAsync()
+    public async Task<IEnumerable<DALDTO.Violation>> GetAllSortedAsync(Guid userId)
     {
-        return await RepoDbSet.Include(v => v.ViolationType).ToListAsync();
+        var query = CreateQuery(userId);
+        var res = await query.ToListAsync();
+//        query = query.OrderBy(c => c.Violation);
+        
+        return res.Select(e => Mapper.Map(e));
     }
 }

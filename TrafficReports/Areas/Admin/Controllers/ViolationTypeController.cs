@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using App.DAL.EF;
 using App.Domain.Violations;
-
+/*
 namespace TrafficReports.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -152,3 +152,4 @@ namespace TrafficReports.Areas.Admin.Controllers
 
     }
 }
+*/

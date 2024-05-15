@@ -1,11 +1,24 @@
 ﻿using App.Contracts.DAL.Repositories;
-using App.Domain.Violations;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using DALDTO = App.DAL.DTO;
+using APPDomain = App.Domain;
 
 namespace App.DAL.EF.Repositories;
 
-public class VehicleViolationRepository : BaseEntityRepository<VehicleViolation, VehicleViolation, AppDbContext>,  IVehicleViolationRepository
+public class VehicleViolationRepository : BaseEntityRepository<APPDomain.Violations.VehicleViolation, DALDTO.VehicleViolation, AppDbContext>,  IVehicleViolationRepository
 {
-    public VehicleViolationRepository(AppDbContext dbContext) :  base(dbContext, new DalDummyMapper<VehicleViolation, VehicleViolation>())
+
+    public VehicleViolationRepository(AppDbContext dbContext, IMapper mapper) :  base(dbContext, new DalDomainMapper<APPDomain.Violations.VehicleViolation, DALDTO.VehicleViolation>(mapper))
     {
+    }
+    
+    public async Task<IEnumerable<DALDTO.VehicleViolation>> GetAllSortedAsync(Guid userId)
+    {
+        var query = CreateQuery(userId);
+        var res = await query.ToListAsync();
+//        query = query.OrderBy(c => c.VehicleViolation);
+        
+        return res.Select(e => Mapper.Map(e));
     }
 }

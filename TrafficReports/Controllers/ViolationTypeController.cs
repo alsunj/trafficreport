@@ -2,29 +2,42 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Contracts.DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using App.DAL.EF;
+using App.Domain.Identity;
 using App.Domain.Violations;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace TrafficReports.Controllers
 {
+    [Authorize]
     public class ViolationTypeController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IAppUnitOfWork _uow;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ViolationTypeController(AppDbContext context)
+        public ViolationTypeController(IAppUnitOfWork uow, UserManager<AppUser> userManager)
         {
-            _context = context;
+            _uow = uow;
+            _userManager = userManager;
         }
 
-        // GET: ViolationType
+     /*   // GET: ViolationType
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ViolationTypes.ToListAsync());
+            var res = await _uow.ViolationTypes.GetAllAsync(
+                Guid.Parse(_userManager.GetUserId(User))
+                );
+            return View(res);
+            
         }
-
+    /*    
+/*
         // GET: ViolationType/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
@@ -154,5 +167,8 @@ namespace TrafficReports.Controllers
         {
             return _context.ViolationTypes.Any(e => e.Id == id);
         }
+        */
     }
+  
 }
+   

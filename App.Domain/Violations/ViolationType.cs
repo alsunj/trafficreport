@@ -5,7 +5,6 @@ namespace App.Domain.Violations;
 
 public class ViolationType : BaseEntityId
 {
-    [MaxLength(128)] 
     public string? ViolationTypeName{ get; set; }
     
     public decimal? Severity { get; set; }

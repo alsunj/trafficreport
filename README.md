@@ -27,7 +27,9 @@ dotnet aspnet-codegenerator controller -name AppUserController        -actions -
 
 dotnet aspnet-codegenerator controller -name VehicleViolationController        -actions -m  App.Domain.Violations.VehicleViolation        -dc AppDbContext -outDir Controllers --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
 
+identity
 
+dotnet aspnet-codegenerator controller identity -f --userClass=App.Domain.Identity.AppUser -gl
 
 area
 
@@ -40,6 +42,43 @@ dotnet aspnet-codegenerator controller -name ViolationController     -actions -m
 dotnet aspnet-codegenerator controller -name VehicleTypeController     -actions -m  App.Domain.Vehicles.VehicleType -dc AppDbContext -outDir Areas\Admin\Controllers  --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
 
 dotnet aspnet-codegenerator controller -name VehicleController     -actions -m  App.Domain.Vehicles.Vehicle -dc AppDbContext -outDir Areas\Admin\Controllers  --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
+
+
+ApiControllers
+
+dotnet aspnet-codegenerator controller -name ViolationTypeController   -m  App.Domain.Violations.ViolationType       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+dotnet aspnet-codegenerator controller -name ViolationController   -m  App.Domain.Violations.Violation     -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+dotnet aspnet-codegenerator controller -name VehicleViolationController   -m  App.Domain.Violations.VehicleViolation       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+dotnet aspnet-codegenerator controller -name VehicleViolationController   -m  App.Domain.Violations.VehicleViolation       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+
+dotnet aspnet-codegenerator controller -name VehicleTypeController   -m  App.Domain.Vehicles.VehicleType       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+dotnet aspnet-codegenerator controller -name VehicleController   -m  App.Domain.Vehicles.Vehicle       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+dotnet aspnet-codegenerator controller -name AdditionalVehicleController   -m  App.Domain.Vehicles.AdditionalVehicle       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+
+dotnet aspnet-codegenerator controller -name CommentController   -m  App.Domain.Evidences.Comment       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+dotnet aspnet-codegenerator controller -name EvidenceTypeController   -m  App.Domain.Evidences.EvidenceType      -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+dotnet aspnet-codegenerator controller -name EvidenceController   -m  App.Domain.Evidences.Evidence     -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 SUBJECTS TO CHANGE:
