@@ -13820,11 +13820,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\WebApp\\WebApp.csproj",
+      "projectUniqueName": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\WebApp\\WebApp.csproj",
       "projectName": "WebApp",
-      "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\WebApp\\WebApp.csproj",
+      "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\WebApp\\WebApp.csproj",
       "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\WebApp\\obj\\",
+      "outputPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\WebApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -13846,20 +13846,20 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.BLL\\App.BLL.csproj": {
-              "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.BLL\\App.BLL.csproj"
+            "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.BLL\\App.BLL.csproj": {
+              "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.BLL\\App.BLL.csproj"
             },
-            "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Contracts.BLL\\App.Contracts.BLL.csproj": {
-              "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Contracts.BLL\\App.Contracts.BLL.csproj"
+            "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Contracts.BLL\\App.Contracts.BLL.csproj": {
+              "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Contracts.BLL\\App.Contracts.BLL.csproj"
             },
-            "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.DAL.EF\\App.DAL.EF.csproj": {
-              "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.DAL.EF\\App.DAL.EF.csproj"
+            "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.DAL.EF\\App.DAL.EF.csproj": {
+              "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.DAL.EF\\App.DAL.EF.csproj"
             },
-            "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj": {
-              "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj"
+            "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj": {
+              "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj"
             },
-            "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Helpers\\Helpers.csproj": {
-              "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Helpers\\Helpers.csproj"
+            "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Helpers\\Helpers.csproj": {
+              "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Helpers\\Helpers.csproj"
             }
           }
         }

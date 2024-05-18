@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "E6mHXzRvODe+teunilh0c1W+KLPeHHMiG/L3sxo6IGPrrlKmWSw43BzW3rP0980AeQ4k+/0ueGKAw2dJbYkB5g==",
+  "dgSpecHash": "D6kPwtsyKlhevsUNKgnfZnqVYQKd0H+TcwZd5ryHYtvSaKc9AIShpJoYhhLrUUPpBdAaB7sYg+c/zI1ZNkaotQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.DAL.EF\\App.DAL.EF.csproj",
+  "projectFilePath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.DAL.EF\\App.DAL.EF.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Alex\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

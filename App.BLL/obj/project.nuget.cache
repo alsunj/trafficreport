@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kcakidhTDErwKKr52MxM5kcgN+XOwCHvPKCkc7ok546FFjGMXy9N3e+t8ZbBF3iBUs0boiXlCJgCD/WHruzhyA==",
+  "dgSpecHash": "/IClYAMcv9fS8Z0xou7DftYZsZWkmLRqvPb0FijTZ3QFgtQhiEcUFYC+Uc/VeeZN08GUKlP2Y+MWt1uMfDGBhA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.BLL\\App.BLL.csproj",
+  "projectFilePath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.BLL\\App.BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Alex\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.4\\microsoft.aspnetcore.cryptography.internal.8.0.4.nupkg.sha512",
