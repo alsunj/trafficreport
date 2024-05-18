@@ -864,11 +864,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Contracts.BLL\\App.Contracts.BLL.csproj",
+      "projectUniqueName": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Contracts.BLL\\App.Contracts.BLL.csproj",
       "projectName": "App.Contracts.BLL",
-      "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Contracts.BLL\\App.Contracts.BLL.csproj",
+      "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Contracts.BLL\\App.Contracts.BLL.csproj",
       "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Contracts.BLL\\obj\\",
+      "outputPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Contracts.BLL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -890,17 +890,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.BLL.DTO\\App.BLL.DTO.csproj": {
-              "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.BLL.DTO\\App.BLL.DTO.csproj"
+            "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.BLL.DTO\\App.BLL.DTO.csproj": {
+              "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.BLL.DTO\\App.BLL.DTO.csproj"
             },
-            "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Contracts.DAL\\App.Contracts.DAL.csproj": {
-              "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Contracts.DAL\\App.Contracts.DAL.csproj"
+            "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Contracts.DAL\\App.Contracts.DAL.csproj": {
+              "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Contracts.DAL\\App.Contracts.DAL.csproj"
             },
-            "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.BLL\\Base.Contracts.BLL.csproj": {
-              "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.BLL\\Base.Contracts.BLL.csproj"
+            "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.BLL\\Base.Contracts.BLL.csproj": {
+              "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.BLL\\Base.Contracts.BLL.csproj"
             },
-            "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.DAL\\Base.Contracts.DAL.csproj": {
-              "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.DAL\\Base.Contracts.DAL.csproj"
+            "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.DAL\\Base.Contracts.DAL.csproj": {
+              "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.DAL\\Base.Contracts.DAL.csproj"
             }
           }
         }

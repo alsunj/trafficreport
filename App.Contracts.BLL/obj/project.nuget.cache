@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "f1i2P5lmW9YvNeS6H1DZdT5Kix/vjyiHK8QWL9rPsLmkQK5u54lCIR0jCpUPgI2Hh+7dGC0b1lhRC7t8gpoB+g==",
+  "dgSpecHash": "Q1GbFUQI1xACrLi0ljkIVpirsvLYwFy8wGLksx/LC0paJ2daYSn0RC2sk7qRUH5V8AoepNXB6olQd97AEmchQA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Contracts.BLL\\App.Contracts.BLL.csproj",
+  "projectFilePath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Contracts.BLL\\App.Contracts.BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Alex\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.3\\microsoft.aspnetcore.cryptography.internal.8.0.3.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.3\\microsoft.aspnetcore.cryptography.keyderivation.8.0.3.nupkg.sha512",
