@@ -53,12 +53,23 @@ WORKDIR /app/WebApp
 RUN dotnet publish -c Release -o out
 
 # switch to runtime image
-FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/aspnet:8.0-bookworm-slim-amd64 AS runtime
-EXPOSE 80
-EXPOSE 8080
+#FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/aspnet:8.0-bookworm-slim-amd64 AS runtime
+#EXPOSE 80
+#EXPOSE 8080
+#WORKDIR /app
+#COPY --from=build /app/WebApp/out ./
+#ENTRYPOINT ["dotnet", "WebApp.dll"]
+
+# Working?
+
+# Switchs to runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/WebApp/out ./
 ENTRYPOINT ["dotnet", "WebApp.dll"]
+
+
+
 
 
 

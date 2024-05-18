@@ -1,7 +1,7 @@
 services:
   sql:
     image: postgres:16
-    container_name: trafficreport-sql
+    container_name: trafficreport-sql-container
     ports:
       - 5432:5432
     volumes:
@@ -16,7 +16,7 @@ services:
         max-file: 3
   app:
     build: ./
-    container_name: trafficreport-app
+    container_name: trafficreport-app-container
     ports:
       - 8080:8080
     restart: on-failure
@@ -25,7 +25,7 @@ services:
         max-size: 10m
         max-file: 3
     environment:
-      ConnectionStrings__DefaultConnection: "Host=trafficreport-sql;Port=5432;Database=trafficreport;Username=postgres;Password=postgres"
+      ConnectionStrings__DefaultConnection: "Host=trafficreport-sql-container;Port=5432;Database=trafficreport;Username=postgres;Password=postgres"
     depends_on:
       - sql
 
