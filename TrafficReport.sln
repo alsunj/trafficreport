@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficReports", "TrafficReports\TrafficReports.csproj", "{4A2A0E83-9E20-47BE-9837-34D87437506A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{4A2A0E83-9E20-47BE-9837-34D87437506A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Domain", "App.Domain\App.Domain.csproj", "{FD25367C-7994-49D9-AB34-C3A19F146FED}"
 EndProject
@@ -19,6 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		docker-compose.yml = docker-compose.yml
 		README.md = README.md
 		Directory.Build.props = Directory.Build.props
+		Dockerfile = Dockerfile
+		.gitignore = .gitignore
+		.dockerignore = .dockerignore
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Contracts.DAL", "Base.Contracts.DAL\Base.Contracts.DAL.csproj", "{A1B07D52-3E57-4E87-AFAA-EA1E8BCEDCE2}"

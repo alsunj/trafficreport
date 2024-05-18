@@ -1,0 +1,17 @@
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\bin\Debug\net8.0\Base.Contracts.BLL.deps.json
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\bin\Debug\net8.0\Base.Contracts.BLL.dll
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\bin\Debug\net8.0\Base.Contracts.BLL.pdb
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\bin\Debug\net8.0\Base.Contracts.DAL.dll
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\bin\Debug\net8.0\Base.Contracts.Domain.dll
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\bin\Debug\net8.0\Base.Contracts.DAL.pdb
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\bin\Debug\net8.0\Base.Contracts.Domain.pdb
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\obj\Debug\net8.0\Base.Contracts.BLL.csproj.AssemblyReference.cache
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\obj\Debug\net8.0\Base.Contracts.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\obj\Debug\net8.0\Base.Contracts.BLL.AssemblyInfoInputs.cache
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\obj\Debug\net8.0\Base.Contracts.BLL.AssemblyInfo.cs
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\obj\Debug\net8.0\Base.Contracts.BLL.csproj.CoreCompileInputs.cache
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\obj\Debug\net8.0\Base.Con.4B5EBEFC.Up2Date
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\obj\Debug\net8.0\Base.Contracts.BLL.dll
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\obj\Debug\net8.0\refint\Base.Contracts.BLL.dll
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\obj\Debug\net8.0\Base.Contracts.BLL.pdb
+C:\Users\Alex\Documents\icd0024-23-24-s\Base.Contracts.BLL\obj\Debug\net8.0\ref\Base.Contracts.BLL.dll

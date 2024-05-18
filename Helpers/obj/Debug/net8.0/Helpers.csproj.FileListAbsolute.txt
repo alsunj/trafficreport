@@ -10,3 +10,15 @@ C:\Users\Alex\Desktop\icd0024-23-24-s\Helpers\obj\Debug\net8.0\Helpers.dll
 C:\Users\Alex\Desktop\icd0024-23-24-s\Helpers\obj\Debug\net8.0\refint\Helpers.dll
 C:\Users\Alex\Desktop\icd0024-23-24-s\Helpers\obj\Debug\net8.0\Helpers.pdb
 C:\Users\Alex\Desktop\icd0024-23-24-s\Helpers\obj\Debug\net8.0\ref\Helpers.dll
+C:\Users\Alex\Documents\icd0024-23-24-s\Helpers\bin\Debug\net8.0\Helpers.deps.json
+C:\Users\Alex\Documents\icd0024-23-24-s\Helpers\bin\Debug\net8.0\Helpers.dll
+C:\Users\Alex\Documents\icd0024-23-24-s\Helpers\bin\Debug\net8.0\Helpers.pdb
+C:\Users\Alex\Documents\icd0024-23-24-s\Helpers\obj\Debug\net8.0\Helpers.csproj.AssemblyReference.cache
+C:\Users\Alex\Documents\icd0024-23-24-s\Helpers\obj\Debug\net8.0\Helpers.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alex\Documents\icd0024-23-24-s\Helpers\obj\Debug\net8.0\Helpers.AssemblyInfoInputs.cache
+C:\Users\Alex\Documents\icd0024-23-24-s\Helpers\obj\Debug\net8.0\Helpers.AssemblyInfo.cs
+C:\Users\Alex\Documents\icd0024-23-24-s\Helpers\obj\Debug\net8.0\Helpers.csproj.CoreCompileInputs.cache
+C:\Users\Alex\Documents\icd0024-23-24-s\Helpers\obj\Debug\net8.0\Helpers.dll
+C:\Users\Alex\Documents\icd0024-23-24-s\Helpers\obj\Debug\net8.0\refint\Helpers.dll
+C:\Users\Alex\Documents\icd0024-23-24-s\Helpers\obj\Debug\net8.0\Helpers.pdb
+C:\Users\Alex\Documents\icd0024-23-24-s\Helpers\obj\Debug\net8.0\ref\Helpers.dll

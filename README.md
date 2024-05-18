@@ -1,11 +1,19 @@
+## Tudeng
+~~~bash
 alsunj
 Alex Šunjajev
 alsunj@taltech.ee
 222442IACB
+~~~
 
+## Database
+~~~bash
 dotnet ef migrations   --project App.DAL.EF --startup-project TrafficReports add trafficreport4
 dotnet ef database  --project App.DAL.EF --startup-project TrafficReports update
+~~~
 
+## ViewControllers
+~~~bash
 cd TrafficReports 
 dotnet aspnet-codegenerator controller -name ViolationTypeController     -actions -m  App.Domain.Violations.ViolationType       -dc AppDbContext -outDir Controllers --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
 
@@ -26,12 +34,17 @@ dotnet aspnet-codegenerator controller -name CommentController      -actions -m 
 dotnet aspnet-codegenerator controller -name AppUserController        -actions -m  App.Domain.Identity.AppUser      -dc AppDbContext -outDir Controllers --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
 
 dotnet aspnet-codegenerator controller -name VehicleViolationController        -actions -m  App.Domain.Violations.VehicleViolation        -dc AppDbContext -outDir Controllers --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
+~~~
 
-identity
+
+## identity
+~~~bash
 
 dotnet aspnet-codegenerator controller identity -f --userClass=App.Domain.Identity.AppUser -gl
+~~~
 
-area
+## Admin Area
+~~~bash
 
 dotnet aspnet-codegenerator controller -name AppUserController        -actions -m  App.Domain.Identity.AppUser      -dc AppDbContext -outDir Areas\Admin\Controllers --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
 
@@ -42,9 +55,12 @@ dotnet aspnet-codegenerator controller -name ViolationController     -actions -m
 dotnet aspnet-codegenerator controller -name VehicleTypeController     -actions -m  App.Domain.Vehicles.VehicleType -dc AppDbContext -outDir Areas\Admin\Controllers  --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
 
 dotnet aspnet-codegenerator controller -name VehicleController     -actions -m  App.Domain.Vehicles.Vehicle -dc AppDbContext -outDir Areas\Admin\Controllers  --useDefaultLayout --useAsyncActions --referenceScriptLibraries -f
+~~~
 
 
-ApiControllers
+## ApiControllers
+
+~~~bash
 
 dotnet aspnet-codegenerator controller -name ViolationTypeController   -m  App.Domain.Violations.ViolationType       -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
 
@@ -68,11 +84,27 @@ dotnet aspnet-codegenerator controller -name EvidenceTypeController   -m  App.Do
 
 dotnet aspnet-codegenerator controller -name EvidenceController   -m  App.Domain.Evidences.Evidence     -dc AppDbContext -outDir ApiControllers -api --useAsyncActions -f
 
+~~~
+
+
+## Docker
+~~~bash
+ç
+# multiplatform build on apple silicon
+# https://docs.docker.com/build/building/multi-platform/
+docker buildx create --name mybuilder --bootstrap --use
+docker buildx build --platform linux/amd64 -t alsunj/webapp:latest --push .
+
+docker buildx build --force-rm -t alsunj/webapp:latest --push .
+ 
+ 
+ 
+docker buildx build --progress=plain --force-rm --push -t alsunj/webapp:latest . 
 
 
 
 
-
+~~~
 
 
 

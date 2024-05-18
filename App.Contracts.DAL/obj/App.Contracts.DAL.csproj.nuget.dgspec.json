@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Contracts.DAL\\App.Contracts.DAL.csproj": {}
+    "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Contracts.DAL\\App.Contracts.DAL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Contracts.DAL\\App.Contracts.DAL.csproj": {
+    "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Contracts.DAL\\App.Contracts.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Contracts.DAL\\App.Contracts.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Contracts.DAL\\App.Contracts.DAL.csproj",
         "projectName": "App.Contracts.DAL",
-        "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Contracts.DAL\\App.Contracts.DAL.csproj",
+        "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Contracts.DAL\\App.Contracts.DAL.csproj",
         "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Contracts.DAL\\obj\\",
+        "outputPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Contracts.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,14 +33,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.DAL.DTO\\App.DAL.DTO.csproj": {
-                "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.DAL.DTO\\App.DAL.DTO.csproj"
+              "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.DAL.DTO\\App.DAL.DTO.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.DAL.DTO\\App.DAL.DTO.csproj"
               },
-              "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj": {
-                "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj"
+              "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj"
               },
-              "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.DAL\\Base.Contracts.DAL.csproj": {
-                "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.DAL\\Base.Contracts.DAL.csproj"
+              "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.DAL\\Base.Contracts.DAL.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.DAL\\Base.Contracts.DAL.csproj"
               }
             }
           }
@@ -80,14 +80,14 @@
         }
       }
     },
-    "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.DAL.DTO\\App.DAL.DTO.csproj": {
+    "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.DAL.DTO\\App.DAL.DTO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.DAL.DTO\\App.DAL.DTO.csproj",
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.DAL.DTO\\App.DAL.DTO.csproj",
         "projectName": "App.DAL.DTO",
-        "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.DAL.DTO\\App.DAL.DTO.csproj",
+        "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.DAL.DTO\\App.DAL.DTO.csproj",
         "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.DAL.DTO\\obj\\",
+        "outputPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.DAL.DTO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -109,8 +109,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
-                "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj"
+              "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj"
               }
             }
           }
@@ -144,14 +144,14 @@
         }
       }
     },
-    "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj": {
+    "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj",
         "projectName": "App.Domain",
-        "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj",
+        "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj",
         "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\App.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -173,8 +173,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj": {
-                "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj"
+              "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj"
               }
             }
           }
@@ -214,14 +214,14 @@
         }
       }
     },
-    "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.DAL\\Base.Contracts.DAL.csproj": {
+    "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.DAL\\Base.Contracts.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.DAL\\Base.Contracts.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.DAL\\Base.Contracts.DAL.csproj",
         "projectName": "Base.Contracts.DAL",
-        "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.DAL\\Base.Contracts.DAL.csproj",
+        "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.DAL\\Base.Contracts.DAL.csproj",
         "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.DAL\\obj\\",
+        "outputPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -243,8 +243,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
-                "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj"
+              "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj"
               }
             }
           }
@@ -284,14 +284,14 @@
         }
       }
     },
-    "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
+    "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj",
         "projectName": "Base.Contracts.Domain",
-        "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj",
+        "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj",
         "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -354,14 +354,14 @@
         }
       }
     },
-    "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj": {
+    "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj",
         "projectName": "Base.Domain",
-        "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj",
+        "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj",
         "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -383,8 +383,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
-                "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj"
+              "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj"
               }
             }
           }

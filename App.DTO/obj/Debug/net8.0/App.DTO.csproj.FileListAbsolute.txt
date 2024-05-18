@@ -1,0 +1,11 @@
+C:\Users\Alex\Documents\icd0024-23-24-s\App.DTO\bin\Debug\net8.0\App.DTO.deps.json
+C:\Users\Alex\Documents\icd0024-23-24-s\App.DTO\bin\Debug\net8.0\App.DTO.dll
+C:\Users\Alex\Documents\icd0024-23-24-s\App.DTO\bin\Debug\net8.0\App.DTO.pdb
+C:\Users\Alex\Documents\icd0024-23-24-s\App.DTO\obj\Debug\net8.0\App.DTO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alex\Documents\icd0024-23-24-s\App.DTO\obj\Debug\net8.0\App.DTO.AssemblyInfoInputs.cache
+C:\Users\Alex\Documents\icd0024-23-24-s\App.DTO\obj\Debug\net8.0\App.DTO.AssemblyInfo.cs
+C:\Users\Alex\Documents\icd0024-23-24-s\App.DTO\obj\Debug\net8.0\App.DTO.csproj.CoreCompileInputs.cache
+C:\Users\Alex\Documents\icd0024-23-24-s\App.DTO\obj\Debug\net8.0\App.DTO.dll
+C:\Users\Alex\Documents\icd0024-23-24-s\App.DTO\obj\Debug\net8.0\refint\App.DTO.dll
+C:\Users\Alex\Documents\icd0024-23-24-s\App.DTO\obj\Debug\net8.0\App.DTO.pdb
+C:\Users\Alex\Documents\icd0024-23-24-s\App.DTO\obj\Debug\net8.0\ref\App.DTO.dll
