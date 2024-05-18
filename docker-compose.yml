@@ -14,6 +14,20 @@ services:
       options:
         max-size: 10m
         max-file: 3
+  app:
+    build: ./
+    container_name: trafficreport-app
+    ports:
+      - 8080:8080
+    restart: on-failure
+    logging:
+      options:
+        max-size: 10m
+        max-file: 3
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=trafficreport-sql;Port=5432;Database=trafficreport;Username=postgres;Password=postgres"
+    depends_on:
+      - sql
 
 volumes:
   sql-volume:
