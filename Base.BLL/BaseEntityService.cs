@@ -66,12 +66,13 @@ public class BaseEntityService<TDalEntity, TBllEntity, TRepository, TKey> : IEnt
 
     public bool Exists(TKey id, TKey? userId = default)
     {
-        throw new NotImplementedException();
+        return Repository.Exists(id, userId);
     }
 
-    public Task<TBllEntity?> FirstOrDefaultAsync(TKey id, TKey? userId = default, bool noTracking = true)
+    public async Task<TBllEntity?> FirstOrDefaultAsync(TKey id, TKey? userId = default, bool noTracking = true)
     {
-        throw new NotImplementedException();
+        var entity = await Repository.FirstOrDefaultAsync(id, userId, noTracking);
+        return Mapper.Map(entity);
     }
 
     public async Task<IEnumerable<TBllEntity>> GetAllAsync(TKey? userId = default, bool noTracking = true)
@@ -79,18 +80,18 @@ public class BaseEntityService<TDalEntity, TBllEntity, TRepository, TKey> : IEnt
         return (await Repository.GetAllAsync(userId, noTracking)).Select(e => Mapper.Map(e));
     }
 
-    public Task<bool> ExistsAsync(TKey id, TKey? userId = default)
+    public async Task<bool> ExistsAsync(TKey id, TKey? userId = default)
     {
-        throw new NotImplementedException();
+        return await Repository.ExistsAsync(id, userId);
     }
 
-    public Task<int> RemoveAsync(TBllEntity entity, TKey? userId = default)
+    public async Task<int> RemoveAsync(TBllEntity entity, TKey? userId = default)
     {
-        throw new NotImplementedException();
+        return await Repository.RemoveAsync(Mapper.Map(entity), userId);
     }
 
-    public Task<int> RemoveAsync(TKey id, TKey? userId = default)
+    public async Task<int> RemoveAsync(TKey id, TKey? userId = default)
     {
-        throw new NotImplementedException();
+        return await Repository.RemoveAsync(id, userId);
     }
 }
