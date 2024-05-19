@@ -102,6 +102,10 @@ docker buildx build --force-rm -t alsunj/webapp:latest --push .
 docker buildx build --progress=plain --force-rm --push -t alsunj/webapp:latest . 
 
 
+# Working docker build for azure
+docker buildx build --progress=plain --force-rm --push -t rpk16/webapp:latest .
+docker build -t webapp:latest .
+
 
 
 ~~~
