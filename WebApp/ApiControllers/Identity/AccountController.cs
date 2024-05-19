@@ -23,15 +23,17 @@ public class AccountController : ControllerBase
     private readonly SignInManager<AppUser> _signInManager;
     private readonly IConfiguration _configuration;
     private readonly AppDbContext _context;
+    private readonly Random _random;
 
     public AccountController(UserManager<AppUser> userManager, ILogger<AccountController> logger,
-        SignInManager<AppUser> signInManager, IConfiguration configuration, AppDbContext context)
+        SignInManager<AppUser> signInManager, IConfiguration configuration, AppDbContext context, Random random)
     {
         _userManager = userManager;
         _logger = logger;
         _signInManager = signInManager;
         _configuration = configuration;
         _context = context;
+        _random = random;
     }
 
 
@@ -136,7 +138,17 @@ public class AccountController : ControllerBase
     }
 
 
+    /// <summary>
+    /// Login into an existing account.
+    /// </summary>
+    /// <param name="loginInfo">Login info from body.</param>
+    /// <param name="expiresInSeconds">JWT expiration time in seconds.</param>
+    /// <returns>JWTResponse - jwt and refresh token</returns>
     [HttpPost]
+    [Produces("application/json")]
+    [Consumes("application/json")]
+    [ProducesResponseType<JWTResponse>((int) HttpStatusCode.OK)]
+    [ProducesResponseType<RestApiErrorResponse>((int) HttpStatusCode.NotFound)]
     public async Task<ActionResult<JWTResponse>> Login(
         [FromBody]
         LoginInfo loginInfo,
@@ -154,7 +166,8 @@ public class AccountController : ControllerBase
         if (appUser == null)
         {
             _logger.LogWarning("WebApi login failed, email {} not found", loginInfo.Email);
-            // TODO: random delay 
+            // Random delay of up to 3 seconds.
+            await Task.Delay(_random.Next(0,3000));
             return NotFound("User/Password problem");
         }
 
@@ -164,7 +177,8 @@ public class AccountController : ControllerBase
         {
             _logger.LogWarning("WebApi login failed, password {} for email {} was wrong", loginInfo.Password,
                 loginInfo.Email);
-            // TODO: random delay 
+            // Random delay of up to 3 seconds.
+            await Task.Delay(_random.Next(0,3000));
             return NotFound("User/Password problem");
         }
 
@@ -172,7 +186,8 @@ public class AccountController : ControllerBase
         if (claimsPrincipal == null)
         {
             _logger.LogWarning("WebApi login failed, claimsPrincipal null");
-            // TODO: random delay 
+            // Random delay of up to 3 seconds.
+            await Task.Delay(_random.Next(0,3000));
             return NotFound("User/Password problem");
         }
 
@@ -212,8 +227,20 @@ public class AccountController : ControllerBase
 
         return Ok(responseData);
     }
-
+    
+    
+    /// <summary>
+    /// Validates or creates a new refresh token.
+    /// </summary>
+    /// <param name="tokenRefreshInfo">tokenRefreshInfo from body.</param>
+    /// <param name="expiresInSeconds">JWT expiration time in seconds.</param>
+    /// <returns>JWTResponse - jwt and refresh token</returns>
     [HttpPost]
+    [Produces("application/json")]
+    [Consumes("application/json")]
+    [ProducesResponseType<JWTResponse>((int) HttpStatusCode.OK)]
+    [ProducesResponseType<RestApiErrorResponse>((int) HttpStatusCode.BadRequest)]
+    [ProducesResponseType<RestApiErrorResponse>((int) HttpStatusCode.NotFound)]
     public async Task<ActionResult<JWTResponse>> RefreshTokenData(
         [FromBody]
         TokenRefreshInfo tokenRefreshInfo,
@@ -353,9 +380,19 @@ public class AccountController : ControllerBase
 
         return Ok(res);
     }
-
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    
+    /// <summary>
+    /// Log out from an account.
+    /// </summary>
+    /// <param name="logout">LogoutInfo from body.</param>
+    /// <returns>ActionResult</returns>
     [HttpPost]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Produces("application/json")]
+    [Consumes("application/json")]
+    [ProducesResponseType<JWTResponse>((int) HttpStatusCode.OK)]
+    [ProducesResponseType<RestApiErrorResponse>((int) HttpStatusCode.BadRequest)]
+    [ProducesResponseType<RestApiErrorResponse>((int) HttpStatusCode.NotFound)]
     public async Task<ActionResult> Logout(
         [FromBody]
         LogoutInfo logout)
