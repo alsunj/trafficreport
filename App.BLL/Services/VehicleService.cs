@@ -21,4 +21,10 @@ public class VehicleService :
         return (await Repository.GetAllSortedAsync(userId)).Select(e => Mapper.Map(e));
         
     }
+
+    public async Task<Vehicle> GetByLicensePlateAsync(string licensePlate)
+    {
+        var vehicle = await Repository.GetByLicensePlateAsync(licensePlate);
+        return Mapper.Map(vehicle)!;
+    }
 }

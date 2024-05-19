@@ -99,6 +99,7 @@ namespace TrafficReport.ApiControllers
         /// <returns>App.DTO.v1_0.AdditionalVehicle</returns>
         [HttpPost]
         [ProducesResponseType(typeof(App.DTO.v1_0.AdditionalVehicle),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.AdditionalVehicle>> PostAdditionalVehicle(App.DTO.v1_0.AdditionalVehicle additionalVehicle)

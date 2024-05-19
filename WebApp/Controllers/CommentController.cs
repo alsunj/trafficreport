@@ -22,7 +22,7 @@ namespace TrafficReports.Controllers
         // GET: Comment
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Comments.Include(c => c.Account).Include(c => c.ParentComment).Include(c => c.VehicleViolation);
+            var appDbContext = _context.Comments.Include(c => c.AppUser).Include(c => c.ParentComment).Include(c => c.VehicleViolation);
             return View(await appDbContext.ToListAsync());
         }
 
@@ -35,7 +35,7 @@ namespace TrafficReports.Controllers
             }
 
             var comment = await _context.Comments
-                .Include(c => c.Account)
+                .Include(c => c.AppUser)
                 .Include(c => c.ParentComment)
                 .Include(c => c.VehicleViolation)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -50,7 +50,7 @@ namespace TrafficReports.Controllers
         // GET: Comment/Create
         public IActionResult Create()
         {
-            ViewData["AccountId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["ParentCommentId"] = new SelectList(_context.Comments, "Id", "Id");
             ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "Id");
             return View();
@@ -61,7 +61,7 @@ namespace TrafficReports.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CommentText,ParentCommentId,AccountId,VehicleViolationId,Id")] Comment comment)
+        public async Task<IActionResult> Create([Bind("CommentText,ParentCommentId,AppUserId,VehicleViolationId,Id")] Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace TrafficReports.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AccountId"] = new SelectList(_context.Users, "Id", "Id", comment.AccountId);
+            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", comment.AppUserId);
             ViewData["ParentCommentId"] = new SelectList(_context.Comments, "Id", "Id", comment.ParentCommentId);
             ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "Id", comment.VehicleViolationId);
             return View(comment);
@@ -89,7 +89,7 @@ namespace TrafficReports.Controllers
             {
                 return NotFound();
             }
-            ViewData["AccountId"] = new SelectList(_context.Users, "Id", "Id", comment.AccountId);
+            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", comment.AppUserId);
             ViewData["ParentCommentId"] = new SelectList(_context.Comments, "Id", "Id", comment.ParentCommentId);
             ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "Id", comment.VehicleViolationId);
             return View(comment);
@@ -100,7 +100,7 @@ namespace TrafficReports.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("CommentText,ParentCommentId,AccountId,VehicleViolationId,Id")] Comment comment)
+        public async Task<IActionResult> Edit(Guid id, [Bind("CommentText,ParentCommentId,AppUserId,VehicleViolationId,Id")] Comment comment)
         {
             if (id != comment.Id)
             {
@@ -127,7 +127,7 @@ namespace TrafficReports.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AccountId"] = new SelectList(_context.Users, "Id", "Id", comment.AccountId);
+            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", comment.AppUserId);
             ViewData["ParentCommentId"] = new SelectList(_context.Comments, "Id", "Id", comment.ParentCommentId);
             ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "Id", comment.VehicleViolationId);
             return View(comment);
@@ -142,7 +142,7 @@ namespace TrafficReports.Controllers
             }
 
             var comment = await _context.Comments
-                .Include(c => c.Account)
+                .Include(c => c.AppUser)
                 .Include(c => c.ParentComment)
                 .Include(c => c.VehicleViolation)
                 .FirstOrDefaultAsync(m => m.Id == id);

@@ -124,6 +124,7 @@ namespace TrafficReport.ApiControllers
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(App.DTO.v1_0.Comment),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<Comment>> PostComment(App.DTO.v1_0.Comment comment)

@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.ParentComment)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Account)
+                @Html.DisplayNameFor(model => model.AppUser)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.VehicleViolation)
@@ -37,7 +37,7 @@
                 @item.ParentComment?.CommentText
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Account!.Id)
+                @Html.DisplayFor(modelItem => item.AppUser!.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.VehicleViolation!.Id)

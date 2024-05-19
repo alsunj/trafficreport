@@ -1,14 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using App.Contracts.BLL;
-using Microsoft.AspNetCore.Http;
+using App.DTO.v1_0;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using App.DAL.EF;
-using App.Domain.Vehicles;
 using Asp.Versioning;
 using AutoMapper;
 using TrafficReport.Helpers;
@@ -18,6 +11,8 @@ namespace TrafficReports.ApiControllers
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:apiVersion}/vehicles/[controller]/[action]")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
     public class VehicleController : ControllerBase
     {
         private readonly IAppBLL _bll;
@@ -29,10 +24,12 @@ namespace TrafficReports.ApiControllers
             _mapper = new PublicDTOBllMapper<App.DTO.v1_0.Vehicle,App.BLL.DTO.Vehicle>(autoMapper);
         }
 
-        // GET: api/Vehicle
+        /// <summary>
+        /// Get all vehicles.
+        /// </summary>
+        /// <returns>List of vehicles.</returns>
         [HttpGet]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Vehicle>),(int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<List<App.DTO.v1_0.Vehicle>>> GetVehicles()
@@ -42,7 +39,11 @@ namespace TrafficReports.ApiControllers
             return Ok(bllVehicleController);
         }
 
-        // GET: api/Vehicle/5
+        /// <summary>
+        /// Get vehicle by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Vehicle</returns>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Vehicle>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
@@ -61,8 +62,34 @@ namespace TrafficReports.ApiControllers
             return Ok(res);
         }
 
-        // PUT: api/Vehicle/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Get vehicle by license plate.
+        /// </summary>
+        /// <param name="licensePlate"></param>
+        /// <returns>Vehicle</returns>
+        [HttpGet("licensePlate")]
+        [ProducesResponseType(typeof(App.DTO.v1_0.Vehicle), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<App.DTO.v1_0.Vehicle>> GetVehicleByLicensePlate(string licensePlate)
+        {
+            var vehicle = await _bll.Vehicles.GetByLicensePlateAsync(licensePlate);
+
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+            var res = _mapper.Map(vehicle);
+            return Ok(res);
+        }
+
+        /// <summary>
+        /// Edit vehicle.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="vehicle"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
@@ -88,10 +115,14 @@ namespace TrafficReports.ApiControllers
             return NoContent();
         }
 
-        // POST: api/Vehicle
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Add vehicle.
+        /// </summary>
+        /// <param name="vehicle"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(App.DTO.v1_0.Vehicle),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.Vehicle>> PostVehicle(App.DTO.v1_0.Vehicle vehicle)
@@ -102,8 +133,15 @@ namespace TrafficReports.ApiControllers
             return CreatedAtAction("GetVehicle", new { id = vehicle.Id }, vehicle);
         }
 
-        // DELETE: api/Vehicle/5
+        /// <summary>
+        /// Delete vehicle by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
+        [ProducesResponseType ((int)HttpStatusCode.NoContent)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
         public async Task<IActionResult> DeleteVehicle(Guid id)
         {
             var vehicle = await _bll.Vehicles.FirstOrDefaultAsync(id);
@@ -113,6 +151,28 @@ namespace TrafficReports.ApiControllers
             }
 
             await _bll.Vehicles.RemoveAsync(id);
+            
+            return NoContent();
+        }
+        
+        /// <summary>
+        /// Delete vehicle by license plate.
+        /// </summary>
+        /// <param name="licensePlate"></param>
+        /// <returns></returns>
+        [HttpDelete("{licensePlate}")]
+        [ProducesResponseType ((int)HttpStatusCode.NoContent)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> DeleteVehicleByLicensePlate(string licensePlate)
+        {
+            var vehicle = await _bll.Vehicles.GetByLicensePlateAsync(licensePlate);
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            await _bll.Vehicles.RemoveAsync(vehicle.Id);
             
             return NoContent();
         }

@@ -16,5 +16,14 @@ public class VehicleRepository : BaseEntityRepository<APPDomain.Vehicles.Vehicle
         var query = CreateQuery(userId);
         query = query.OrderBy(vehicle => vehicle.RegNr);
         return (await query.ToListAsync()).Select(e => Mapper.Map(e));
-    }                                                                                                                                                                             
+    }  
+    public async Task<DALDTO.Vehicle> GetByLicensePlateAsync(string licensePlate)
+    {
+        var query = CreateQuery();
+        var vehicle = await query
+            .Where(v => v.RegNr!.ToUpper() == licensePlate.ToUpper())
+            .FirstOrDefaultAsync();
+        return Mapper.Map(vehicle)!;
+    }
+    
 }                                                                                                                                                                                  

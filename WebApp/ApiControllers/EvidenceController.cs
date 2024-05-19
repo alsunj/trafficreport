@@ -1,72 +1,86 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using App.Contracts.BLL;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using App.DAL.EF;
-using App.Domain.Evidences;
+using App.Domain.Identity;
 using Asp.Versioning;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using TrafficReport.Helpers;
 
-namespace TrafficReports.ApiControllers
+namespace TrafficReport.ApiControllers
 {
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:apiVersion}/evidences/[controller]/[action]")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
     public class EvidenceController : ControllerBase
     {
         private readonly IAppBLL _bll;
         private readonly PublicDTOBllMapper<App.DTO.v1_0.Evidence, App.BLL.DTO.Evidence> _mapper; 
+        private readonly UserManager<AppUser> _userManager;
 
-        public EvidenceController(IAppBLL bll, IMapper autoMapper)
+
+        public EvidenceController(IAppBLL bll, IMapper autoMapper, UserManager<AppUser> userManager)
         {
             _bll = bll;
+            _userManager = userManager;
             _mapper = new PublicDTOBllMapper<App.DTO.v1_0.Evidence, App.BLL.DTO.Evidence>(autoMapper);
         }
 
-        // GET: api/Evidence
+        /// <summary>
+        /// Get all evidences for current user.
+        /// </summary>
+        /// <returns>List of evidences.</returns>
         [HttpGet]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Evidence>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<IEnumerable<App.DTO.v1_0.Evidence>>> GetEvidences()
-        {
-            var bllEvidenceResult = await _bll.Evidences.GetAllAsync();
-            var bllEvidences = bllEvidenceResult.Select(e => _mapper.Map(e)).ToList();
-            return Ok(bllEvidences);
+        public async Task<ActionResult<List<App.DTO.v1_0.Evidence>>> GetUserEvidences()
+        { 
+            var bllEvidenceResult = (await _bll.Evidences.GetAllSortedAsync(
+                    Guid.Parse(_userManager.GetUserId(User))
+                ))
+                .Select(e => _mapper.Map(e))
+                .ToList();
+            return Ok(bllEvidenceResult);
         }
 
-        // GET: api/Evidence/5
+        /// <summary>
+        /// Get evidences by Vehicle violation id.
+        /// </summary>
+        /// <param name="vehicleViolationId"></param>
+        /// <returns>List of evidences.</returns>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Evidence>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<App.DTO.v1_0.Evidence>> GetEvidence(Guid id)
+        public async Task<ActionResult<List<App.DTO.v1_0.Evidence>>> GetAllEvidenceForVehicleViolation(Guid vehicleViolationId)
         {
-            var evidence = await _bll.Evidences.FirstOrDefaultAsync(id);
+            var evidences = await _bll.Evidences.GetAllViolationEvidencesSortedAsync(vehicleViolationId);
 
-            if (evidence == null)
+            if (evidences.IsNullOrEmpty())
             {
                 return NotFound();
             }
-            var res = _mapper.Map(evidence);
-
-            return Ok(res);
+            
+            return Ok(evidences);
         }
 
-        // PUT: api/Evidence/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Edit evidence.
+        /// </summary>
+        /// <param name="id">Evidence id</param>
+        /// <param name="evidence"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<IActionResult> PutEvidence(Guid id, App.DTO.v1_0.Evidence evidence)
@@ -81,26 +95,43 @@ namespace TrafficReports.ApiControllers
                 return NotFound("id doesnt exist");
 
             }
+            // var userVehicleviolations =
+            //     await _bll.VehicleViolations.GetAllSortedAsync(Guid.Parse(_userManager.GetUserId(User)));
+            
+            // if (!(userVehicleviolations.FirstOrDefault(violation => violation.Id.Equals(evidence.VehicleViolationId))!)
+            //     .Equals(userVehicleviolations.FirstOrDefault(violation => violation.AppUserId.Equals(Guid.Parse(_userManager.GetUserId(User))))))
+            // {
+            //     return Unauthorized();
+            // }
+            
             var res = _mapper.Map(evidence);
             _bll.Evidences.Update(res);
             return NoContent();
         }
 
-        // POST: api/Evidence
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Add new evidence.
+        /// </summary>
+        /// <param name="evidence"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(App.DTO.v1_0.Evidence),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<Evidence>> PostEvidence(App.DTO.v1_0.Evidence evidence)
+        public async Task<ActionResult<App.DTO.v1_0.Evidence>> PostEvidence(App.DTO.v1_0.Evidence evidence)
         {
             var mappedEvidenceTypes = _mapper.Map(evidence);
             _bll.Evidences.Add(mappedEvidenceTypes);
 
-            return CreatedAtAction("GetEvidence", new { id = evidence.Id }, evidence);
+            return CreatedAtAction("GetAllEvidenceForVehicleViolation", new { id = evidence.VehicleViolationId }, evidence);
         }
 
-        // DELETE: api/Evidence/5
+        /// <summary>
+        /// Delete evidence by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [HttpDelete("{id}")]

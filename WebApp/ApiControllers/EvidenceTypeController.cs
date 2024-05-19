@@ -1,27 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using App.Contracts.BLL;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using App.DAL.EF;
 using App.Domain.Evidences;
 using Asp.Versioning;
 using AutoMapper;
 using TrafficReport.Helpers;
 
-namespace TrafficReports.ApiControllers
+namespace TrafficReport.ApiControllers
 {
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:apiVersion}/evidences/[controller]/[action]")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
     public class EvidenceTypeController : ControllerBase
     {
         private readonly IAppBLL _bll;
         private readonly PublicDTOBllMapper<App.DTO.v1_0.EvidenceType, App.BLL.DTO.EvidenceType> _mapper; 
+        
 
         public EvidenceTypeController(IAppBLL bll, IMapper autoMapper)
         {
@@ -29,20 +25,27 @@ namespace TrafficReports.ApiControllers
             _mapper = new PublicDTOBllMapper<App.DTO.v1_0.EvidenceType, App.BLL.DTO.EvidenceType>(autoMapper);
         }
 
-        // GET: api/EvidenceType
+        /// <summary>
+        /// Get all evidence types.
+        /// </summary>
+        /// <returns>List of evidence types.</returns>
         [HttpGet]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.EvidenceType>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<IEnumerable<App.DTO.v1_0.EvidenceType>>> GetEvidenceTypes()
+        public async Task<ActionResult<List<App.DTO.v1_0.EvidenceType>>> GetEvidenceTypes()
         {
             var bllEvidenceTypeResult = await _bll.EvidenceTypes.GetAllAsync();
             var bllEvidenceTypes = bllEvidenceTypeResult.Select(e => _mapper.Map(e)).ToList();
             return Ok(bllEvidenceTypes);
         }
 
-        // GET: api/EvidenceType/5
+        /// <summary>
+        /// Get evidence type by id.
+        /// </summary>
+        /// <param name="id">Evidence type id.</param>
+        /// <returns>Evidence type</returns>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.EvidenceType>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
@@ -61,8 +64,12 @@ namespace TrafficReports.ApiControllers
             return Ok(res);
         }
 
-        // PUT: api/EvidenceType/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Edit evidence type.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="evidenceType"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
@@ -88,13 +95,17 @@ namespace TrafficReports.ApiControllers
             return NoContent();
         }
 
-        // POST: api/EvidenceType
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Add evidence type.
+        /// </summary>
+        /// <param name="evidenceType"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(App.DTO.v1_0.EvidenceType),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<EvidenceType>> PostEvidenceType(App.DTO.v1_0.EvidenceType evidenceType)
+        public async Task<ActionResult<App.DTO.v1_0.EvidenceType>> PostEvidenceType(App.DTO.v1_0.EvidenceType evidenceType)
         {
             var mappedEvidenceTypes = _mapper.Map(evidenceType);
             _bll.EvidenceTypes.Add(mappedEvidenceTypes);
@@ -103,7 +114,11 @@ namespace TrafficReports.ApiControllers
             return CreatedAtAction("GetEvidenceType", new { id = evidenceType.Id }, evidenceType);
         }
 
-        // DELETE: api/EvidenceType/5
+        /// <summary>
+        /// Delete evidence type by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [HttpDelete("{id}")]
@@ -116,7 +131,7 @@ namespace TrafficReports.ApiControllers
             {
                 return NotFound();
             }
-
+            
             await _bll.EvidenceTypes.RemoveAsync(id);
 
             return NoContent();
