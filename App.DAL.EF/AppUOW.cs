@@ -18,44 +18,44 @@ public class AppUOW : BaseUnitOfWork<AppDbContext>, IAppUnitOfWork
 
     private IVehicleViolationRepository? _vehicleViolations;
 
-    public IVehicleViolationRepository VehicleViolations =>
+    public IVehicleViolationRepository VehicleViolationRepository =>
         _vehicleViolations ?? new VehicleViolationRepository(UowDbContext, _mapper);
     
     
     private IViolationTypeRepository? _violationTypes;
-    public IViolationTypeRepository ViolationTypes =>
+    public IViolationTypeRepository ViolationTypeRepository =>
         _violationTypes ?? new ViolationTypeRepository(UowDbContext, _mapper);
     
     private IViolationRepository? _violations;
 
-    public IViolationRepository Violations =>
+    public IViolationRepository ViolationRepository =>
         _violations ?? new ViolationRepository(UowDbContext, _mapper);
     private IVehicleTypeRepository? _vehicleTypes;
-    public IVehicleTypeRepository VehicleTypes => 
+    public IVehicleTypeRepository VehicleTypeRepository => 
         _vehicleTypes ??= new VehicleTypeRepository(UowDbContext, _mapper);
 
     private IVehicleRepository? _vehicles;
-    public IVehicleRepository Vehicles => 
+    public IVehicleRepository VehicleRepository => 
         _vehicles ??= new VehicleRepository(UowDbContext, _mapper);
 
     private IAdditionalVehicleRepository? _additionalVehicles;
-    public IAdditionalVehicleRepository AdditionalVehicles => 
+    public IAdditionalVehicleRepository AdditionalVehicleRepository => 
         _additionalVehicles ??= new AdditionalVehicleRepository(UowDbContext, _mapper);
 
     private IEvidenceTypeRepository? _evidenceTypes;
-    public IEvidenceTypeRepository EvidenceTypes => 
+    public IEvidenceTypeRepository EvidenceTypeRepository => 
         _evidenceTypes ??= new EvidenceTypeRepository(UowDbContext, _mapper);
 
     private IEvidenceRepository? _evidences;
-    public IEvidenceRepository Evidences => 
+    public IEvidenceRepository EvidenceRepository => 
         _evidences ??= new EvidenceRepository(UowDbContext, _mapper);
 
     private ICommentRepository? _comments;
-    public ICommentRepository Comments => 
+    public ICommentRepository CommentRepository => 
         _comments ??= new CommentRepository(UowDbContext, _mapper);
 
     private IEntityRepository<AppUser>? _users;
-    public IEntityRepository<AppUser> Users => _users ??
+    public IEntityRepository<AppUser> AppUserRepository => _users ??
                                                new BaseEntityRepository<AppUser, AppUser, AppDbContext>(UowDbContext,
                                                    new DalDomainMapper<AppUser, AppUser>(_mapper));
 }

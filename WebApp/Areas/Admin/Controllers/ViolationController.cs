@@ -24,7 +24,7 @@ namespace WebApp.Areas.Admin.Controllers
         // GET: Admin/Violation
         public async Task<IActionResult> Index()
         {
-            var res = await _uow.Violations.GetAllWithViolationTypesAsync();
+            var res = await _uow.ViolationRepository.GetAllWithViolationTypesAsync();
             return View(res);
         }
 
@@ -36,7 +36,7 @@ namespace WebApp.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var violation = await _uow.Violations
+            var violation = await _uow.ViolationRepository
                 .FirstOrDefaultAsync(id.Value);
             if (violation == null)
             {
@@ -49,7 +49,7 @@ namespace WebApp.Areas.Admin.Controllers
         // GET: Admin/Violation/Create
         public IActionResult Create()
         {
-            ViewData["ViolationTypeId"] = new SelectList(_uow.ViolationTypes.GetAll(), "Id", "Id");
+            ViewData["ViolationTypeId"] = new SelectList(_uow.ViolationTypeRepository.GetAll(), "Id", "Id");
             return View();
         }
 
@@ -63,12 +63,12 @@ namespace WebApp.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 violation.Id = Guid.NewGuid();
-                _uow.Violations.Add(violation);
+                _uow.ViolationRepository.Add(violation);
                 await _uow.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["ViolationTypeId"] = new SelectList(await _uow.ViolationTypes.GetAllAsync(), "Id", "Id", violation.ViolationTypeId);
+            ViewData["ViolationTypeId"] = new SelectList(await _uow.ViolationTypeRepository.GetAllAsync(), "Id", "Id", violation.ViolationTypeId);
             return View(violation);
         }
 
@@ -80,12 +80,12 @@ namespace WebApp.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var violation = await _uow.Violations.FirstOrDefaultAsync(id.Value);
+            var violation = await _uow.ViolationRepository.FirstOrDefaultAsync(id.Value);
             if (violation == null)
             {
                 return NotFound();
             }
-            ViewData["ViolationTypeId"] = new SelectList(await _uow.ViolationTypes.GetAllAsync(), "Id", "Id", violation.ViolationTypeId);
+            ViewData["ViolationTypeId"] = new SelectList(await _uow.ViolationTypeRepository.GetAllAsync(), "Id", "Id", violation.ViolationTypeId);
             return View(violation);
         }
 
@@ -105,12 +105,12 @@ namespace WebApp.Areas.Admin.Controllers
             {
                 try
                 {
-                    _uow.Violations.Update(violation);
+                    _uow.ViolationRepository.Update(violation);
                     await _uow.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (! await _uow.Violations.ExistsAsync(violation.Id))
+                    if (! await _uow.ViolationRepository.ExistsAsync(violation.Id))
                     {
                         return NotFound();
                     }
@@ -121,7 +121,7 @@ namespace WebApp.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ViolationTypeId"] = new SelectList(await _uow.ViolationTypes.GetAllAsync(), "Id", "Id", violation.ViolationTypeId);
+            ViewData["ViolationTypeId"] = new SelectList(await _uow.ViolationTypeRepository.GetAllAsync(), "Id", "Id", violation.ViolationTypeId);
             return View(violation);
         }
 
@@ -133,7 +133,7 @@ namespace WebApp.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var violation = await _uow.Violations
+            var violation = await _uow.ViolationRepository
                 //    .Include(v => v.ViolationType)
                 //     .FirstOrDefaultAsync(m => m.Id == id);
                 .FirstOrDefaultAsync(id.Value);
@@ -150,7 +150,7 @@ namespace WebApp.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            _uow.Violations.RemoveAsync(id);
+            _uow.ViolationRepository.RemoveAsync(id);
             await _uow.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

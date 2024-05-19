@@ -9,64 +9,88 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using App.DAL.EF;
 using App.Domain.Evidences;
+using App.Domain.Identity;
 using Asp.Versioning;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using TrafficReport.Helpers;
 
-namespace TrafficReports.ApiControllers
+namespace TrafficReport.ApiControllers
 {
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:apiVersion}/evidences/[controller]/[action]")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
     public class CommentController : ControllerBase
     {
         private readonly IAppBLL _bll;
+        private readonly UserManager<AppUser> _userManager;
+
         private readonly PublicDTOBllMapper<App.DTO.v1_0.Comment, App.BLL.DTO.Comment> _mapper; 
-        public CommentController(IAppBLL bll, IMapper autoMapper)
+        public CommentController(IAppBLL bll, IMapper autoMapper, UserManager<AppUser> userManager)
         {
             _bll = bll;
+            _userManager = userManager;
             _mapper = new PublicDTOBllMapper<App.DTO.v1_0.Comment, App.BLL.DTO.Comment>(autoMapper);
         }
 
-        // GET: api/Comment
+        /// <summary>
+        /// Get all comments for current user.
+        /// </summary>
+        /// <returns>List of comments.</returns>
         [HttpGet]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Comment>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<IEnumerable<App.DTO.v1_0.Comment>>> GetComments()
+        public async Task<ActionResult<List<App.DTO.v1_0.Comment>>> GetUserComments()
         {
-            var bllCommentResult = await _bll.Comments.GetAllAsync();
-            var bllComments = bllCommentResult.Select(e => _mapper.Map(e)).ToList();
-            return Ok(bllComments);
+            var bllCommentResult = (await _bll.Comments.GetAllSortedAsync(
+                Guid.Parse(_userManager.GetUserId(User))
+                ))
+                .Select(e => _mapper.Map(e))
+                .ToList();
+            return Ok(bllCommentResult);
         }
 
-        // GET: api/Comment/5
+        /// <summary>
+        /// Get comments by Vehicle violation id.
+        /// </summary>
+        /// <param name="vehicleViolationId"></param>
+        /// <returns>List of comments.</returns>
         [HttpGet]
-        [ProducesResponseType(typeof(List<App.DTO.v1_0.Comment>),(int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(App.DTO.v1_0.Comment),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<App.DTO.v1_0.Comment>> GetComment(Guid id)
+        public async Task<ActionResult<List<App.DTO.v1_0.Comment>>> GetAllVehicleViolationComments(Guid vehicleViolationId)
         {
-            var comment = await _bll.Comments.FirstOrDefaultAsync(id);
+            var comments = await _bll.Comments.GetAllViolationCommentsSortedAsync(vehicleViolationId);
 
-            if (comment == null)
+            if (comments.IsNullOrEmpty())
             {
                 return NotFound();
             }
-
-            var res = _mapper.Map(comment);
-            
-            return Ok(res);
+            return Ok(comments);
         }
+        
+        
 
-        // PUT: api/Comment/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Edit comment.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="comment"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<IActionResult> PutComment(Guid id, App.DTO.v1_0.Comment comment)
@@ -81,14 +105,23 @@ namespace TrafficReports.ApiControllers
                 return NotFound("id doesnt exist");
 
             }
+
+            if (comment.AccountId != Guid.Parse(_userManager.GetUserId(User)))
+            {
+                return Unauthorized();
+            }
+
             var res = _mapper.Map(comment);
             _bll.Comments.Update(res);
 
             return NoContent();
         }
 
-        // POST: api/Comment
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Add a new comment.
+        /// </summary>
+        /// <param name="comment"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(App.DTO.v1_0.Comment),(int)HttpStatusCode.OK)]
         [Produces("application/json")]
@@ -98,12 +131,17 @@ namespace TrafficReports.ApiControllers
             var mappedComments = _mapper.Map(comment);
             _bll.Comments.Add(mappedComments);
 
-            return CreatedAtAction("GetComment", new { id = comment.Id }, comment);
+            return CreatedAtAction("GetAllVehicleViolationComments", new { id = comment.VehicleViolationId }, comment);
         }
 
-        // DELETE: api/Comment/5
+        /// <summary>
+        /// Delete a comment.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [HttpDelete("{id}")]
         [Produces("application/json")]
         [Consumes("application/json")] 
@@ -114,10 +152,14 @@ namespace TrafficReports.ApiControllers
             {
                 return NotFound();
             }
+            if (comment.AccountId != Guid.Parse(_userManager.GetUserId(User)))
+            {
+                return Unauthorized();
+            }
             await _bll.Comments.RemoveAsync(id);
             return NoContent();
         }
-
+        
         private bool CommentExists(Guid id)
         {
             return _bll.Comments.Exists(id);

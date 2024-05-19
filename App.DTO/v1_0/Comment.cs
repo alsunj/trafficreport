@@ -13,6 +13,6 @@ public class Comment
     
     public Guid VehicleViolationId { get; set; }
 
-    private DateTime CreatedAt { get; set; } 
+    private DateTime CreatedAt { get; set; } = DateTime.Now;
 
 }

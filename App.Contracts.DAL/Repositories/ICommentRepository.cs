@@ -11,4 +11,6 @@ public interface ICommentRepository:  IEntityRepository<DALDTO.Comment>, ICommen
 public interface ICommentRepositoryCustom<TEntity>
 {
     Task<IEnumerable<TEntity>> GetAllSortedAsync(Guid userId);
+    Task<IEnumerable<TEntity>> GetAllViolationCommentsSortedAsync(Guid violationId);
+    
 }

@@ -135,5 +135,6 @@ namespace TrafficReports.ApiControllers
         {
             return _bll.ViolationTypes.Exists(id);
         }
+        
     }
 }

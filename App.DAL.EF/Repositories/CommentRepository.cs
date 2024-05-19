@@ -20,4 +20,23 @@ public class CommentRepository : BaseEntityRepository<APPDomain.Evidences.Commen
 
         return (await query.ToListAsync()).Select(e => Mapper.Map(e));
     }
+    public async Task<IEnumerable<DALDTO.Comment>> GetAllViolationCommentsSortedAsync(Guid vehicleViolationId)
+    {
+        // return await CommentRepository
+        //     .Where(c => c.VehicleViolationId == vehicleViolationId)
+        //     .OrderBy(c => c.CreatedAt)
+        //     .ToListAsync();
+
+        var query = CreateQuery(vehicleViolationId);
+        var res = await query.ToListAsync();
+        query = query
+            .Where(c => c.VehicleViolationId == vehicleViolationId)
+            //.OrderBy(comment => comment.CreatedAt)
+            .OrderBy(comment => comment.Id);
+        return (await query.ToListAsync()).Select(comment => Mapper.Map(comment));
+
+
+
+
+    }
 }                                                                                                                                                                                  

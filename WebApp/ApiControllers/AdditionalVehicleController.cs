@@ -1,12 +1,11 @@
 using System.Net;
 using App.Contracts.BLL;
-using Microsoft.AspNetCore.Mvc;
-using App.Domain.Vehicles;
 using Asp.Versioning;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using TrafficReport.Helpers;
 
-namespace TrafficReports.ApiControllers
+namespace TrafficReport.ApiControllers
 {
     [ApiVersion("1.0")]
     [ApiController]
