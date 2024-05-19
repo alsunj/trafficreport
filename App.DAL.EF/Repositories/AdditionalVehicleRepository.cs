@@ -15,8 +15,9 @@ public class AdditionalVehicleRepository : BaseEntityRepository<APPDomain.Vehicl
     {                                                                                                                                                                              
         var query = CreateQuery(userId);                                                                                                                                           
         var res = await query.ToListAsync();                                                                                                                                       
-//        query = query.OrderBy(c => c.AdditionalVehicle);                                                                                                                               
+        query = query.OrderBy(c => c.Vehicle);                                                                                                                               
                                                                                                                                                                                    
-        return res.Select(e => Mapper.Map(e));                                                                                                                                     
-    }                                                                                                                                                                              
+        return (await query.ToListAsync()).Select(e => Mapper.Map(e));
+        
+    }                                                                                                                                                                                       
 }                                                                                                                                                                                  

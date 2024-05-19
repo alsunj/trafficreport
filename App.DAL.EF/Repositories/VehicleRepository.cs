@@ -11,12 +11,10 @@ public class VehicleRepository : BaseEntityRepository<APPDomain.Vehicles.Vehicle
     public VehicleRepository(AppDbContext dbContext, IMapper mapper) :  base(dbContext, new DalDomainMapper<APPDomain.Vehicles.Vehicle, DALDTO.Vehicle>(mapper))       
     {                                                                                                                                                                              
     }                                                                                                                                                                              
-    public async Task<IEnumerable<DALDTO.Vehicle>> GetAllSortedAsync(Guid userId)                                                                                              
-    {                                                                                                                                                                              
-        var query = CreateQuery(userId);                                                                                                                                           
-        var res = await query.ToListAsync();                                                                                                                                       
-//        query = query.OrderBy(c => c.VehicleType);                                                                                                                               
-                                                                                                                                                                                   
-        return res.Select(e => Mapper.Map(e));                                                                                                                                     
-    }                                                                                                                                                                              
+    public async Task<IEnumerable<DALDTO.Vehicle>> GetAllSortedAsync(Guid userId)
+    {
+        var query = CreateQuery(userId);
+        query = query.OrderBy(vehicle => vehicle.RegNr);
+        return (await query.ToListAsync()).Select(e => Mapper.Map(e));
+    }                                                                                                                                                                             
 }                                                                                                                                                                                  

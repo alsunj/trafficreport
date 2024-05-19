@@ -16,8 +16,8 @@ public class VehicleTypeRepository : BaseEntityRepository<APPDomain.Vehicles.Veh
     {
         var query = CreateQuery(userId);
         var res = await query.ToListAsync();
-//        query = query.OrderBy(c => c.VehicleType);
+        query = query.OrderBy(c => c.Size);
         
-        return res.Select(e => Mapper.Map(e));
+        return (await query.ToListAsync()).Select(e => Mapper.Map(e));
     }
 }

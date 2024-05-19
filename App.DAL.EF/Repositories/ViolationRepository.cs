@@ -16,9 +16,9 @@ public class ViolationRepository : BaseEntityRepository<APPDomain.Violations.Vio
     public async Task<IEnumerable<DALDTO.Violation>> GetAllSortedAsync(Guid userId)
     {
         var query = CreateQuery(userId);
-        var res = await query.ToListAsync();
-//        query = query.OrderBy(c => c.Violation);
+        var res = await query.ToListAsync(); 
+        query = query.OrderBy(c => c.Severity);
         
-        return res.Select(e => Mapper.Map(e));
+        return (await query.ToListAsync()).Select(e => Mapper.Map(e));
     }
 }

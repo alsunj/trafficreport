@@ -17,8 +17,8 @@ public class VehicleViolationRepository : BaseEntityRepository<APPDomain.Violati
     {
         var query = CreateQuery(userId);
         var res = await query.ToListAsync();
-//        query = query.OrderBy(c => c.VehicleViolation);
+        query = query.OrderBy(c => c.Violation);
         
-        return res.Select(e => Mapper.Map(e));
+        return (await query.ToListAsync()).Select(e => Mapper.Map(e));
     }
 }

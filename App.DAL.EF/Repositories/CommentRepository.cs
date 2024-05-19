@@ -9,13 +9,15 @@ public class CommentRepository : BaseEntityRepository<APPDomain.Evidences.Commen
 {                                                                                                                                                                                  
     public CommentRepository(AppDbContext dbContext, IMapper mapper) :  base(dbContext, new DalDomainMapper<APPDomain.Evidences.Comment, DALDTO.Comment>(mapper))       
     {                                                                                                                                                                              
-    }                                                                                                                                                                              
-    public async Task<IEnumerable<DALDTO.Comment>> GetAllSortedAsync(Guid userId)                                                                                              
-    {                                                                                                                                                                              
-        var query = CreateQuery(userId);                                                                                                                                           
-        var res = await query.ToListAsync();                                                                                                                                       
-//        query = query.OrderBy(c => c.Comment);                                                                                                                               
-                                                                                                                                                                                   
-        return res.Select(e => Mapper.Map(e));                                                                                                                                     
-    }                                                                                                                                                                              
+    }
+
+    public async Task<IEnumerable<DALDTO.Comment>> GetAllSortedAsync(Guid userId)
+    {
+        var query = CreateQuery(userId);
+        var res = await query.ToListAsync();
+        //query = query.OrderBy(c => c.CreatedAt);
+        query = query.OrderBy(c => c.Id);
+
+        return (await query.ToListAsync()).Select(e => Mapper.Map(e));
+    }
 }                                                                                                                                                                                  

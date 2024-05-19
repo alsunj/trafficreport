@@ -14,8 +14,9 @@ public class EvidenceTypeRepository : BaseEntityRepository<APPDomain.Evidences.E
     {                                                                                                                                                                              
         var query = CreateQuery(userId);                                                                                                                                           
         var res = await query.ToListAsync();                                                                                                                                       
-//        query = query.OrderBy(c => c.EvidenceType);                                                                                                                               
+        query = query.OrderBy(c => c.EvidenceTypeName);                                                                                                                               
                                                                                                                                                                                    
-        return res.Select(e => Mapper.Map(e));                                                                                                                                     
-    }                                                                                                                                                                              
+        return (await query.ToListAsync()).Select(e => Mapper.Map(e));
+        
+    }                                                                                         
 }                                                                                                                                                                                  

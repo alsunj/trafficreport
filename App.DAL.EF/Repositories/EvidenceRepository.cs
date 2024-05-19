@@ -1,4 +1,5 @@
-﻿using App.Contracts.DAL.Repositories;
+﻿using System.Security.Policy;
+using App.Contracts.DAL.Repositories;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 namespace App.DAL.EF.Repositories;
@@ -14,8 +15,9 @@ public class EvidenceRepository : BaseEntityRepository<APPDomain.Evidences.Evide
     {                                                                                                                                                                              
         var query = CreateQuery(userId);                                                                                                                                           
         var res = await query.ToListAsync();                                                                                                                                       
-//        query = query.OrderBy(c => c.Evidence);                                                                                                                               
+        query = query.OrderBy(c => c.CreatedAt);                                                                                                                               
                                                                                                                                                                                    
-        return res.Select(e => Mapper.Map(e));                                                                                                                                     
+        return (await query.ToListAsync()).Select(e => Mapper.Map(e));
+        
     }                                                                                                                                                                              
 }                                                                                                                                                                                  

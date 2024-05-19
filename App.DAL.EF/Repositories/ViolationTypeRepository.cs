@@ -16,6 +16,9 @@ public class ViolationTypeRepository : BaseEntityRepository<APPDomain.Violations
     {
         var query = CreateQuery();
         var res = await query.ToListAsync();
-        return res.Select(e => Mapper.Map(e));
+        query = query.OrderBy(c => c.Severity);
+        
+        return (await query.ToListAsync()).Select(e => Mapper.Map(e));
+        
     }
 }
