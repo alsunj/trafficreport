@@ -10,7 +10,7 @@ public class VehicleViolation: IDomainEntityId
 
     public Guid ViolationId { get; set; }
 
-    public Guid AccountId { get; set; }
+    public Guid AppUserId { get; set; }
     
     public string? Description { get; set; }
     

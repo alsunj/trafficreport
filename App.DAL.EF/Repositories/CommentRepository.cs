@@ -34,9 +34,5 @@ public class CommentRepository : BaseEntityRepository<APPDomain.Evidences.Commen
             //.OrderBy(comment => comment.CreatedAt)
             .OrderBy(comment => comment.Id);
         return (await query.ToListAsync()).Select(comment => Mapper.Map(comment));
-
-
-
-
     }
 }                                                                                                                                                                                  

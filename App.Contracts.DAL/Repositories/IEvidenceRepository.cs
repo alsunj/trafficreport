@@ -11,4 +11,6 @@ public interface IEvidenceRepository:  IEntityRepository<DALDTO.Evidence>, IEvid
 public interface IEvidenceRepositoryCustom<TEntity>
 {
     Task<IEnumerable<TEntity>> GetAllSortedAsync(Guid userId);
+    Task<IEnumerable<TEntity>> GetAllViolationEvidencesSortedAsync(Guid violationId);
+
 }

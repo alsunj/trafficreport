@@ -8,7 +8,7 @@ public class VehicleViolation
 
     public Guid ViolationId { get; set; }
 
-    public Guid AccountId { get; set; }
+    public Guid AppUserId { get; set; }
     
     public string? Description { get; set; }
     

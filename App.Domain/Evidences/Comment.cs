@@ -8,13 +8,13 @@ namespace App.Domain.Evidences;
 
 public class Comment : BaseEntityId
 {
-
-    public string? CommentText { get; set; }
+    [MaxLength(256)] 
+    public string CommentText { get; set; } = default!;
     public Guid? ParentCommentId { get; set; }
     
     public Comment? ParentComment { get; set; }
-    public Guid AccountId { get; set; }
-    public AppUser? Account { get; set; }
+    public Guid AppUserId { get; set; }
+    public AppUser? AppUser { get; set; }
     
     public Guid VehicleViolationId { get; set; }
     public VehicleViolation? VehicleViolation { get; set; }

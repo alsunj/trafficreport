@@ -21,4 +21,10 @@ public class EvidenceService :
         return (await Repository.GetAllSortedAsync(userId)).Select(e => Mapper.Map(e));
         
     }
+    
+    public async Task<IEnumerable<Evidence>> GetAllViolationEvidencesSortedAsync(Guid violationId)
+    {
+        return (await Repository.GetAllViolationEvidencesSortedAsync(violationId))
+            .Select(e => Mapper.Map(e));
+    }
 }

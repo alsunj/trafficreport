@@ -5,9 +5,9 @@ namespace App.Domain.Violations;
 
 public class ViolationType : BaseEntityId
 {
-    public string? ViolationTypeName{ get; set; }
-    
-    public decimal? Severity { get; set; }
+    public string ViolationTypeName { get; set; } = default!;
+
+    public decimal Severity { get; set; } = default!;
     
     public ICollection<Violation>? Violations { get; set; } = default!;
   

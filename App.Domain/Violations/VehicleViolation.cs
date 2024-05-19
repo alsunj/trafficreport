@@ -14,13 +14,13 @@ public class VehicleViolation : BaseEntityId
     public Guid ViolationId { get; set; }
     public Violation? Violation { get; set; }
 
-    public Guid AccountId { get; set; }
-    public AppUser? Account { get; set; }
+    public Guid AppUserId { get; set; }
+    public AppUser? AppUser { get; set; }
     public string? Description { get; set; }
     
     public string? Coordinates { get; set; }
-    
-    public string? LocationName { get; set; }
+
+    public string LocationName { get; set; } = default!;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     public ICollection<AdditionalVehicle>? AdditionalVehicles { get; set; }

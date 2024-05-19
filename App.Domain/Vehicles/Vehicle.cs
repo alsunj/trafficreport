@@ -7,8 +7,8 @@ public class Vehicle : BaseEntityId
 {
     public Guid VehicleTypeId { get; set; }
     public VehicleType? VehicleType { get; set; }
-    
-    public string? Color { get; set; }
+
+    public string Color { get; set; } = default!;
     
     public string? RegNr { get; set; }
     
