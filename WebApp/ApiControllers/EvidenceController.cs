@@ -17,7 +17,7 @@ namespace TrafficReports.ApiControllers
 {
     [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/v{version:apiVersion}/vehicles/[controller]/[action]")]
+    [Route("api/v{version:apiVersion}/evidences/[controller]/[action]")]
     public class EvidenceController : ControllerBase
     {
         private readonly IAppBLL _bll;
