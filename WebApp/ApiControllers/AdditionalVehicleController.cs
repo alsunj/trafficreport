@@ -1,13 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using App.Contracts.BLL;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using App.DAL.EF;
 using App.Domain.Vehicles;
 using Asp.Versioning;
 using AutoMapper;
@@ -17,6 +10,7 @@ namespace TrafficReports.ApiControllers
 {
     [ApiVersion("1.0")]
     [ApiController]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/v{version:apiVersion}/vehicles/[controller]/[action]")]
     public class AdditionalVehicleController : ControllerBase
     {
@@ -29,22 +23,29 @@ namespace TrafficReports.ApiControllers
             _mapper = new PublicDTOBllMapper<App.DTO.v1_0.AdditionalVehicle, App.BLL.DTO.AdditionalVehicle>(autoMapper);
         }
 
-        // GET: api/AdditionalVehicle
+        /// <summary>
+        /// Get additional vehicles
+        /// </summary>
+        /// <returns>List of additional vehicles</returns>
         [HttpGet]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.AdditionalVehicle>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<IEnumerable<App.DTO.v1_0.AdditionalVehicle>>> GetAdditionalVehicles()
+        public async Task<ActionResult<List<App.DTO.v1_0.AdditionalVehicle>>> GetAdditionalVehicles()
         {
             var bllAdditionalVehicleResult = await _bll.AdditionalVehicles.GetAllAsync();
             var bllAdditionalVehicles = bllAdditionalVehicleResult.Select(e =>_mapper.Map(e)).ToList();
             return Ok(bllAdditionalVehicles);
         }
 
-        // GET: api/AdditionalVehicle/5
+        /// <summary>
+        /// Get additional vehicle by id.
+        /// </summary>
+        /// <param name="id">Additional vehicle id.</param>
+        /// <returns>App.DTO.v1_0.AdditionalVehicle</returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(List<App.DTO.v1_0.AdditionalVehicle>),(int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(App.DTO.v1_0.AdditionalVehicle),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
@@ -62,8 +63,12 @@ namespace TrafficReports.ApiControllers
             return Ok(res);
         }
 
-        // PUT: api/AdditionalVehicle/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Edit Additional vehicle.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="additionalVehicle"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
@@ -88,13 +93,16 @@ namespace TrafficReports.ApiControllers
             return NoContent();
         }
 
-        // POST: api/AdditionalVehicle
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Add additional vehicle.
+        /// </summary>
+        /// <param name="additionalVehicle">AdditionalVehicle</param>
+        /// <returns>App.DTO.v1_0.AdditionalVehicle</returns>
         [HttpPost]
         [ProducesResponseType(typeof(App.DTO.v1_0.AdditionalVehicle),(int)HttpStatusCode.OK)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<AdditionalVehicle>> PostAdditionalVehicle(App.DTO.v1_0.AdditionalVehicle additionalVehicle)
+        public async Task<ActionResult<App.DTO.v1_0.AdditionalVehicle>> PostAdditionalVehicle(App.DTO.v1_0.AdditionalVehicle additionalVehicle)
         {
             var mappedAdditionalVehicles = _mapper.Map(additionalVehicle);
             _bll.AdditionalVehicles.Add(mappedAdditionalVehicles);
@@ -102,7 +110,11 @@ namespace TrafficReports.ApiControllers
             return CreatedAtAction("GetAdditionalVehicle", new { id = additionalVehicle.Id }, additionalVehicle);
         }
 
-        // DELETE: api/AdditionalVehicle/5
+        /// <summary>
+        /// Delete additional vehicle.
+        /// </summary>
+        /// <param name="id">Additional Vehicle id</param>
+        /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [HttpDelete("{id}")]
@@ -121,6 +133,11 @@ namespace TrafficReports.ApiControllers
             return NoContent();
         }
 
+        /// <summary>
+        /// checks, whether additional vehicle exists
+        /// </summary>
+        /// <param name="id">Additional vehicle id</param>
+        /// <returns>bool</returns>
         private bool AdditionalVehicleExists(Guid id)
         {
             return _bll.AdditionalVehicles.Exists(id);
