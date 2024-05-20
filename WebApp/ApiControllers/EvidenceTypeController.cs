@@ -47,7 +47,7 @@ namespace TrafficReport.ApiControllers
         /// <param name="id">Evidence type id.</param>
         /// <returns>Evidence type</returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(List<App.DTO.v1_0.EvidenceType>),(int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(App.DTO.v1_0.EvidenceType),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
