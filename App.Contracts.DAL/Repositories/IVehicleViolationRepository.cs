@@ -11,4 +11,6 @@ public interface IVehicleViolationRepository :  IEntityRepository<DALDTO.Vehicle
 public interface IVehicleViolationRepositoryCustom<TEntity>
 {
     Task<IEnumerable<TEntity>> GetAllSortedAsync(Guid userId);
+    Task<IEnumerable<TEntity>> GetAllUserVehicleViolationsSortedAsync(Guid userId);
+    Task<IEnumerable<TEntity>> GetAllVehicleViolationsByLicensePlateSortedAsync(string licensePlate);
 }

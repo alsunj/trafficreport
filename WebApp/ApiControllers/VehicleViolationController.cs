@@ -2,26 +2,21 @@
 using System.Net;
 using App.Contracts.BLL;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using App.DAL.EF;
 using App.Domain.Identity;
-using App.Domain.Violations;
 using Asp.Versioning;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using TrafficReport.Helpers;
 
-namespace TrafficReports.ApiControllers
+namespace TrafficReport.ApiControllers
 
 {
 
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:apiVersion}/violations/[controller]/[action]")]
-
-
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class VehicleViolationController : ControllerBase
     {
@@ -38,10 +33,12 @@ namespace TrafficReports.ApiControllers
         }
 
 
-        // GET: api/VehicleViolation
+        /// <summary>
+        /// Get a list of all vehicle violations.
+        /// </summary>
+        /// <returns>List of vehicle violations</returns>
         [HttpGet]
         [ProducesResponseType<IEnumerable<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
-        [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<List<App.DTO.v1_0.VehicleViolation>>> GetVehicleViolations()
@@ -50,10 +47,33 @@ namespace TrafficReports.ApiControllers
             var bllVehiceViolation =  bllVehicleViolationResult.Select(e => _mapper.Map(e)).ToList();
             return Ok(bllVehiceViolation);
         }
-
-        // GET: api/VehicleViolation/5
-        [HttpGet("{id}")]
+        
+        /// <summary>
+        /// Get a list of current user's vehicle violations.
+        /// </summary>
+        /// <returns>List of vehicle violations</returns>
+        [HttpGet]
         [ProducesResponseType<IEnumerable<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
+        [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<List<App.DTO.v1_0.VehicleViolation>>> GetVehicleViolationsForUser()
+        {
+            var bllVehicleViolationResult = await _bll.VehicleViolations.
+                GetAllUserVehicleViolationsSortedAsync(
+                    Guid.Parse(_userManager.GetUserId(User)));
+            
+            var bllVehiceViolation =  bllVehicleViolationResult.Select(e => _mapper.Map(e)).ToList();
+            return Ok(bllVehiceViolation);
+        }
+
+        /// <summary>
+        /// Get vehicle violation by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>vehicle violation</returns>
+        [HttpGet("{id}")]
+        [ProducesResponseType<App.DTO.v1_0.VehicleViolation>((int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
@@ -69,9 +89,38 @@ namespace TrafficReports.ApiControllers
             var res = _mapper.Map(vehicleViolation);
             return Ok(res);
         }
+        
+        /// <summary>
+        /// Get vehicle violations by license plate.
+        /// </summary>
+        /// <param name="licensePlate"></param>
+        /// <returns>list of vehicle violations.</returns>
+        [HttpGet("{licensePlate}")]
+        [ProducesResponseType<List<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
+        [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<List<App.DTO.v1_0.VehicleViolation>>> GetVehicleViolationsByLicensePlate(string licensePlate)
+        {
+            var vehicleViolations =
+                await _bll.VehicleViolations.GetAllVehicleViolationsByLicensePlateSortedAsync(licensePlate);
+                
 
-        // PUT: api/VehicleViolation/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+            if (vehicleViolations.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+            vehicleViolations =  vehicleViolations.ToList();
+            
+            return Ok(vehicleViolations);
+        }
+
+        /// <summary>
+        /// Edit vehicle violation.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="vehicleViolation"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
@@ -99,10 +148,14 @@ namespace TrafficReports.ApiControllers
 
         }
 
-        // POST: api/VehicleViolation
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Add vehicle violation.
+        /// </summary>
+        /// <param name="vehicleViolation"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ProducesResponseType<IEnumerable<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
+        [ProducesResponseType<App.DTO.v1_0.VehicleViolation>((int) HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.VehicleViolation>> PostVehicleViolation(App.DTO.v1_0.VehicleViolation vehicleViolation)
@@ -118,7 +171,11 @@ namespace TrafficReports.ApiControllers
             }, vehicleViolation);
         }
 
-        // DELETE: api/VehicleViolation/5
+        /// <summary>
+        /// Delete vehicle violation by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [HttpDelete("{id}")]

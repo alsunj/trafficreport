@@ -19,6 +19,18 @@ public class VehicleViolationService :
     public async Task<IEnumerable<VehicleViolation>> GetAllSortedAsync(Guid userId)
     {
         return (await Repository.GetAllSortedAsync(userId)).Select(e => Mapper.Map(e));
-        
+    }
+    
+    public async Task<IEnumerable<VehicleViolation>> GetAllUserVehicleViolationsSortedAsync(Guid userId)
+    {
+        return (await Repository.GetAllUserVehicleViolationsSortedAsync(userId))
+            .Select(e => Mapper.Map(e));
+    }
+
+
+    public async Task<IEnumerable<VehicleViolation>> GetAllVehicleViolationsByLicensePlateSortedAsync(string licensePlate)
+    {
+        return (await Repository.GetAllVehicleViolationsByLicensePlateSortedAsync(licensePlate))
+            .Select(e => Mapper.Map(e));
     }
 }
