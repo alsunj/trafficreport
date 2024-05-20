@@ -97,11 +97,13 @@ namespace TrafficReports.ApiControllers
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.VehicleType>> PostVehicleType(App.DTO.v1_0.VehicleType vehicleType)
         {
+            //vehicleType.Id = new Guid();
             var mappedVehicleTypes = _mapper.Map(vehicleType);
             _bll.VehicleTypes.Add(mappedVehicleTypes);
-
+            await _bll.SaveChangesAsync();
+            
             return CreatedAtAction("GetVehicleType", new 
-                { id = vehicleType.Id }, vehicleType);
+                { id = mappedVehicleTypes.Id }, vehicleType);
         }
 
         // DELETE: api/VehicleType/5

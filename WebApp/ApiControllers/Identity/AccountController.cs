@@ -23,17 +23,17 @@ public class AccountController : ControllerBase
     private readonly SignInManager<AppUser> _signInManager;
     private readonly IConfiguration _configuration;
     private readonly AppDbContext _context;
-    private readonly Random _random;
+    //private readonly Random _random;
 
     public AccountController(UserManager<AppUser> userManager, ILogger<AccountController> logger,
-        SignInManager<AppUser> signInManager, IConfiguration configuration, AppDbContext context, Random random)
+        SignInManager<AppUser> signInManager, IConfiguration configuration, AppDbContext context)
     {
         _userManager = userManager;
         _logger = logger;
         _signInManager = signInManager;
         _configuration = configuration;
         _context = context;
-        _random = random;
+        //_random = random;
     }
 
 
@@ -167,7 +167,7 @@ public class AccountController : ControllerBase
         {
             _logger.LogWarning("WebApi login failed, email {} not found", loginInfo.Email);
             // Random delay of up to 3 seconds.
-            await Task.Delay(_random.Next(0,3000));
+            //await Task.Delay(_random.Next(0,3000));
             return NotFound("User/Password problem");
         }
 
@@ -178,7 +178,7 @@ public class AccountController : ControllerBase
             _logger.LogWarning("WebApi login failed, password {} for email {} was wrong", loginInfo.Password,
                 loginInfo.Email);
             // Random delay of up to 3 seconds.
-            await Task.Delay(_random.Next(0,3000));
+            //await Task.Delay(_random.Next(0,3000));
             return NotFound("User/Password problem");
         }
 
@@ -187,7 +187,7 @@ public class AccountController : ControllerBase
         {
             _logger.LogWarning("WebApi login failed, claimsPrincipal null");
             // Random delay of up to 3 seconds.
-            await Task.Delay(_random.Next(0,3000));
+            //await Task.Delay(_random.Next(0,3000));
             return NotFound("User/Password problem");
         }
 

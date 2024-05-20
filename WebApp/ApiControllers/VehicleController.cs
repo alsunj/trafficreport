@@ -129,8 +129,9 @@ namespace TrafficReports.ApiControllers
         {
             var mappedVehicles = _mapper.Map(vehicle);
             _bll.Vehicles.Add(mappedVehicles);
+            await _bll.SaveChangesAsync();
 
-            return CreatedAtAction("GetVehicle", new { id = vehicle.Id }, vehicle);
+            return CreatedAtAction("GetVehicle", new { id = mappedVehicles.Id }, vehicle);
         }
 
         /// <summary>
