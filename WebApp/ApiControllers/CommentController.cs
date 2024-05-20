@@ -127,7 +127,7 @@ namespace TrafficReport.ApiControllers
         [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<Comment>> PostComment(App.DTO.v1_0.Comment comment)
+        public async Task<ActionResult<App.DTO.v1_0.Comment>> PostComment(App.DTO.v1_0.Comment comment)
         {
             var mappedComments = _mapper.Map(comment);
             _bll.Comments.Add(mappedComments);
