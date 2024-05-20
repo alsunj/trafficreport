@@ -106,6 +106,7 @@ namespace TrafficReport.ApiControllers
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.VehicleType>> PostVehicleType(App.DTO.v1_0.VehicleType vehicleType)
         {
+            vehicleType.Id = Guid.NewGuid();
             var mappedVehicleType = _mapper.Map(vehicleType);
             _bll.VehicleTypes.Add(mappedVehicleType);
             await _bll.SaveChangesAsync();

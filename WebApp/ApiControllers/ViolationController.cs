@@ -116,6 +116,7 @@ namespace TrafficReports.ApiControllers
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.Violation>> PostViolation(App.DTO.v1_0.Violation violation)
         {
+            violation.Id = Guid.NewGuid();
             var mappedViolation = _mapper.Map(violation);
             _bll.Violations.Add(mappedViolation);
             await _bll.SaveChangesAsync();

@@ -130,6 +130,7 @@ namespace TrafficReport.ApiControllers
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.Comment>> PostComment(App.DTO.v1_0.Comment comment)
         {
+            comment.Id = Guid.NewGuid();
             var mappedComment = _mapper.Map(comment);
             _bll.Comments.Add(mappedComment);
             await _bll.SaveChangesAsync();

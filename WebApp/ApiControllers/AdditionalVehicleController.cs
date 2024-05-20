@@ -105,6 +105,7 @@ namespace TrafficReport.ApiControllers
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.AdditionalVehicle>> PostAdditionalVehicle(App.DTO.v1_0.AdditionalVehicle additionalVehicle)
         {
+            additionalVehicle.Id = Guid.NewGuid();
             var mappedAdditionalVehicle = _mapper.Map(additionalVehicle);
             _bll.AdditionalVehicles.Add(mappedAdditionalVehicle);
             await _bll.SaveChangesAsync();

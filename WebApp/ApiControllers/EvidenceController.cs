@@ -123,6 +123,7 @@ namespace TrafficReport.ApiControllers
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.Evidence>> PostEvidence(App.DTO.v1_0.Evidence evidence)
         {
+            evidence.Id = Guid.NewGuid();
             var mappedEvidenceType = _mapper.Map(evidence);
             _bll.Evidences.Add(mappedEvidenceType);
             await _bll.SaveChangesAsync();
