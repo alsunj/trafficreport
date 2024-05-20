@@ -88,7 +88,7 @@ namespace TrafficReports.ApiControllers
             var res = _mapper.Map(violationType);
             
             _bll.ViolationTypes.Update(res);
-            //mapper?
+            await _bll.SaveChangesAsync();
             
             return NoContent();
         }
@@ -101,13 +101,14 @@ namespace TrafficReports.ApiControllers
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.ViolationType>> PostViolationType(App.DTO.v1_0.ViolationType violationType)
         {
-            var mappedViolationTypes = _mapper.Map(violationType);
-            _bll.ViolationTypes.Add(mappedViolationTypes);
+            var mappedViolationType = _mapper.Map(violationType);
+            _bll.ViolationTypes.Add(mappedViolationType);
+            await _bll.SaveChangesAsync();
             
             return CreatedAtAction("GetViolationType", new
             {
                 version = HttpContext.GetRequestedApiVersion()?.ToString(),
-                id = violationType.Id 
+                id = mappedViolationType.Id 
                 
             }, violationType);
         }

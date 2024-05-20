@@ -110,6 +110,7 @@ namespace TrafficReports.ApiControllers
             }
             var res = _mapper.Map(vehicle);
             _bll.Vehicles.Update(res);
+            await _bll.SaveChangesAsync();
 
 
             return NoContent();
@@ -127,11 +128,11 @@ namespace TrafficReports.ApiControllers
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.Vehicle>> PostVehicle(App.DTO.v1_0.Vehicle vehicle)
         {
-            var mappedVehicles = _mapper.Map(vehicle);
-            _bll.Vehicles.Add(mappedVehicles);
+            var mappedVehicle = _mapper.Map(vehicle);
+            _bll.Vehicles.Add(mappedVehicle);
             await _bll.SaveChangesAsync();
 
-            return CreatedAtAction("GetVehicle", new { id = mappedVehicles.Id }, vehicle);
+            return CreatedAtAction("GetVehicle", new { id = mappedVehicle.Id }, vehicle);
         }
 
         /// <summary>

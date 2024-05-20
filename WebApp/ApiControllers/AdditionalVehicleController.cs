@@ -89,6 +89,7 @@ namespace TrafficReport.ApiControllers
 
             var res = _mapper.Map(additionalVehicle);
             _bll.AdditionalVehicles.Update(res);
+            await _bll.SaveChangesAsync();
             return NoContent();
         }
 
@@ -104,10 +105,11 @@ namespace TrafficReport.ApiControllers
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.AdditionalVehicle>> PostAdditionalVehicle(App.DTO.v1_0.AdditionalVehicle additionalVehicle)
         {
-            var mappedAdditionalVehicles = _mapper.Map(additionalVehicle);
-            _bll.AdditionalVehicles.Add(mappedAdditionalVehicles);
+            var mappedAdditionalVehicle = _mapper.Map(additionalVehicle);
+            _bll.AdditionalVehicles.Add(mappedAdditionalVehicle);
+            await _bll.SaveChangesAsync();
 
-            return CreatedAtAction("GetAdditionalVehicle", new { id = additionalVehicle.Id }, additionalVehicle);
+            return CreatedAtAction("GetAdditionalVehicle", new { id = mappedAdditionalVehicle.Id }, additionalVehicle);
         }
 
         /// <summary>

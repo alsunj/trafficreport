@@ -91,6 +91,7 @@ namespace TrafficReport.ApiControllers
 
             var res = _mapper.Map(evidenceType);
             _bll.EvidenceTypes.Update(res);
+            await _bll.SaveChangesAsync();
 
             return NoContent();
         }
@@ -107,11 +108,11 @@ namespace TrafficReport.ApiControllers
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.EvidenceType>> PostEvidenceType(App.DTO.v1_0.EvidenceType evidenceType)
         {
-            var mappedEvidenceTypes = _mapper.Map(evidenceType);
-            _bll.EvidenceTypes.Add(mappedEvidenceTypes);
+            var mappedEvidenceType = _mapper.Map(evidenceType);
+            _bll.EvidenceTypes.Add(mappedEvidenceType);
+            await _bll.SaveChangesAsync();
             
-
-            return CreatedAtAction("GetEvidenceType", new { id = evidenceType.Id }, evidenceType);
+            return CreatedAtAction("GetEvidenceType", new { id = mappedEvidenceType.Id }, evidenceType);
         }
 
         /// <summary>

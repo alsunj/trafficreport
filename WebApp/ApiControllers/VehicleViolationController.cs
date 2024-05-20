@@ -93,6 +93,7 @@ namespace TrafficReports.ApiControllers
             var res = _mapper.Map(vehicleViolation);
             
             _bll.VehicleViolations.Update(res);
+            await _bll.SaveChangesAsync();
             
             return NoContent();
 
@@ -108,11 +109,12 @@ namespace TrafficReports.ApiControllers
         {
             var mappedVehicleViolation = _mapper.Map(vehicleViolation);
             _bll.VehicleViolations.Add(mappedVehicleViolation);
+            await _bll.SaveChangesAsync();
 
             return CreatedAtAction("GetVehicleViolation", new
             {
                 version = HttpContext.GetRequestedApiVersion()?.ToString(),
-                id = vehicleViolation.Id
+                id = mappedVehicleViolation.Id
             }, vehicleViolation);
         }
 

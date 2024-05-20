@@ -84,6 +84,7 @@ namespace TrafficReports.ApiControllers
 
             var res = _mapper.Map(vehicleType);
             _bll.VehicleTypes.Update(res);
+            await _bll.SaveChangesAsync();
 
 
             return NoContent();
@@ -98,12 +99,12 @@ namespace TrafficReports.ApiControllers
         public async Task<ActionResult<App.DTO.v1_0.VehicleType>> PostVehicleType(App.DTO.v1_0.VehicleType vehicleType)
         {
             //vehicleType.Id = new Guid();
-            var mappedVehicleTypes = _mapper.Map(vehicleType);
-            _bll.VehicleTypes.Add(mappedVehicleTypes);
+            var mappedVehicleType = _mapper.Map(vehicleType);
+            _bll.VehicleTypes.Add(mappedVehicleType);
             await _bll.SaveChangesAsync();
             
             return CreatedAtAction("GetVehicleType", new 
-                { id = mappedVehicleTypes.Id }, vehicleType);
+                { id = mappedVehicleType.Id }, vehicleType);
         }
 
         // DELETE: api/VehicleType/5

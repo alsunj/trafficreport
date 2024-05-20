@@ -113,6 +113,7 @@ namespace TrafficReport.ApiControllers
 
             var res = _mapper.Map(comment);
             _bll.Comments.Update(res);
+            await _bll.SaveChangesAsync();
 
             return NoContent();
         }
@@ -129,10 +130,11 @@ namespace TrafficReport.ApiControllers
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.Comment>> PostComment(App.DTO.v1_0.Comment comment)
         {
-            var mappedComments = _mapper.Map(comment);
-            _bll.Comments.Add(mappedComments);
+            var mappedComment = _mapper.Map(comment);
+            _bll.Comments.Add(mappedComment);
+            await _bll.SaveChangesAsync();
 
-            return CreatedAtAction("GetAllVehicleViolationComments", new { id = comment.VehicleViolationId }, comment);
+            return CreatedAtAction("GetAllVehicleViolationComments", new { id = mappedComment.VehicleViolationId }, comment);
         }
 
         /// <summary>
