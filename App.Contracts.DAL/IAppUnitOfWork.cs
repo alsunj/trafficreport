@@ -9,7 +9,6 @@ public interface IAppUnitOfWork : IUnitOfWork
 {
     //repod
     IVehicleViolationRepository VehicleViolationRepository { get; }
-    IViolationTypeRepository ViolationTypeRepository { get; }
     IViolationRepository ViolationRepository { get; }
     IEntityRepository<AppUser> AppUserRepository { get; }
     IVehicleTypeRepository VehicleTypeRepository { get; }

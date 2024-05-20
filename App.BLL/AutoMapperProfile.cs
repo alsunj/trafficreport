@@ -6,7 +6,6 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<App.DAL.DTO.ViolationType, App.BLL.DTO.ViolationType>().ReverseMap();
         CreateMap<App.DAL.DTO.Violation, App.BLL.DTO.Violation>().ReverseMap();
         CreateMap<App.DAL.DTO.VehicleViolation, App.BLL.DTO.VehicleViolation>().ReverseMap();
         CreateMap<App.DAL.DTO.AdditionalVehicle, App.BLL.DTO.AdditionalVehicle>().ReverseMap();

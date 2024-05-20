@@ -26,6 +26,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj": {
+                "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj"
+              },
               "C:\\Users\\admin\\C-sharp development\\treport\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
                 "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj"
               }

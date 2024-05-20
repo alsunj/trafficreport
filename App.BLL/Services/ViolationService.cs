@@ -6,7 +6,6 @@ using App.DTO.v1_0;
 using AutoMapper;
 using Base.BLL;
 using Violation = App.BLL.DTO.Violation;
-using ViolationType = App.BLL.DTO.ViolationType;
 
 namespace App.BLL.Services;
 

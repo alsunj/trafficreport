@@ -14,6 +14,11 @@ services:
       options:
         max-size: 10m
         max-file: 3
+    deploy:
+      resources:
+        limits:
+          memory: 1g  # Limit memory usage to 1GB
+          
   app:
     build: ./
     container_name: trafficreport-app-container
@@ -27,7 +32,11 @@ services:
     environment:
       ConnectionStrings__DefaultConnection: "Host=trafficreport-sql-container;Port=5432;Database=trafficreport;Username=postgres;Password=postgres"
     depends_on:
-      - sql
+      - sql   
+    deploy:
+      resources:
+        limits:
+          memory: 1g  # Limit memory usage to 1GB
 
 volumes:
   sql-volume:

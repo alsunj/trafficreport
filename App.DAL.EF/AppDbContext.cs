@@ -11,7 +11,6 @@ namespace App.DAL.EF;
 public class AppDbContext :IdentityDbContext<AppUser, AppRole, Guid, IdentityUserClaim<Guid>,
     AppUserRole, IdentityUserLogin<Guid>, IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
 {
-    public DbSet<ViolationType> ViolationTypes { get; set; } = default!;
     
     public DbSet<Violation> Violations { get; set; } = default!;
     

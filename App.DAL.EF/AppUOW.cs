@@ -22,9 +22,6 @@ public class AppUOW : BaseUnitOfWork<AppDbContext>, IAppUnitOfWork
         _vehicleViolations ?? new VehicleViolationRepository(UowDbContext, _mapper);
     
     
-    private IViolationTypeRepository? _violationTypes;
-    public IViolationTypeRepository ViolationTypeRepository =>
-        _violationTypes ?? new ViolationTypeRepository(UowDbContext, _mapper);
     
     private IViolationRepository? _violations;
 

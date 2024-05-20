@@ -1,3 +1,4 @@
+@using App.Domain.Violations
 @model App.Domain.Violations.Violation
 
 @{
@@ -13,9 +14,11 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ViolationTypeId" class="control-label"></label>
-                <select asp-for="ViolationTypeId" class ="form-control" asp-items="ViewBag.ViolationTypeId"></select>
+                <label asp-for="ViolationType" class="control-label"></label>
+                <select asp-for="ViolationType" asp-items="@Html.GetEnumSelectList<EViolationType>()" class="form-control"></select>
+                <span asp-validation-for="ViolationType" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <label asp-for="ViolationName" class="control-label"></label>
                 <input asp-for="ViolationName" class="form-control" />

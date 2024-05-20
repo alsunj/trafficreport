@@ -19,9 +19,6 @@ public class AppBLL : BaseBLL<AppDbContext>, IAppBLL
         _mapper = mapper;
         _uow = uoW;
     }
-
-    private IViolationTypeService? _violationTypes;
-    public IViolationTypeService ViolationTypes => _violationTypes ??= new ViolationTypeService(_uow, _uow.ViolationTypeRepository, _mapper);
     
     private IViolationService? _violations;
     public IViolationService Violations => _violations ??= new ViolationService(_uow, _uow.ViolationRepository, _mapper);   

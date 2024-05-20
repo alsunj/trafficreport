@@ -6,7 +6,7 @@ namespace App.Contracts.BLL;
 
 public interface IAppBLL : IBLL
 {
-    IViolationTypeService ViolationTypes { get; }
+
     IViolationService Violations { get; }
     IVehicleViolationService VehicleViolations { get; }
     

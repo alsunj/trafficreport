@@ -6,7 +6,6 @@ public class AutoMapperProfile: Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<App.BLL.DTO.ViolationType, App.DTO.v1_0.ViolationType>().ReverseMap();
         CreateMap<App.BLL.DTO.Violation,App.DTO.v1_0.Violation>().ReverseMap();
         CreateMap<App.BLL.DTO.EvidenceType, App.DTO.v1_0.EvidenceType>().ReverseMap();
         CreateMap<App.BLL.DTO.Evidence, App.DTO.v1_0.Evidence>().ReverseMap();

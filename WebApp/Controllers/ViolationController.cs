@@ -22,7 +22,7 @@ namespace TrafficReports.Controllers
         // GET: Violation
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Violations.Include(v => v.ViolationType);
+            var appDbContext = _context.Violations;
             return View(await appDbContext.ToListAsync());
         }
 
@@ -48,7 +48,6 @@ namespace TrafficReports.Controllers
         // GET: Violation/Create
         public IActionResult Create()
         {
-            ViewData["ViolationTypeId"] = new SelectList(_context.ViolationTypes, "Id", "Id");
             return View();
         }
 
@@ -57,7 +56,7 @@ namespace TrafficReports.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ViolationTypeId,ViolationName,Severity,Id")] Violation violation)
+        public async Task<IActionResult> Create([Bind("ViolationType,ViolationName,Severity,Id")] Violation violation)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +65,7 @@ namespace TrafficReports.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ViolationTypeId"] = new SelectList(_context.ViolationTypes, "Id", "Id", violation.ViolationTypeId);
+            
             return View(violation);
         }
 
@@ -83,7 +82,7 @@ namespace TrafficReports.Controllers
             {
                 return NotFound();
             }
-            ViewData["ViolationTypeId"] = new SelectList(_context.ViolationTypes, "Id", "Id", violation.ViolationTypeId);
+            
             return View(violation);
         }
 
@@ -92,7 +91,7 @@ namespace TrafficReports.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("ViolationTypeId,ViolationName,Severity,Id")] Violation violation)
+        public async Task<IActionResult> Edit(Guid id, [Bind("ViolationType,ViolationName,Severity,Id")] Violation violation)
         {
             if (id != violation.Id)
             {
@@ -119,7 +118,7 @@ namespace TrafficReports.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ViolationTypeId"] = new SelectList(_context.ViolationTypes, "Id", "Id", violation.ViolationTypeId);
+            
             return View(violation);
         }
 

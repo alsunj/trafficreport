@@ -1,14 +1,9 @@
 using System.Net;
 using App.Contracts.BLL;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using App.DAL.EF;
 using App.Domain.Identity;
-using App.Domain.Violations;
 using Asp.Versioning;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using TrafficReport.Helpers;
 
@@ -35,7 +30,11 @@ namespace TrafficReports.ApiControllers
             _userManager = userManager;
             _mapper = new PublicDTOBllMapper<App.DTO.v1_0.Violation, App.BLL.DTO.Violation>(autoMapper);
         }
-        // GET: api/Violation
+        
+        /// <summary>
+        /// Get a list of all violations.
+        /// </summary>
+        /// <returns>List of violations.</returns>
         [HttpGet]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Violation>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
@@ -48,9 +47,13 @@ namespace TrafficReports.ApiControllers
             return Ok(bllViolations);
         }
 
-        // GET: api/Violation/5
+        /// <summary>
+        /// Get violation by id
+        /// </summary>
+        /// <param name="id">Violation id</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(List<App.DTO.v1_0.Violation>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(App.DTO.v1_0.Violation), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
@@ -68,8 +71,12 @@ namespace TrafficReports.ApiControllers
             return Ok(res);
         }
 
-        // PUT: api/Violation/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Edit violation.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="violation"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
@@ -97,10 +104,13 @@ namespace TrafficReports.ApiControllers
             return NoContent();
         }
 
-        // POST: api/Violation
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Add new violation.
+        /// </summary>
+        /// <param name="violation"></param>
+        /// <returns></returns>
         [HttpPost]
-        [ProducesResponseType(typeof(List<App.DTO.v1_0.Violation>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(App.DTO.v1_0.Violation), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
         [Consumes("application/json")]
@@ -117,7 +127,11 @@ namespace TrafficReports.ApiControllers
             }, violation);
         }
 
-        // DELETE: api/Violation/5
+        /// <summary>
+        /// Delete vehicle violation by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [HttpDelete("{id}")]
