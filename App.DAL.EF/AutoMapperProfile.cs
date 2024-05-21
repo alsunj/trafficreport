@@ -18,10 +18,6 @@ public class AutoMapperProfile : Profile
             .ReverseMap()
             .ForMember(dest => dest.Size, opt => opt.MapFrom(src => (EVehicleSize)src.Size));
         CreateMap<App.Domain.Vehicles.AdditionalVehicle, App.DAL.DTO.AdditionalVehicle>().ReverseMap();
-        CreateMap<App.Domain.Vehicles.EVehicleSize, App.DAL.DTO.EVehicleSize>()
-            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ToString()))
-            .ReverseMap()
-            .ForMember(dest => dest, opt => opt.MapFrom(src => Enum.Parse(typeof(EVehicleSize), src.Name)));
     }
     
     
