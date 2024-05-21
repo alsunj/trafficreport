@@ -19,7 +19,7 @@ public class VehicleService :
 
     public async Task<IEnumerable<Vehicle>> GetAllSortedAsync(Guid userId)
     {
-        return (await Repository.GetAllSortedAsync(userId)).Select(e => Mapper.Map(e));
+        return (await NuGet.Protocol.Core.Types.Repository.GetAllSortedAsync(userId)).Select(e => Mapper.Map(e));
         
     }
 
