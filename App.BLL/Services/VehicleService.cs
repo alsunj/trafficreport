@@ -31,7 +31,7 @@ public class VehicleService :
 
     public double CalculateVehicleRatingByLicensePlate(string licensePlate)
     {
-        var rating = CalculateVehicleRatingByLicensePlate(licensePlate);
+        var rating = Repository.CalculateVehicleRatingByLicensePlate(licensePlate);
         return rating;
     }
 }
