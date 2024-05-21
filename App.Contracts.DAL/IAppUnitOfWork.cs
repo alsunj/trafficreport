@@ -17,6 +17,9 @@ public interface IAppUnitOfWork : IUnitOfWork
     IEvidenceTypeRepository EvidenceTypeRepository { get; }
     IEvidenceRepository EvidenceRepository { get; }
     ICommentRepository CommentRepository { get; }
+    
+    IEViolationTypeRepository EViolationTypeRepository { get; }
+    IEVehicleSizeRepository EVehicleSizeRepository { get; }
 
 
 }

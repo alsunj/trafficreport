@@ -1,5 +1,4 @@
-﻿
-namespace App.DAL.DTO;
+﻿namespace App.DTO.v1_0;
 
 public class EViolationType
 {

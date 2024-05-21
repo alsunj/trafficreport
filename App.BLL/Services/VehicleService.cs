@@ -5,6 +5,7 @@ using App.Contracts.DAL.Repositories;
 using App.DAL.EF;
 using AutoMapper;
 using Base.BLL;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace App.BLL.Services;
 
@@ -17,10 +18,10 @@ public class VehicleService :
     {
     }
 
-    public async Task<IEnumerable<Vehicle>> GetAllSortedAsync(Guid userId)
+
+    public Task<IEnumerable<Vehicle>> GetAllSortedAsync(Guid userId)
     {
-        return (await Repository.GetAllSortedAsync(userId)).Select(e => Mapper.Map(e));
-        
+        throw new NotImplementedException();
     }
 
     public async Task<Vehicle> GetByLicensePlateAsync(string licensePlate)

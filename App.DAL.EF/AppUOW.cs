@@ -22,7 +22,6 @@ public class AppUOW : BaseUnitOfWork<AppDbContext>, IAppUnitOfWork
         _vehicleViolations ?? new VehicleViolationRepository(UowDbContext, _mapper, new ViolationRepository(UowDbContext, _mapper));
     
     private IViolationRepository? _violations;
-
     public IViolationRepository ViolationRepository =>
         _violations ?? new ViolationRepository(UowDbContext, _mapper);
     private IVehicleTypeRepository? _vehicleTypes;
@@ -52,9 +51,18 @@ public class AppUOW : BaseUnitOfWork<AppDbContext>, IAppUnitOfWork
     private ICommentRepository? _comments;
     public ICommentRepository CommentRepository => 
         _comments ??= new CommentRepository(UowDbContext, _mapper);
+    
+    private IEViolationTypeRepository? _eViolationTypes;
+    public IEViolationTypeRepository EViolationTypeRepository => 
+        _eViolationTypes ??= new EViolationTypeRepository();
+    
+    
+    private IEVehicleSizeRepository? _eVehicleSizes;
+    public IEVehicleSizeRepository EVehicleSizeRepository => 
+        _eVehicleSizes ??= new EVehicleSizeRepository();
 
     private IEntityRepository<AppUser>? _users;
     public IEntityRepository<AppUser> AppUserRepository => _users ??
-                                               new BaseEntityRepository<AppUser, AppUser, AppDbContext>(UowDbContext,
-                                                   new DalDomainMapper<AppUser, AppUser>(_mapper));
+                                                           new BaseEntityRepository<AppUser, AppUser, AppDbContext>(UowDbContext,
+                                                               new DalDomainMapper<AppUser, AppUser>(_mapper));
 }
