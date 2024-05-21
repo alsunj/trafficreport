@@ -7,7 +7,7 @@ public class Violation: IDomainEntityId
 {
     public Guid Id { get; set; }
     
-    public EViolationType ViolationType { get; set; }
+    public int ViolationType { get; set; }
     
     public string? ViolationName { get; set; }
     
