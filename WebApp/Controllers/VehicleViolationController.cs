@@ -38,10 +38,9 @@ namespace TrafficReport.Controllers
         // GET: /VehicleViolations
         public async Task<IActionResult> Index()
         {
-            var res = await _uow.VehicleViolationRepository.GetAllAsync(
-                Guid.Parse(_userManager.GetUserId(User))
-                );
-            return Ok(res);
+            var res = await _uow.VehicleViolationRepository.GetAllSortedAsync(
+                Guid.Parse(_userManager.GetUserId(User)));
+            return View(res);
         }
 
         // GET: Admin/VehicleViolations/Details/5
@@ -58,7 +57,7 @@ namespace TrafficReport.Controllers
                 return NotFound();
             }
 
-            return Ok(vehicleViolation);
+            return View(vehicleViolation);
         }
 
         // GET: Admin/VehicleViolations/Create
@@ -86,7 +85,7 @@ namespace TrafficReport.Controllers
             ViewData["AppUserId"] = new SelectList(await _uow.AppUserRepository.GetAllAsync(), "Id", "Id", vehicleViolation.AppUserId);
             ViewData["VehicleId"] = new SelectList(await _uow.VehicleRepository.GetAllAsync(), "Id", "Id", vehicleViolation.VehicleId);
             ViewData["ViolationId"] = new SelectList(await _uow.ViolationRepository.GetAllAsync(), "Id", "Id", vehicleViolation.ViolationId);
-            return Ok(vehicleViolation);
+            return View(vehicleViolation);
         }
 
         // GET: Admin/VehicleViolations/Edit/5
@@ -105,7 +104,7 @@ namespace TrafficReport.Controllers
             ViewData["AppUserId"] = new SelectList(await _uow.AppUserRepository.GetAllAsync(), "Id", "Id", vehicleViolation.AppUserId);
             ViewData["VehicleId"] = new SelectList(await _uow.VehicleRepository.GetAllAsync(), "Id", "Id", vehicleViolation.VehicleId);
             ViewData["ViolationId"] = new SelectList(await _uow.ViolationRepository.GetAllAsync(), "Id", "Id", vehicleViolation.ViolationId);
-            return Ok(vehicleViolation);
+            return View(vehicleViolation);
         }
 
         // POST: Admin/VehicleViolations/Edit/5
@@ -143,7 +142,7 @@ namespace TrafficReport.Controllers
             ViewData["AppUserId"] = new SelectList(await _uow.AppUserRepository.GetAllAsync(), "Id", "Id", vehicleViolation.AppUserId);
             ViewData["VehicleId"] = new SelectList(await _uow.VehicleRepository.GetAllAsync(), "Id", "Id", vehicleViolation.VehicleId);
             ViewData["ViolationId"] = new SelectList(await _uow.ViolationRepository.GetAllAsync(), "Id", "Id", vehicleViolation.ViolationId);
-            return Ok(vehicleViolation);
+            return View(vehicleViolation);
         }
 
         // GET: Admin/VehicleViolations/Delete/5
@@ -164,7 +163,7 @@ namespace TrafficReport.Controllers
                 return NotFound();
             }
 
-            return Ok(vehicleViolation);
+            return View(vehicleViolation);
         }
 
         // POST: Admin/VehicleViolations/Delete/5

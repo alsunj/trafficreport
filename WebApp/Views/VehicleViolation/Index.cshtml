@@ -1,4 +1,4 @@
-@model IEnumerable<App.Domain.Violations.VehicleViolation>
+@model IEnumerable<App.DAL.DTO.VehicleViolation>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,13 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Vehicle)
+                @Html.DisplayNameFor(model => model.VehicleId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Violation)
+                @Html.DisplayNameFor(model => model.ViolationId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AppUser)
+                @Html.DisplayNameFor(model => model.AppUserId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
@@ -40,13 +40,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Vehicle!.Id)
+                @Html.DisplayFor(modelItem => item.VehicleId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Violation!.Id)
+                @Html.DisplayFor(modelItem => item.ViolationId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AppUser!.Id)
+                @Html.DisplayFor(modelItem => item.AppUserId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
