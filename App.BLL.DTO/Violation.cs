@@ -1,4 +1,3 @@
-﻿using App.Domain.Vehicles;
 using App.Domain.Violations;
 using Base.Contracts.Domain;
 
