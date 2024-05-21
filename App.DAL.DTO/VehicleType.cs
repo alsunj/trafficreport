@@ -9,7 +9,7 @@ public class VehicleType : IDomainEntityId
 
     public string? VehicleTypeName { get; set; }
     
-    public EVehicleSize Size { get; set; }
+    public int Size { get; set; }
     
     public string? Make { get; set; }
     

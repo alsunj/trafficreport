@@ -1,23 +1,13 @@
 ﻿using App.Contracts.DAL.Repositories;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-namespace App.DAL.EF.Repositories;
-using DALDTO = App.DAL.DTO;
-using APPDomain = App.Domain;
+using App.Domain.Violations;
 
-/*
-public class EViolationTypeRepository: BaseEntityRepository<APPDomain.Violations.EViolationType, DALDTO.EViolationType, AppDbContext>,  IEvidenceTypeRepository                         
-{                                                                                                                                                                                  
-    public EvidenceTypeRepository(AppDbContext dbContext, IMapper mapper) :  base(dbContext, new DalDomainMapper<APPDomain.Violations.EViolationType, DALDTO.EViolationType>(mapper))       
-    {                                                                                                                                                                              
-    }                                                                                                                                                                              
-    public async Task<IEnumerable<DALDTO.EvidenceType>> GetAllSortedAsync(Guid userId)                                                                                              
-    {                                                                                                                                                                              
-        var query = CreateQuery(userId);                                                                                                                                           
-        var res = await query.ToListAsync();                                                                                                                                       
-        query = query.OrderBy(c => c.EvidenceTypeName);                                                                                                                               
-                                                                                                                                                                                   
-        return (await query.ToListAsync()).Select(e => Mapper.Map(e));
-        
-    }                                                                                         
-}        */
+namespace App.DAL.EF.Repositories
+{
+    public class EViolationTypeRepository : IEViolationTypeRepository
+    {
+        public async Task<IEnumerable<string>> GetAllAsync()
+        {
+            return await Task.Run(() => Enum.GetNames(typeof(EViolationType)));
+        }
+    }
+}
