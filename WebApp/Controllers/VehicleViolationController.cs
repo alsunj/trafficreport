@@ -78,12 +78,13 @@ namespace TrafficReport.Controllers
         {
             if (ModelState.IsValid)
             {
+                _uow.VehicleViolationRepository.Add(vehicleViolation);
+                
                 var vehicle = await _uow.VehicleRepository.FirstOrDefaultAsync(vehicleViolation.VehicleId);
                 
                 vehicle!.Rating = (decimal) _uow.VehicleRepository.CalculateVehicleRatingByLicensePlate(vehicle.RegNr!);
                 
                 _uow.VehicleRepository.Update(vehicle);
-                _uow.VehicleViolationRepository.Add(vehicleViolation);
                 
                 await _uow.SaveChangesAsync();
                 
