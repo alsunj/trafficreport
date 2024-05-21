@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using App.DAL.EF;
 using App.Domain.Violations;
 
-namespace TrafficReports.Controllers
+namespace WebApp.Controllers
 {
     public class ViolationController : Controller
     {
@@ -22,8 +22,7 @@ namespace TrafficReports.Controllers
         // GET: Violation
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Violations;
-            return View(await appDbContext.ToListAsync());
+            return View(await _context.Violations.ToListAsync());
         }
 
         // GET: Violation/Details/5
@@ -35,7 +34,6 @@ namespace TrafficReports.Controllers
             }
 
             var violation = await _context.Violations
-                .Include(v => v.ViolationType)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (violation == null)
             {
@@ -65,7 +63,6 @@ namespace TrafficReports.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            
             return View(violation);
         }
 
@@ -82,7 +79,6 @@ namespace TrafficReports.Controllers
             {
                 return NotFound();
             }
-            
             return View(violation);
         }
 
@@ -118,7 +114,6 @@ namespace TrafficReports.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            
             return View(violation);
         }
 
@@ -131,7 +126,6 @@ namespace TrafficReports.Controllers
             }
 
             var violation = await _context.Violations
-                .Include(v => v.ViolationType)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (violation == null)
             {
