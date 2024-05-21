@@ -114,6 +114,31 @@ namespace TrafficReport.ApiControllers
             
             return Ok(vehicleViolations);
         }
+        
+        /// <summary>
+        /// Get vehicle violations by vehicle id.
+        /// </summary>
+        /// <param name="vehicleId"></param>
+        /// <returns>list of vehicle violations.</returns>
+        [HttpGet("{licensePlate}")]
+        [ProducesResponseType<List<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
+        [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<List<App.DTO.v1_0.VehicleViolation>>> GetAllVehicleViolationsByVehicleId(Guid vehicleId)
+        {
+            var vehicleViolations =
+                await _bll.VehicleViolations.GetAllVehicleViolationsByVehicleId(vehicleId);
+                
+
+            if (vehicleViolations.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+            vehicleViolations =  vehicleViolations.ToList();
+            
+            return Ok(vehicleViolations);
+        }
 
         /// <summary>
         /// Edit vehicle violation.
@@ -160,10 +185,16 @@ namespace TrafficReport.ApiControllers
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.VehicleViolation>> PostVehicleViolation(App.DTO.v1_0.VehicleViolation vehicleViolation)
         {
+            var vehicle = await _bll.Vehicles.FirstOrDefaultAsync(vehicleViolation.VehicleId);
+            vehicle!.Rating = (decimal) _bll.Vehicles.CalculateVehicleRatingByLicensePlate(vehicle.RegNr!);
+            _bll.Vehicles.Update(vehicle);
+            
             vehicleViolation.Id = Guid.NewGuid();
             var mappedVehicleViolation = _mapper.Map(vehicleViolation);
             _bll.VehicleViolations.Add(mappedVehicleViolation);
+            
             await _bll.SaveChangesAsync();
+            
 
             return CreatedAtAction("GetVehicleViolation", new
             {

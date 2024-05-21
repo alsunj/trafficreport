@@ -19,9 +19,7 @@ public class AppUOW : BaseUnitOfWork<AppDbContext>, IAppUnitOfWork
     private IVehicleViolationRepository? _vehicleViolations;
 
     public IVehicleViolationRepository VehicleViolationRepository =>
-        _vehicleViolations ?? new VehicleViolationRepository(UowDbContext, _mapper);
-    
-    
+        _vehicleViolations ?? new VehicleViolationRepository(UowDbContext, _mapper, new ViolationRepository(UowDbContext, _mapper));
     
     private IViolationRepository? _violations;
 
@@ -33,7 +31,11 @@ public class AppUOW : BaseUnitOfWork<AppDbContext>, IAppUnitOfWork
 
     private IVehicleRepository? _vehicles;
     public IVehicleRepository VehicleRepository => 
-        _vehicles ??= new VehicleRepository(UowDbContext, _mapper);
+        _vehicles ??= new VehicleRepository(UowDbContext, _mapper,
+            new VehicleViolationRepository(UowDbContext, _mapper,
+                new ViolationRepository(UowDbContext, _mapper)
+                )
+            );
 
     private IAdditionalVehicleRepository? _additionalVehicles;
     public IAdditionalVehicleRepository AdditionalVehicleRepository => 

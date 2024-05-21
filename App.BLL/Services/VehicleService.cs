@@ -2,6 +2,7 @@
 using App.Contracts.BLL.Services;
 using App.Contracts.DAL;
 using App.Contracts.DAL.Repositories;
+using App.DAL.EF;
 using AutoMapper;
 using Base.BLL;
 
@@ -26,5 +27,11 @@ public class VehicleService :
     {
         var vehicle = await Repository.GetByLicensePlateAsync(licensePlate);
         return Mapper.Map(vehicle)!;
+    }
+
+    public double CalculateVehicleRatingByLicensePlate(string licensePlate)
+    {
+        var rating = CalculateVehicleRatingByLicensePlate(licensePlate);
+        return rating;
     }
 }

@@ -11,6 +11,5 @@ public class Violation: IDomainEntityId
     public string? ViolationName { get; set; }
     
     public decimal? Severity { get; set; }
-
-
+    
 }
