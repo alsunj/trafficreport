@@ -57,10 +57,11 @@ namespace TrafficReports.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VehicleTypeId,Color,RegNr,Rating,Id")] Vehicle vehicle)
+        public async Task<IActionResult> Create([Bind("VehicleTypeId,Color,RegNr,Id")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
+                vehicle.Rating = (decimal)5.0;
                 vehicle.Id = Guid.NewGuid();
                 _context.Add(vehicle);
                 await _context.SaveChangesAsync();
@@ -77,7 +78,7 @@ namespace TrafficReports.Controllers
             {
                 return NotFound();
             }
-
+            
             var vehicle = await _context.Vehicles.FindAsync(id);
             if (vehicle == null)
             {
@@ -92,7 +93,7 @@ namespace TrafficReports.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("VehicleTypeId,Color,RegNr,Rating,Id")] Vehicle vehicle)
+        public async Task<IActionResult> Edit(Guid id, [Bind("VehicleTypeId,Color,RegNr,Id")] Vehicle vehicle)
         {
             if (id != vehicle.Id)
             {
@@ -103,7 +104,17 @@ namespace TrafficReports.Controllers
             {
                 try
                 {
-                    _context.Update(vehicle);
+                    var existingVehicle = await _context.Vehicles.AsNoTracking().FirstOrDefaultAsync(v => v.Id == id);
+            
+                    if (existingVehicle == null)
+                    {
+                        return NotFound();
+                    }
+                    
+                    vehicle.Rating = existingVehicle.Rating;
+                    
+                    _context.Entry(vehicle).State = EntityState.Modified;
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -119,6 +130,7 @@ namespace TrafficReports.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["VehicleTypeId"] = new SelectList(_context.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
             return View(vehicle);
         }

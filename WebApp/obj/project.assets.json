@@ -4607,6 +4607,7 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "App.Contracts.DAL": "1.0.0",
+          "App.DTO": "1.0.0",
           "App.Domain": "1.0.0",
           "AutoMapper": "13.0.1",
           "Base.DAL.EF": "1.0.0",
@@ -4638,6 +4639,9 @@
       "App.DTO/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "App.Domain": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/App.DTO.dll": {}
         },

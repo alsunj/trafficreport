@@ -359,6 +359,9 @@
               "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj": {
                 "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj"
               },
+              "C:\\Users\\admin\\C-sharp development\\treport\\App.DTO\\App.DTO.csproj": {
+                "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.DTO\\App.DTO.csproj"
+              },
               "C:\\Users\\admin\\C-sharp development\\treport\\Base.DAL.EF\\Base.DAL.EF.csproj": {
                 "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\Base.DAL.EF\\Base.DAL.EF.csproj"
               }
@@ -502,7 +505,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj": {
+                "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

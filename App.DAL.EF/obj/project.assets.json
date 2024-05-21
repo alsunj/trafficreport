@@ -1193,6 +1193,19 @@
           "bin/placeholder/App.Domain.dll": {}
         }
       },
+      "App.DTO/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "App.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/App.DTO.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/App.DTO.dll": {}
+        }
+      },
       "Base.Contracts.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -2923,6 +2936,11 @@
       "path": "../App.Domain/App.Domain.csproj",
       "msbuildProject": "../App.Domain/App.Domain.csproj"
     },
+    "App.DTO/1.0.0": {
+      "type": "project",
+      "path": "../App.DTO/App.DTO.csproj",
+      "msbuildProject": "../App.DTO/App.DTO.csproj"
+    },
     "Base.Contracts.DAL/1.0.0": {
       "type": "project",
       "path": "../Base.Contracts.DAL/Base.Contracts.DAL.csproj",
@@ -2947,6 +2965,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "App.Contracts.DAL >= 1.0.0",
+      "App.DTO >= 1.0.0",
       "App.Domain >= 1.0.0",
       "AutoMapper >= 13.0.1",
       "Base.DAL.EF >= 1.0.0",
@@ -2986,6 +3005,9 @@
             },
             "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj": {
               "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj"
+            },
+            "C:\\Users\\admin\\C-sharp development\\treport\\App.DTO\\App.DTO.csproj": {
+              "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.DTO\\App.DTO.csproj"
             },
             "C:\\Users\\admin\\C-sharp development\\treport\\Base.DAL.EF\\Base.DAL.EF.csproj": {
               "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\Base.DAL.EF\\Base.DAL.EF.csproj"

@@ -11,6 +11,7 @@ public class AutoMapperProfile : Profile
         CreateMap<App.DAL.DTO.AdditionalVehicle, App.BLL.DTO.AdditionalVehicle>().ReverseMap();
         CreateMap<App.DAL.DTO.VehicleType, App.BLL.DTO.VehicleType>().ReverseMap();
         CreateMap<App.DAL.DTO.Vehicle, App.BLL.DTO.Vehicle>().ReverseMap();
+        CreateMap<App.DTO.v1_0.VehicleModifyDTO, App.BLL.DTO.Vehicle>().ReverseMap();
         CreateMap<App.DAL.DTO.Evidence, App.BLL.DTO.Evidence>().ReverseMap();
         CreateMap<App.DAL.DTO.EvidenceType, App.BLL.DTO.EvidenceType>().ReverseMap();
         CreateMap<App.DAL.DTO.Comment, App.BLL.DTO.Comment>().ReverseMap();

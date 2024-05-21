@@ -16,11 +16,13 @@ namespace TrafficReport.ApiControllers
     {
         private readonly IAppBLL _bll;
         private readonly PublicDTOBllMapper<App.DTO.v1_0.Vehicle, App.BLL.DTO.Vehicle> _mapper;
+        private readonly PublicDTOBllMapper<App.DTO.v1_0.VehicleModifyDTO, App.BLL.DTO.Vehicle> _mapperMod;
 
         public VehicleController(IAppBLL bll, IMapper autoMapper)
         {
             _bll = bll;
             _mapper = new PublicDTOBllMapper<App.DTO.v1_0.Vehicle,App.BLL.DTO.Vehicle>(autoMapper);
+            _mapperMod = new PublicDTOBllMapper<App.DTO.v1_0.VehicleModifyDTO,App.BLL.DTO.Vehicle>(autoMapper);
         }
 
         /// <summary>
@@ -39,7 +41,7 @@ namespace TrafficReport.ApiControllers
         }
 
         /// <summary>
-        /// Get vehicle by id.
+        /// Get vehicleDto by id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Vehicle</returns>
@@ -62,7 +64,7 @@ namespace TrafficReport.ApiControllers
         }
 
         /// <summary>
-        /// Get vehicle by license plate.
+        /// Get vehicleDto by license plate.
         /// </summary>
         /// <param name="licensePlate"></param>
         /// <returns>Vehicle</returns>
@@ -84,10 +86,10 @@ namespace TrafficReport.ApiControllers
         }
 
         /// <summary>
-        /// Edit vehicle.
+        /// Edit vehicleDto.
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="vehicle"></param>
+        /// <param name="vehicleModifyDto"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
@@ -95,9 +97,9 @@ namespace TrafficReport.ApiControllers
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<IActionResult> PutVehicle(Guid id, App.DTO.v1_0.Vehicle vehicle)
+        public async Task<IActionResult> PutVehicle(Guid id, App.DTO.v1_0.VehicleModifyDTO vehicleModifyDto)
         {
-            if (id != vehicle.Id)
+            if (id != vehicleModifyDto.Id)
             {
                 return BadRequest("bad request");
             }
@@ -107,7 +109,10 @@ namespace TrafficReport.ApiControllers
                 return NotFound("id doesnt exist");
 
             }
-            var res = _mapper.Map(vehicle);
+
+            var vehicle = _bll.Vehicles.FirstOrDefaultAsync(id).Result;
+            var res = _mapperMod.Map(vehicleModifyDto);
+            res!.Rating = vehicle!.Rating;
             _bll.Vehicles.Update(res);
             await _bll.SaveChangesAsync();
 
@@ -116,27 +121,29 @@ namespace TrafficReport.ApiControllers
         }
 
         /// <summary>
-        /// Add vehicle.
+        /// Add vehicleDto.
         /// </summary>
-        /// <param name="vehicle"></param>
+        /// <param name="vehicleModifyDto"></param>
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(App.DTO.v1_0.Vehicle),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<App.DTO.v1_0.Vehicle>> PostVehicle(App.DTO.v1_0.Vehicle vehicle)
+        public async Task<ActionResult<App.DTO.v1_0.Vehicle>> PostVehicle(App.DTO.v1_0.VehicleModifyDTO vehicleModifyDto)
         {
-            vehicle.Id = Guid.NewGuid();
-            var mappedVehicle = _mapper.Map(vehicle);
+            
+            vehicleModifyDto.Id = Guid.NewGuid();
+            var mappedVehicle = _mapperMod.Map(vehicleModifyDto);
+            mappedVehicle!.Rating = (decimal) 5.0;
             _bll.Vehicles.Add(mappedVehicle);
             await _bll.SaveChangesAsync();
 
-            return CreatedAtAction("GetVehicle", new { id = mappedVehicle.Id }, vehicle);
+            return CreatedAtAction("GetVehicle", new { id = mappedVehicle.Id }, vehicleModifyDto);
         }
 
         /// <summary>
-        /// Delete vehicle by id.
+        /// Delete vehicleDto by id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -158,7 +165,7 @@ namespace TrafficReport.ApiControllers
         }
         
         /// <summary>
-        /// Delete vehicle by license plate.
+        /// Delete vehicleDto by license plate.
         /// </summary>
         /// <param name="licensePlate"></param>
         /// <returns></returns>

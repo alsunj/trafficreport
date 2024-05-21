@@ -161,6 +161,9 @@
               "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj": {
                 "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj"
               },
+              "C:\\Users\\admin\\C-sharp development\\treport\\App.DTO\\App.DTO.csproj": {
+                "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.DTO\\App.DTO.csproj"
+              },
               "C:\\Users\\admin\\C-sharp development\\treport\\Base.DAL.EF\\Base.DAL.EF.csproj": {
                 "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\Base.DAL.EF\\Base.DAL.EF.csproj"
               }
@@ -263,6 +266,63 @@
               "version": "[8.0.4, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\admin\\C-sharp development\\treport\\App.DTO\\App.DTO.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\admin\\C-sharp development\\treport\\App.DTO\\App.DTO.csproj",
+        "projectName": "App.DTO",
+        "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.DTO\\App.DTO.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.DTO\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj": {
+                "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
           "imports": [
             "net461",
             "net462",
