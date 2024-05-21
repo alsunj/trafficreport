@@ -23,13 +23,13 @@ namespace TrafficReport.Controllers
     {
         private readonly IAppUnitOfWork _uow;
         private readonly UserManager<AppUser> _userManager;
-        private readonly PublicDTOBllMapper<App.DTO.v1_0.Vehicle, App.BLL.DTO.Vehicle> _mapper;
+        private readonly PublicDTOBllMapper<App.DTO.v1_0.VehicleViolation, App.BLL.DTO.VehicleViolation> _mapper;
 
         public VehicleViolationController(IAppUnitOfWork uow, UserManager<AppUser> userManager, IMapper autoMapper)
         {
             _uow = uow;
             _userManager = userManager;
-            _mapper = new PublicDTOBllMapper<App.DTO.v1_0.Vehicle, App.BLL.DTO.Vehicle>(autoMapper);
+            _mapper = new PublicDTOBllMapper<App.DTO.v1_0.VehicleViolation, App.BLL.DTO.VehicleViolation>(autoMapper);
         }
         
         
@@ -38,10 +38,9 @@ namespace TrafficReport.Controllers
         // GET: /VehicleViolations
         public async Task<IActionResult> Index()
         {
-            var res = await _uow.VehicleViolationRepository.GetAllAsync(
-                Guid.Parse(_userManager.GetUserId(User))
-                );
-            return Ok(res);
+            var res = await _uow.VehicleViolationRepository.GetAllSortedAsync(
+                Guid.Parse(_userManager.GetUserId(User)));
+            return View(res);
         }
 
         // GET: Admin/VehicleViolations/Details/5
@@ -58,7 +57,7 @@ namespace TrafficReport.Controllers
                 return NotFound();
             }
 
-            return Ok(vehicleViolation);
+            return View(vehicleViolation);
         }
 
         // GET: Admin/VehicleViolations/Create
@@ -79,14 +78,21 @@ namespace TrafficReport.Controllers
         {
             if (ModelState.IsValid)
             {
+                var vehicle = await _uow.VehicleRepository.FirstOrDefaultAsync(vehicleViolation.VehicleId);
+                
+                vehicle!.Rating = (decimal) _uow.VehicleRepository.CalculateVehicleRatingByLicensePlate(vehicle.RegNr!);
+                
+                _uow.VehicleRepository.Update(vehicle);
                 _uow.VehicleViolationRepository.Add(vehicleViolation);
+                
                 await _uow.SaveChangesAsync();
+                
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AppUserId"] = new SelectList(await _uow.AppUserRepository.GetAllAsync(), "Id", "Id", vehicleViolation.AppUserId);
             ViewData["VehicleId"] = new SelectList(await _uow.VehicleRepository.GetAllAsync(), "Id", "Id", vehicleViolation.VehicleId);
             ViewData["ViolationId"] = new SelectList(await _uow.ViolationRepository.GetAllAsync(), "Id", "Id", vehicleViolation.ViolationId);
-            return Ok(vehicleViolation);
+            return View(vehicleViolation);
         }
 
         // GET: Admin/VehicleViolations/Edit/5
@@ -105,7 +111,7 @@ namespace TrafficReport.Controllers
             ViewData["AppUserId"] = new SelectList(await _uow.AppUserRepository.GetAllAsync(), "Id", "Id", vehicleViolation.AppUserId);
             ViewData["VehicleId"] = new SelectList(await _uow.VehicleRepository.GetAllAsync(), "Id", "Id", vehicleViolation.VehicleId);
             ViewData["ViolationId"] = new SelectList(await _uow.ViolationRepository.GetAllAsync(), "Id", "Id", vehicleViolation.ViolationId);
-            return Ok(vehicleViolation);
+            return View(vehicleViolation);
         }
 
         // POST: Admin/VehicleViolations/Edit/5
@@ -143,7 +149,7 @@ namespace TrafficReport.Controllers
             ViewData["AppUserId"] = new SelectList(await _uow.AppUserRepository.GetAllAsync(), "Id", "Id", vehicleViolation.AppUserId);
             ViewData["VehicleId"] = new SelectList(await _uow.VehicleRepository.GetAllAsync(), "Id", "Id", vehicleViolation.VehicleId);
             ViewData["ViolationId"] = new SelectList(await _uow.ViolationRepository.GetAllAsync(), "Id", "Id", vehicleViolation.ViolationId);
-            return Ok(vehicleViolation);
+            return View(vehicleViolation);
         }
 
         // GET: Admin/VehicleViolations/Delete/5
@@ -164,7 +170,7 @@ namespace TrafficReport.Controllers
                 return NotFound();
             }
 
-            return Ok(vehicleViolation);
+            return View(vehicleViolation);
         }
 
         // POST: Admin/VehicleViolations/Delete/5

@@ -6,10 +6,12 @@ namespace App.DAL.EF.Repositories;
 using DALDTO = App.DAL.DTO;
 using APPDomain = App.Domain;
 
-public class VehicleRepository : BaseEntityRepository<APPDomain.Vehicles.Vehicle, DALDTO.Vehicle, AppDbContext>,  IVehicleRepository                               
-{                                                                                                                                                                                  
-    public VehicleRepository(AppDbContext dbContext, IMapper mapper) :  base(dbContext, new DalDomainMapper<APPDomain.Vehicles.Vehicle, DALDTO.Vehicle>(mapper))       
-    {                                                                                                                                                                              
+public class VehicleRepository : BaseEntityRepository<APPDomain.Vehicles.Vehicle, DALDTO.Vehicle, AppDbContext>,  IVehicleRepository
+{
+    private readonly VehicleViolationRepository _violationRepository;
+    public VehicleRepository(AppDbContext dbContext, IMapper mapper, VehicleViolationRepository violationRepository) :  base(dbContext, new DalDomainMapper<APPDomain.Vehicles.Vehicle, DALDTO.Vehicle>(mapper))
+    {
+        _violationRepository = violationRepository;
     }                                                                                                                                                                              
     public async Task<IEnumerable<DALDTO.Vehicle>> GetAllSortedAsync(Guid userId)
     {
@@ -26,4 +28,22 @@ public class VehicleRepository : BaseEntityRepository<APPDomain.Vehicles.Vehicle
         return Mapper.Map(vehicle)!;
     }
     
+    public double CalculateVehicleRatingByLicensePlate(string licensePlate)
+    {
+        var vehicle = GetByLicensePlateAsync(licensePlate).Result;
+        var violations = _violationRepository.GetAllViolationIdsByVehicleId(vehicle.Id).Result;
+        var totalRating = 25.0;
+      
+
+        foreach (var violation in violations)
+        {
+            totalRating += 5 * (1 - (double) violation.Severity!);
+        }
+
+        var averageRating = totalRating / (violations.Count + 5);
+
+        vehicle.Rating = (decimal) averageRating;
+        
+        return averageRating;
+    }
 }                                                                                                                                                                                  

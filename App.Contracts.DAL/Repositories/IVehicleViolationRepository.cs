@@ -12,5 +12,7 @@ public interface IVehicleViolationRepositoryCustom<TEntity>
 {
     Task<IEnumerable<TEntity>> GetAllSortedAsync(Guid userId);
     Task<IEnumerable<TEntity>> GetAllUserVehicleViolationsSortedAsync(Guid userId);
+    Task<IEnumerable<TEntity>> GetAllVehicleViolationsByVehicleId(Guid vehicleId);
     Task<IEnumerable<TEntity>> GetAllVehicleViolationsByLicensePlateSortedAsync(string licensePlate);
+    
 }
