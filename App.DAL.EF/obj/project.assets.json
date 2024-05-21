@@ -1169,6 +1169,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "App.Domain": "1.0.0",
           "Base.Contracts.Domain": "1.0.0"
         },
         "compile": {
