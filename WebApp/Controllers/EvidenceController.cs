@@ -6,17 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using App.DAL.EF;
-using App.Domain.Evidences;
+using App.DTO.v1_0;
+using TrafficReport.ViewModels;
+using Evidence = App.Domain.Evidences.Evidence;
 
-namespace TrafficReports.Controllers
+namespace WebApp.Controllers
 {
     public class EvidenceController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IWebHostEnvironment _env;
 
-        public EvidenceController(AppDbContext context)
+        public EvidenceController(AppDbContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: Evidence
@@ -50,30 +54,72 @@ namespace TrafficReports.Controllers
         public IActionResult Create()
         {
             ViewData["EvidenceTypeId"] = new SelectList(_context.EvidenceTypes, "Id", "Id");
-            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "Id");
+            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "LocationName");
             return View();
         }
 
-        // POST: Evidence/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // // POST: Evidence/Create
+        // // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public async Task<IActionResult> Create([Bind("EvidenceTypeId,VehicleViolationId,Files,Description,Id")] Evidence evidence)
+        // {
+        //     if (ModelState.IsValid)
+        //     {
+        //         evidence.Id = Guid.NewGuid();
+        //         _context.Add(evidence);
+        //         await _context.SaveChangesAsync();
+        //         return RedirectToAction(nameof(Index));
+        //     }
+        //     ViewData["EvidenceTypeId"] = new SelectList(_context.EvidenceTypes, "Id", "Id", evidence.EvidenceTypeId);
+        //     ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "LocationName", evidence.VehicleViolationId);
+        //     return View(evidence);
+        // }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EvidenceTypeId,VehicleViolationId,Description,Id")] Evidence evidence)
+        public async Task<IActionResult> Create([Bind("EvidenceTypeId,VehicleViolationId,File,Description")] Evidence evidence, IFormFile file)
         {
+            
+            var fileExtensions = new string[]
+            {
+                ".png", ".jpg", ".bmp", ".gif", ".mov", ".mp4"
+            };
+            
             if (ModelState.IsValid)
             {
                 evidence.Id = Guid.NewGuid();
                 _context.Add(evidence);
                 await _context.SaveChangesAsync();
+                if (file.Length > 0 && fileExtensions.Contains(Path.GetExtension(file.FileName)))
+                {
+                    var uploadDir = Path.Combine(_env.WebRootPath, "uploads");
+                    
+                    if (!Directory.Exists(uploadDir))
+                    {
+                        Directory.CreateDirectory(uploadDir);
+                    }
+                    
+                    var filename = evidence.Id + "_" + Path.GetFileName(file.FileName);
+                    var filePath = Path.Combine(uploadDir, filename);
+
+                    await using (var stream = System.IO.File.Create(filePath))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                    
+                    evidence.File = "~/uploads/" + filename;
+                    _context.Update(evidence);
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EvidenceTypeId"] = new SelectList(_context.EvidenceTypes, "Id", "Id", evidence.EvidenceTypeId);
-            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "Id", evidence.VehicleViolationId);
-            return View(evidence);
+            ViewBag.EvidenceTypeId = new SelectList(_context.EvidenceTypes, "Id", "Name", evidence.EvidenceTypeId);
+            ViewBag.VehicleViolationId = new SelectList(_context.VehicleViolations, "Id", "Name", evidence.VehicleViolationId);
+            return RedirectToAction(nameof(Index));
         }
-
-        // GET: Evidence/Edit/5
+        
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -87,7 +133,7 @@ namespace TrafficReports.Controllers
                 return NotFound();
             }
             ViewData["EvidenceTypeId"] = new SelectList(_context.EvidenceTypes, "Id", "Id", evidence.EvidenceTypeId);
-            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "Id", evidence.VehicleViolationId);
+            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "VehicleViolationId", evidence.VehicleViolationId);
             return View(evidence);
         }
 
@@ -96,7 +142,7 @@ namespace TrafficReports.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("EvidenceTypeId,VehicleViolationId,Description,Id")] Evidence evidence)
+        public async Task<IActionResult> Edit(Guid id, [Bind("EvidenceTypeId,VehicleViolationId,File,Description,Id")] Evidence evidence)
         {
             if (id != evidence.Id)
             {
@@ -124,7 +170,7 @@ namespace TrafficReports.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EvidenceTypeId"] = new SelectList(_context.EvidenceTypes, "Id", "Id", evidence.EvidenceTypeId);
-            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "Id", evidence.VehicleViolationId);
+            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "VehicleViolationId", evidence.VehicleViolationId);
             return View(evidence);
         }
 

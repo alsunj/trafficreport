@@ -13,7 +13,7 @@ ottoun
 
 ## Database
 ~~~bash
-dotnet ef migrations   --project App.DAL.EF --startup-project WebApp add trafficreport3
+dotnet ef migrations   --project App.DAL.EF --startup-project WebApp add trafficreport33
 dotnet ef database  --project App.DAL.EF --startup-project WebApp update
 dotnet ef database  --project App.DAL.EF --startup-project WebApp drop --context AppDbContext
 

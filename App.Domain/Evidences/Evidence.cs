@@ -12,7 +12,7 @@ public class Evidence : BaseEntityId
     public Guid VehicleViolationId{ get; set; }
     public VehicleViolation? VehicleViolation{ get; set; }
     
-    //public Blob Media { get; set; }
+    public string? File { get; set; }
     
     [MaxLength(256)] 
     public string? Description { get; set; }

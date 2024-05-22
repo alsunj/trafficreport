@@ -2,6 +2,7 @@
 
 public class Violation
 {
+
     public Guid Id { get; set; }
     
     public int ViolationType { get; set; }

@@ -1,10 +1,11 @@
+@using System.Security.Claims
 @model IEnumerable<App.Domain.Evidences.Evidence>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Evidences</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,10 +14,17 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            
+            <th>
                 @Html.DisplayNameFor(model => model.EvidenceType)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.VehicleViolation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.File)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
@@ -28,18 +36,28 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            
+            <td>
                 @Html.DisplayFor(modelItem => item.EvidenceType!.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.VehicleViolation!.Id)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.EvidenceType!.EvidenceTypeName)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                @if (!string.IsNullOrEmpty(User.FindFirstValue(ClaimTypes.NameIdentifier)) && Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)) == item.VehicleViolation!.AppUserId)
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">| Edit | </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                }
             </td>
         </tr>
 }

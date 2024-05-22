@@ -10,21 +10,33 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
             <div class="form-group">
                 <label asp-for="EvidenceTypeId" class="control-label"></label>
-                <select asp-for="EvidenceTypeId" class ="form-control" asp-items="ViewBag.EvidenceTypeId"></select>
+                <select asp-for="EvidenceTypeId" class="form-control" asp-items="ViewBag.EvidenceTypeId"></select>
+                <span asp-validation-for="EvidenceTypeId" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <label asp-for="VehicleViolationId" class="control-label"></label>
-                <select asp-for="VehicleViolationId" class ="form-control" asp-items="ViewBag.VehicleViolationId"></select>
+                <select asp-for="VehicleViolationId" class="form-control" asp-items="ViewBag.VehicleViolationId"></select>
+                <span asp-validation-for="VehicleViolationId" class="text-danger"></span>
             </div>
+            
+            <div class="form-group">
+                <label asp-for="File" class="control-label"></label>
+                <input asp-for="File" type="file" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

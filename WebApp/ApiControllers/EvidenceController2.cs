@@ -15,14 +15,14 @@ namespace TrafficReport.ApiControllers
     [Route("api/v{version:apiVersion}/evidences/[controller]/[action]")]
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
-    public class EvidenceController : ControllerBase
+    public class EvidenceController2 : ControllerBase
     {
         private readonly IAppBLL _bll;
         private readonly PublicDTOBllMapper<App.DTO.v1_0.Evidence, App.BLL.DTO.Evidence> _mapper; 
         private readonly UserManager<AppUser> _userManager;
 
 
-        public EvidenceController(IAppBLL bll, IMapper autoMapper, UserManager<AppUser> userManager)
+        public EvidenceController2(IAppBLL bll, IMapper autoMapper, UserManager<AppUser> userManager)
         {
             _bll = bll;
             _userManager = userManager;
