@@ -49,6 +49,7 @@ namespace TrafficReports.ApiControllers
             return Ok(bllViolations);
         }
 
+        
         /// <summary>
         /// Get violation by id
         /// </summary>
