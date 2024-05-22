@@ -6,6 +6,7 @@ public class Violation
     
     public int ViolationType { get; set; }
 
+    
     public string? ViolationName { get; set; }
     
     public decimal? Severity { get; set; }

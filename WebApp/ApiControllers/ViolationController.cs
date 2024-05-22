@@ -40,6 +40,7 @@ namespace TrafficReports.ApiControllers
         [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
+        
         public async Task<ActionResult<List<App.DTO.v1_0.Violation>>> GetViolations()
         {
             var bllViolationResult = await _bll.Violations.GetAllAsync();
