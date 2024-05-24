@@ -1,5 +1,6 @@
 ﻿using App.Contracts.DAL.Repositories;
 using AutoMapper;
+using Base.DAL.EF;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.DAL.EF.Repositories;

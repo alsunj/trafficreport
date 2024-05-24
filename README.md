@@ -11,6 +11,17 @@ ottoun@taltech.ee
 ottoun
 ~~~
 
+## Testing
+~~~bash
+dotnet test ./App.Test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/
+dotnet test ./Base.Test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/
+
+Run both:
+dotnet test . /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/
+
+~~~
+
+
 ## Database
 ~~~bash
 dotnet ef migrations   --project App.DAL.EF --startup-project WebApp add trafficreport33

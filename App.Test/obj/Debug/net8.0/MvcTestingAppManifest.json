@@ -1,0 +1,19 @@
+{
+  "App.BLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\App.BLL",
+  "App.BLL.DTO, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\App.BLL.DTO",
+  "App.Contracts.BLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\App.Contracts.BLL",
+  "App.Contracts.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\App.Contracts.DAL",
+  "App.DAL.DTO, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\App.DAL.DTO",
+  "App.DAL.EF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\App.DAL.EF",
+  "App.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain",
+  "App.DTO, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\App.DTO",
+  "Base.BLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\Base.BLL",
+  "Base.Contracts.BLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Contracts.BLL",
+  "Base.Contracts.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Contracts.DAL",
+  "Base.Contracts.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Contracts.Domain",
+  "Base.DAL.EF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\Base.DAL.EF",
+  "Base.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Domain",
+  "Base.Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Test",
+  "Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\Helpers",
+  "WebApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\admin\\C-sharp development\\treport\\WebApp"
+}

@@ -1,6 +1,7 @@
 ﻿using App.Contracts.DAL.Repositories;
 using App.Domain.Identity;
 using AutoMapper;
+using Base.DAL.EF;
 using Microsoft.EntityFrameworkCore;
 using DALDTO = App.DAL.DTO;
 using APPDomain = App.Domain;

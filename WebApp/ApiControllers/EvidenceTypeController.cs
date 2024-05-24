@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using App.Domain.Evidences;
 using Asp.Versioning;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using TrafficReport.Helpers;
 
 namespace TrafficReport.ApiControllers
@@ -11,7 +13,7 @@ namespace TrafficReport.ApiControllers
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:apiVersion}/evidences/[controller]/[action]")]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class EvidenceTypeController : ControllerBase
     {

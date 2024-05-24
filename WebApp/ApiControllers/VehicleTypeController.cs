@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Asp.Versioning;
 using TrafficReport.Helpers;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace TrafficReport.ApiControllers
@@ -11,7 +13,7 @@ namespace TrafficReport.ApiControllers
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:apiVersion}/vehicles/[controller]/[action]")]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class VehicleTypeController : ControllerBase
     {
         private readonly IAppBLL _bll;

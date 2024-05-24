@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using App.DAL.EF;
 using App.Domain.Vehicles;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TrafficReports.Controllers
 {
+    [Authorize]
     public class VehicleController : Controller
     {
         private readonly AppDbContext _context;

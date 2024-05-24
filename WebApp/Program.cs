@@ -16,6 +16,7 @@ using Npgsql;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using TrafficReport;
 using TrafficReport.Helpers;
+using WebApp;
 using AutoMapperProfile = TrafficReport.Helpers.AutoMapperProfile;
 
 
@@ -107,7 +108,6 @@ builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwa
 builder.Services.AddSwaggerGen();
 
 
-
 // configure low level translations
 
 var app = builder.Build();
@@ -173,7 +173,10 @@ static void SetupAppData(WebApplication app)
         .CreateScope();
     using var context = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-    context.Database.Migrate();
+    if (!context.Database.ProviderName!.Contains("InMemory"))
+    {
+        context.Database.Migrate();
+    }
 
     using var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
     using var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<AppRole>>();
@@ -207,7 +210,12 @@ static void SetupAppData(WebApplication app)
     {
         Console.WriteLine(res.ToString());
     }
-
     
+}
+
+
+// needed for unit testing, to change generated top level statement class to public
+public partial class Program
+{
     
 }

@@ -4,8 +4,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace TrafficReport;
-
+namespace WebApp;
 
 public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
 {
@@ -35,8 +34,8 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
         options.IncludeXmlComments(xmlPath);
 
 
-
         // use FullName for schemaId - avoids conflicts between classes using the same name (which are in different namespaces)
+        options.CustomSchemaIds(i => i.FullName);
 
         options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
         {

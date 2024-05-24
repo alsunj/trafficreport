@@ -1,6 +1,7 @@
 ﻿using System.Security.Policy;
 using App.Contracts.DAL.Repositories;
 using AutoMapper;
+using Base.DAL.EF;
 using Microsoft.EntityFrameworkCore;
 namespace App.DAL.EF.Repositories;
 using DALDTO = App.DAL.DTO;

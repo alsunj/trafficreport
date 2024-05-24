@@ -13,18 +13,18 @@ using App.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace TrafficReport.Areas.Identity.Pages.Account
+namespace WebApp.Areas.Identity.Pages.Account
 {
-    public class LoginWith2faModel : PageModel
+    public class LoginWith2FaModel : PageModel
     {
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
-        private readonly ILogger<LoginWith2faModel> _logger;
+        private readonly ILogger<LoginWith2FaModel> _logger;
 
-        public LoginWith2faModel(
+        public LoginWith2FaModel(
             SignInManager<AppUser> signInManager,
             UserManager<AppUser> userManager,
-            ILogger<LoginWith2faModel> logger)
+            ILogger<LoginWith2FaModel> logger)
         {
             _signInManager = signInManager;
             _userManager = userManager;
