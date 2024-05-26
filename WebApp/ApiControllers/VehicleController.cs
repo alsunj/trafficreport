@@ -11,7 +11,7 @@ namespace TrafficReport.ApiControllers
 {
     [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/v{version:apiVersion}/vehicles/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class VehicleController : ControllerBase
@@ -127,7 +127,7 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="vehicleModifyDto"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("post")]
         [ProducesResponseType(typeof(App.DTO.v1_0.Vehicle),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
@@ -149,7 +149,7 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         [ProducesResponseType ((int)HttpStatusCode.NoContent)]
         [Produces("application/json")]
         [Consumes("application/json")]
@@ -171,7 +171,7 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="licensePlate"></param>
         /// <returns></returns>
-        [HttpDelete("{licensePlate}")]
+        [HttpDelete("delete/{licensePlate}")]
         [ProducesResponseType ((int)HttpStatusCode.NoContent)]
         [Produces("application/json")]
         [Consumes("application/json")]
