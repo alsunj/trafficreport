@@ -1,5 +1,9 @@
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using App.Contracts.BLL;
 using Microsoft.AspNetCore.Mvc;
 using App.Domain.Identity;
@@ -7,6 +11,7 @@ using Asp.Versioning;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using TrafficReport.Helpers;

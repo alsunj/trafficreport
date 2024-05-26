@@ -81,20 +81,20 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:TrafficReport.ApiControllers.EvidenceController2.GetUserEvidences">
+        <member name="M:TrafficReport.ApiControllers.EvidenceController.GetUserEvidences">
             <summary>
             Get all evidences for current user.
             </summary>
             <returns>List of evidences.</returns>
         </member>
-        <member name="M:TrafficReport.ApiControllers.EvidenceController2.GetAllEvidenceForVehicleViolation(System.Guid)">
+        <member name="M:TrafficReport.ApiControllers.EvidenceController.GetAllEvidenceForVehicleViolation(System.Guid)">
             <summary>
             Get evidences by Vehicle violation id.
             </summary>
             <param name="vehicleViolationId"></param>
             <returns>List of evidences.</returns>
         </member>
-        <member name="M:TrafficReport.ApiControllers.EvidenceController2.PutEvidence(System.Guid,App.DTO.v1_0.Evidence)">
+        <member name="M:TrafficReport.ApiControllers.EvidenceController.PutEvidence(System.Guid,App.DTO.v1_0.Evidence)">
             <summary>
             Edit evidence.
             </summary>
@@ -102,14 +102,14 @@
             <param name="evidence"></param>
             <returns></returns>
         </member>
-        <member name="M:TrafficReport.ApiControllers.EvidenceController2.PostEvidence(App.DTO.v1_0.Evidence)">
+        <member name="M:TrafficReport.ApiControllers.EvidenceController.PostEvidence(App.DTO.v1_0.Evidence)">
             <summary>
             Add new evidence.
             </summary>
             <param name="evidence"></param>
             <returns></returns>
         </member>
-        <member name="M:TrafficReport.ApiControllers.EvidenceController2.DeleteEvidence(System.Guid)">
+        <member name="M:TrafficReport.ApiControllers.EvidenceController.DeleteEvidence(System.Guid)">
             <summary>
             Delete evidence by id.
             </summary>
