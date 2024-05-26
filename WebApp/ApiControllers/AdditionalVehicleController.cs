@@ -12,7 +12,7 @@ namespace TrafficReport.ApiControllers
     [ApiVersion("1.0")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("api/v{version:apiVersion}/vehicles/[controller]/[action]")]
+    [Route("api/v{version:apiVersion}/[controller]/")]
     public class AdditionalVehicleController : ControllerBase
     {
         private readonly IAppBLL _bll;
@@ -70,7 +70,7 @@ namespace TrafficReport.ApiControllers
         /// <param name="id"></param>
         /// <param name="additionalVehicle"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("put/{id}")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
@@ -100,7 +100,7 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="additionalVehicle">AdditionalVehicle</param>
         /// <returns>App.DTO.v1_0.AdditionalVehicle</returns>
-        [HttpPost]
+        [HttpPost("post")]
         [ProducesResponseType(typeof(App.DTO.v1_0.AdditionalVehicle),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
@@ -122,7 +122,7 @@ namespace TrafficReport.ApiControllers
         /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         [Produces("application/json")]
         [Consumes("application/json")] 
         public async Task<IActionResult> DeleteAdditionalVehicle(Guid id)

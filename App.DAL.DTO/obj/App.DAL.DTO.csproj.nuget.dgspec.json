@@ -1,36 +1,43 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\admin\\C-sharp development\\treport\\App.DAL.DTO\\App.DAL.DTO.csproj": {}
+    "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.DAL.DTO\\App.DAL.DTO.csproj": {}
   },
   "projects": {
-    "C:\\Users\\admin\\C-sharp development\\treport\\App.DAL.DTO\\App.DAL.DTO.csproj": {
+    "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.DAL.DTO\\App.DAL.DTO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\admin\\C-sharp development\\treport\\App.DAL.DTO\\App.DAL.DTO.csproj",
+        "projectUniqueName": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.DAL.DTO\\App.DAL.DTO.csproj",
         "projectName": "App.DAL.DTO",
-        "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.DAL.DTO\\App.DAL.DTO.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.DAL.DTO\\obj\\",
+        "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.DAL.DTO\\App.DAL.DTO.csproj",
+        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.DAL.DTO\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj": {
-                "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj"
+              "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj"
               },
-              "C:\\Users\\admin\\C-sharp development\\treport\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
-                "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj"
+              "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj"
               }
             }
           }
@@ -60,34 +67,41 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj": {
+    "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj",
         "projectName": "App.Domain",
-        "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\App.Domain.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\admin\\C-sharp development\\treport\\App.Domain\\obj\\",
+        "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Domain\\App.Domain.csproj",
+        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\App.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\admin\\C-sharp development\\treport\\Base.Domain\\Base.Domain.csproj": {
-                "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Domain\\Base.Domain.csproj"
+              "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj"
               }
             }
           }
@@ -123,26 +137,33 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\admin\\C-sharp development\\treport\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
+    "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj",
         "projectName": "Base.Contracts.Domain",
-        "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Contracts.Domain\\obj\\",
+        "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj",
+        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -186,34 +207,41 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\admin\\C-sharp development\\treport\\Base.Domain\\Base.Domain.csproj": {
+    "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Domain\\Base.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj",
         "projectName": "Base.Domain",
-        "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Domain\\Base.Domain.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Domain\\obj\\",
+        "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Domain\\Base.Domain.csproj",
+        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\admin\\C-sharp development\\treport\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
-                "projectPath": "C:\\Users\\admin\\C-sharp development\\treport\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj"
+              "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Desktop\\icd0024-23-24-s\\Base.Contracts.Domain\\Base.Contracts.Domain.csproj"
               }
             }
           }
@@ -257,7 +285,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
