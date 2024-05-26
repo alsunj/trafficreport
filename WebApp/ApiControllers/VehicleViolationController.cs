@@ -17,7 +17,7 @@ namespace TrafficReport.ApiControllers
 
     [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/v{version:apiVersion}/violations/[controller]/[action]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class VehicleViolationController : ControllerBase
@@ -39,7 +39,8 @@ namespace TrafficReport.ApiControllers
         /// Get a list of all vehicle violations.
         /// </summary>
         /// <returns>List of vehicle violations</returns>
-        [HttpGet]
+      
+        [HttpGet("GetVehicleViolations")]
         [ProducesResponseType<List<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
         [Produces("application/json")]
         [Consumes("application/json")]
@@ -54,7 +55,7 @@ namespace TrafficReport.ApiControllers
         /// Get a list of current user's vehicle violations.
         /// </summary>
         /// <returns>List of vehicle violations</returns>
-        [HttpGet]
+        [HttpGet("GetVehicleViolationsForUser")]
         [ProducesResponseType<List<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
@@ -97,7 +98,7 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="licensePlate"></param>
         /// <returns>list of vehicle violations.</returns>
-        [HttpGet("{licensePlate}")]
+        [HttpGet("GetVehicleViolationsByLicensePlate/{licensePlate}")]
         [ProducesResponseType<List<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
@@ -122,7 +123,7 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="vehicleId"></param>
         /// <returns>list of vehicle violations.</returns>
-        [HttpGet("{vehicleId}")]
+        [HttpGet("GetAllVehicleViolationsByVehicleId/{vehicleId}")]
         [ProducesResponseType<List<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
@@ -148,7 +149,7 @@ namespace TrafficReport.ApiControllers
         /// <param name="id"></param>
         /// <param name="vehicleViolation"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("put/{id}")]
         //[ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
@@ -180,7 +181,7 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="vehicleViolation"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("post")]
         [ProducesResponseType<App.DTO.v1_0.VehicleViolation>((int) HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
@@ -215,7 +216,7 @@ namespace TrafficReport.ApiControllers
         /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         [Produces("application/json")]
         [Consumes("application/json")]
 

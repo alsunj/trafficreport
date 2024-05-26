@@ -31,7 +31,7 @@ namespace TrafficReport.ApiControllers
         /// Get all vehicles.
         /// </summary>
         /// <returns>List of vehicles.</returns>
-        [HttpGet]
+        [HttpGet("GetVehicles")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Vehicle>),(int)HttpStatusCode.OK)]
         [Produces("application/json")]
         [Consumes("application/json")]
@@ -70,7 +70,7 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="licensePlate"></param>
         /// <returns>Vehicle</returns>
-        [HttpGet("licensePlate")]
+        [HttpGet("GetVehicleByLicensePlate/{licensePlate}")]
         [ProducesResponseType(typeof(App.DTO.v1_0.Vehicle), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [Produces("application/json")]
@@ -93,7 +93,7 @@ namespace TrafficReport.ApiControllers
         /// <param name="id"></param>
         /// <param name="vehicleModifyDto"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("put/{id}")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
