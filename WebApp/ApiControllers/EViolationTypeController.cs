@@ -9,7 +9,7 @@ namespace TrafficReport.ApiControllers;
 [ApiVersion("1.0")]
 [ApiController]
 [Route("api/v{version:apiVersion}/violations/[controller]/[action]")]
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+//[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
 public class EViolationTypeController: ControllerBase
 {

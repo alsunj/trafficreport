@@ -16,6 +16,7 @@ public class VehicleViolation : BaseEntityId
 
     public Guid AppUserId { get; set; }
     public AppUser? AppUser { get; set; }
+    
     public string? Description { get; set; }
     
     public string? Coordinates { get; set; }
