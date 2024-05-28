@@ -15,7 +15,7 @@ namespace TrafficReports.ApiControllers
 
     [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/v{version:apiVersion}/violations/[controller]/[action]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
    // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class ViolationController : ControllerBase
@@ -37,7 +37,7 @@ namespace TrafficReports.ApiControllers
         /// Get a list of all violations.
         /// </summary>
         /// <returns>List of violations.</returns>
-        [HttpGet]
+        [HttpGet("GetViolations")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Violation>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
@@ -82,7 +82,7 @@ namespace TrafficReports.ApiControllers
         /// <param name="id"></param>
         /// <param name="violation"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("put/{id}")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
@@ -114,7 +114,7 @@ namespace TrafficReports.ApiControllers
         /// </summary>
         /// <param name="violation"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("post")]
         [ProducesResponseType(typeof(App.DTO.v1_0.Violation), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
@@ -140,7 +140,7 @@ namespace TrafficReports.ApiControllers
         /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<IActionResult> DeleteViolation(Guid id)

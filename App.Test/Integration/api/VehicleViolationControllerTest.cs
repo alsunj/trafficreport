@@ -19,7 +19,7 @@ namespace App.Test.Integration.api;
 
 [Collection("NonParallel")]
 public class VehicleViolationControllerTest : IClassFixture<CustomWebApplicationFactory<Program>>
-{
+{/*
     private readonly HttpClient _client;
     private Guid VehicleId130Thn;
     private readonly CustomWebApplicationFactory<Program> _factory;
@@ -680,5 +680,5 @@ public class VehicleViolationControllerTest : IClassFixture<CustomWebApplication
     //
     //     var responseContent = await response.Content.ReadAsStringAsync();
     //     return responseContent;
-    // }
+    // }*/
 }

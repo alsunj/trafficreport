@@ -8,15 +8,15 @@ using Microsoft.AspNetCore.Mvc;
 namespace TrafficReport.ApiControllers;
 [ApiVersion("1.0")]
 [ApiController]
-[Route("api/v{version:apiVersion}/violations/[controller]/[action]")]
+[Route("api/v{version:apiVersion}/[controller]")]
 //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
-public class EViolationTypeController: ControllerBase
+public class EnumsController: ControllerBase
 {
     private readonly IAppUnitOfWork _uow;
 
 
-    public EViolationTypeController(IAppUnitOfWork uow)
+    public EnumsController(IAppUnitOfWork uow)
     {
         _uow = uow;
     }
@@ -29,5 +29,16 @@ public class EViolationTypeController: ControllerBase
     {
         var violationTypes = await _uow.EViolationTypeRepository.GetAllAsync();
         return Ok(violationTypes);
+    }
+    
+    [HttpGet]
+    [ProducesResponseType(typeof(List<App.DTO.v1_0.EVehicleSize>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
+    [Produces("application/json")]
+    [Consumes("application/json")]
+    public async Task<ActionResult<List<App.DTO.v1_0.EVehicleSize>>> GetVehicleSizeEnums()
+    {
+        var vehicleSizes = await _uow.EVehicleSizeRepository.GetAllAsync();
+        return Ok(vehicleSizes);
     }
 }

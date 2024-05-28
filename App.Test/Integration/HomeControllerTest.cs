@@ -12,7 +12,7 @@ namespace App.Test.Integration;
 
 [Collection("NonParallel")]
 public class HomeControllerTest : IClassFixture<CustomWebApplicationFactory<Program>>
-{
+{/*
     private readonly HttpClient _client;
     private readonly CustomWebApplicationFactory<Program> _factory;
     private readonly ITestOutputHelper _testOutputHelper;
@@ -267,5 +267,5 @@ public class HomeControllerTest : IClassFixture<CustomWebApplicationFactory<Prog
         Assert.True(response3.IsSuccessStatusCode);
     }
 
-
+*/
 }

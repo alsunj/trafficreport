@@ -22,8 +22,8 @@ namespace TrafficReport.ApiControllers
 {
     [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/v{version:apiVersion}/evidences/[controller]/[action]")]
-   // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class CommentController : ControllerBase
     {
@@ -42,7 +42,7 @@ namespace TrafficReport.ApiControllers
         /// Get all comments for current user.
         /// </summary>
         /// <returns>List of comments.</returns>
-        [HttpGet]
+        [HttpGet("GetComments")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Comment>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
@@ -86,7 +86,7 @@ namespace TrafficReport.ApiControllers
         /// <param name="id"></param>
         /// <param name="comment"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("put/{id}")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
@@ -123,7 +123,7 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="comment"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpDelete("delete/{id}")]
         [ProducesResponseType(typeof(App.DTO.v1_0.Comment),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
