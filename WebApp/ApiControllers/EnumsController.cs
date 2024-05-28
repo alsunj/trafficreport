@@ -20,7 +20,7 @@ public class EnumsController: ControllerBase
     {
         _uow = uow;
     }
-    [HttpGet]
+    [HttpGet("GetViolationTypeEnums")]
     [ProducesResponseType(typeof(List<App.DTO.v1_0.EViolationType>), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
     [Produces("application/json")]
@@ -31,7 +31,7 @@ public class EnumsController: ControllerBase
         return Ok(violationTypes);
     }
     
-    [HttpGet]
+    [HttpGet("GetVehicleSizeEnums")]
     [ProducesResponseType(typeof(List<App.DTO.v1_0.EVehicleSize>), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
     [Produces("application/json")]
