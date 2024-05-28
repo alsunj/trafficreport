@@ -190,7 +190,7 @@ namespace TrafficReport.ApiControllers
         {
             
             vehicleViolation.Id = Guid.NewGuid();
-            vehicleViolation.AppUserId = Guid.Parse(_userManager.GetUserId(User)!);
+          //vehicleViolation.AppUserId = Guid.Parse(_userManager.GetUserId(User)!);
             
             var mappedVehicleViolation = _mapper.Map(vehicleViolation);
             _bll.VehicleViolations.Add(mappedVehicleViolation);

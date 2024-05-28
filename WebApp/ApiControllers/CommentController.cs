@@ -62,7 +62,7 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="vehicleViolationId"></param>
         /// <returns>List of comments.</returns>
-        [HttpGet]
+        [HttpGet("GetAllCommentsByVehicleViolationId/{vehicleViolationId}")]
         [ProducesResponseType(typeof(App.DTO.v1_0.Comment),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]

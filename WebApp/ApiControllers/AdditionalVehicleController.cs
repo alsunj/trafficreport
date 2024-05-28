@@ -45,14 +45,14 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="id">Additional vehicle id.</param>
         /// <returns>App.DTO.v1_0.AdditionalVehicle</returns>
-        [HttpGet("{id}")]
+        [HttpGet("{vehicleViolationId}")]
         [ProducesResponseType(typeof(App.DTO.v1_0.AdditionalVehicle),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<App.DTO.v1_0.AdditionalVehicle>> GetAdditionalVehicle(Guid id)
+        public async Task<ActionResult<App.DTO.v1_0.AdditionalVehicle>> GetAdditionalVehicle(Guid vehicleViolationId)
         {
-            var additionalVehicle = await _bll.AdditionalVehicles.FirstOrDefaultAsync(id);
+            var additionalVehicle = await _bll.AdditionalVehicles.FirstOrDefaultAsync(vehicleViolationId);
 
             if (additionalVehicle == null)
             {

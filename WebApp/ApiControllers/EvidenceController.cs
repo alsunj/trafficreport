@@ -55,7 +55,7 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="vehicleViolationId"></param>
         /// <returns>List of evidences.</returns>
-        [HttpGet("{id}")]
+        [HttpGet("GetAllEvidencesByVehicleViolationId/{vehicleViolationId}")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Evidence>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
