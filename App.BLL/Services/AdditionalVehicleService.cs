@@ -21,4 +21,10 @@ public class AdditionalVehicleService :
         return (await Repository.GetAllSortedAsync(userId)).Select(e => Mapper.Map(e));
         
     }
+    
+    public async Task<IEnumerable<AdditionalVehicle>> GetAllByVehicleViolationSortedAsync(Guid vehicleViolationId)
+    {
+        return (await Repository.GetAllByVehicleViolationSortedAsync(vehicleViolationId)).Select(e => Mapper.Map(e));
+        
+    }
 }

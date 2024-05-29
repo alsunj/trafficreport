@@ -19,8 +19,9 @@ public class Comment : BaseEntityId
     public Guid VehicleViolationId { get; set; }
     public VehicleViolation? VehicleViolation { get; set; }
     
+    public DateTime CreatedAt { get; set; } 
+
     public ICollection<Comment>? ChildComments { get; set; } = new List<Comment>();
 
-    private DateTime CreatedAt { get; set; } = DateTime.Now;
 
 }

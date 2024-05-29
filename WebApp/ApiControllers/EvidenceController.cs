@@ -37,7 +37,7 @@ namespace TrafficReport.ApiControllers
         }
 
         /// <summary>
-        /// Get all evidences for current user.
+        /// Get all evidences.
         /// </summary>
         /// <returns>List of evidences.</returns>
         [HttpGet("GetEvidences")]
@@ -47,12 +47,21 @@ namespace TrafficReport.ApiControllers
         [Consumes("application/json")]
         public async Task<ActionResult<List<App.DTO.v1_0.Evidence>>> GetUserEvidences()
         { 
-            var bllEvidenceResult = (await _bll.Evidences.GetAllSortedAsync(
-                    Guid.Parse(_userManager.GetUserId(User))
-                ))
-                .Select(e => _mapper.Map(e))
-                .ToList();
-            return Ok(bllEvidenceResult);
+            var evidences = await _bll.Evidences.GetAllAsync();
+
+            if (evidences.IsNullOrEmpty())
+            {
+                return NotFound();
+            }    
+            var baseUrl = _appSettings.BaseUrl;
+            var fullUrlEvidences = evidences.Select(evidence =>
+            {
+                evidence.File = new Uri(new Uri(baseUrl), evidence.File).ToString();
+                return evidence;
+            }).ToList();
+            
+
+            return Ok(fullUrlEvidences);
         }
 
         /// <summary>
@@ -75,11 +84,11 @@ namespace TrafficReport.ApiControllers
             }           
             
             var baseUrl = _appSettings.BaseUrl;
-
-
+            
             var fullUrlEvidences = evidences.Select(evidence =>
             {
                 evidence.File = new Uri(new Uri(baseUrl), evidence.File).ToString();
+                Console.WriteLine( evidence.File);
                 return evidence;
             }).ToList();
 
@@ -151,22 +160,22 @@ namespace TrafficReport.ApiControllers
                     {
                         Directory.CreateDirectory(_uploadPath);
                     }
-
+        
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     var filePath = Path.Combine(_uploadPath, fileName);
-
+        
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await file.CopyToAsync(stream);
                     }
-
+        
                     evidence.Id = Guid.NewGuid();
-                    evidence.File = Path.Combine("/uploads", fileName); // Store the relative path
-
+                    evidence.File = Path.Combine("/uploads", fileName).Replace("~", ""); // Remove tilde (~)
+        
                     var mappedEvidence = _mapper.Map(evidence);
                     _bll.Evidences.Add(mappedEvidence);
                     await _bll.SaveChangesAsync();
-
+        
                     return CreatedAtAction("GetAllEvidenceForVehicleViolation", new { id = mappedEvidence.VehicleViolationId }, evidence);
                 }
                 else
@@ -182,6 +191,7 @@ namespace TrafficReport.ApiControllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
 
         /// <summary>
         /// Delete evidence by id.
