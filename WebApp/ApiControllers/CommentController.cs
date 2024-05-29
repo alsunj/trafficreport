@@ -56,6 +56,29 @@ namespace TrafficReport.ApiControllers
                 .ToList();
             return Ok(bllCommentResult);
         }
+        
+        [HttpGet("GetAllCommentsWithParentCommentId/{ParentCommentId}")]
+        [ProducesResponseType(typeof(List<App.DTO.v1_0.Comment>),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<List<App.DTO.v1_0.Comment>>> GetAllCommentsWithParentCommentId(Guid ParentCommentId)
+        {
+            var bllCommentResult = await _bll.Comments.GetAllViolationCommentsWithParentCommentAsync(ParentCommentId);
+            return Ok(bllCommentResult);
+        }
+        [HttpGet("GetAllVehicleViolationCommentsWithNoParentCommentId/{vehicleViolationId}")]
+        [ProducesResponseType(typeof(List<App.DTO.v1_0.Comment>),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<List<App.DTO.v1_0.Comment>>> GetAllCommentsWithNoParentCommentId(Guid vehicleViolationId)
+        {
+            var bllCommentResult = (await _bll.Comments.GetAllViolationCommentsWithNoParentCommentAsync(vehicleViolationId))
+                .Select(e => _mapper.Map(e))
+                .ToList();
+            return Ok(bllCommentResult);
+        }
 
         /// <summary>
         /// Get comments by Vehicle violation id.

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using TrafficReport.Helpers;
+using WebApp;
 
 namespace TrafficReport.ApiControllers
 {
@@ -19,13 +20,17 @@ namespace TrafficReport.ApiControllers
 
     public class EvidenceController : ControllerBase
     {
+        private readonly appSettings _appSettings;
         private readonly IAppBLL _bll;
         private readonly PublicDTOBllMapper<App.DTO.v1_0.Evidence, App.BLL.DTO.Evidence> _mapper; 
         private readonly UserManager<AppUser> _userManager;
+        private readonly string _uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
 
 
-        public EvidenceController(IAppBLL bll, IMapper autoMapper, UserManager<AppUser> userManager)
+
+        public EvidenceController(IAppBLL bll, IMapper autoMapper, UserManager<AppUser> userManager, appSettings appSettings)
         {
+            _appSettings = appSettings;
             _bll = bll;
             _userManager = userManager;
             _mapper = new PublicDTOBllMapper<App.DTO.v1_0.Evidence, App.BLL.DTO.Evidence>(autoMapper);
@@ -67,10 +72,20 @@ namespace TrafficReport.ApiControllers
             if (evidences.IsNullOrEmpty())
             {
                 return NotFound();
-            }
+            }           
             
-            return Ok(evidences);
+            var baseUrl = _appSettings.BaseUrl;
+
+
+            var fullUrlEvidences = evidences.Select(evidence =>
+            {
+                evidence.File = new Uri(new Uri(baseUrl), evidence.File).ToString();
+                return evidence;
+            }).ToList();
+
+            return Ok(fullUrlEvidences);
         }
+    
 
         /// <summary>
         /// Edit evidence.
@@ -116,21 +131,56 @@ namespace TrafficReport.ApiControllers
         /// <summary>
         /// Add new evidence.
         /// </summary>
+        ///         /// <param name="file"></param>
+
         /// <param name="evidence"></param>
         /// <returns></returns>
         [HttpPost("post")]
         [ProducesResponseType(typeof(App.DTO.v1_0.Evidence),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
-        [Consumes("application/json")]
-        public async Task<ActionResult<App.DTO.v1_0.Evidence>> PostEvidence(App.DTO.v1_0.Evidence evidence)
-        {
-            evidence.Id = Guid.NewGuid();
-            var mappedEvidenceType = _mapper.Map(evidence);
-            _bll.Evidences.Add(mappedEvidenceType);
-            await _bll.SaveChangesAsync();
+        [Consumes("multipart/form-data")]
 
-            return CreatedAtAction("GetAllEvidenceForVehicleViolation", new { id = mappedEvidenceType.VehicleViolationId }, evidence);
+        public async Task<ActionResult<App.DTO.v1_0.Evidence>> PostEvidence([FromForm] IFormFile file, [FromForm] App.DTO.v1_0.Evidence evidence)
+        {
+            try
+            {
+                if (file.Length > 0 && file.Length <= 25 * 1024 * 1024) // 25MB limit
+                {
+                    if (!Directory.Exists(_uploadPath))
+                    {
+                        Directory.CreateDirectory(_uploadPath);
+                    }
+
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    var filePath = Path.Combine(_uploadPath, fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    evidence.Id = Guid.NewGuid();
+                    evidence.File = Path.Combine("/uploads", fileName); // Store the relative path
+
+                    var mappedEvidence = _mapper.Map(evidence);
+                    _bll.Evidences.Add(mappedEvidence);
+                    await _bll.SaveChangesAsync();
+
+                    return CreatedAtAction("GetAllEvidenceForVehicleViolation", new { id = mappedEvidence.VehicleViolationId }, evidence);
+                }
+                else
+                {
+                    return BadRequest("File is too large or empty.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the error
+                Console.WriteLine($"Error in PostEvidence method: {ex.Message}");
+                // Return an error response
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         /// <summary>
