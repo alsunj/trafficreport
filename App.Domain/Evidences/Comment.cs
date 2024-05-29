@@ -21,6 +21,6 @@ public class Comment : BaseEntityId
     
     public ICollection<Comment>? ChildComments { get; set; } = new List<Comment>();
 
-    private DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 
 }
