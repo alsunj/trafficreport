@@ -16,25 +16,18 @@ public class CommentRepository : BaseEntityRepository<APPDomain.Evidences.Commen
     {
         var query = CreateQuery(userId);
         var res = await query.ToListAsync();
-        //query = query.OrderBy(c => c.CreatedAt);
-        query = query.OrderBy(c => c.Id);
+        query = query.OrderBy(c => c.CreatedAt);
 
         return (await query.ToListAsync()).Select(e => Mapper.Map(e));
     }
     public async Task<IEnumerable<DALDTO.Comment>> GetAllViolationCommentsSortedAsync(Guid vehicleViolationId)
     {
-        // return await CommentRepository
-        //     .Where(c => c.VehicleViolationId == vehicleViolationId)
-        //     .OrderBy(c => c.CreatedAt)
-        //     .ToListAsync();
-
         var query = CreateQuery(vehicleViolationId);
         var res = await query.ToListAsync();
         query = query
             .Where(c => c.VehicleViolationId == vehicleViolationId)
-
-            //.OrderBy(comment => comment.CreatedAt)
-            .OrderBy(comment => comment.Id);
+            .OrderBy(comment => comment.CreatedAt);
+         
         return (await query.ToListAsync()).Select(comment => Mapper.Map(comment));
     }
 
@@ -45,8 +38,7 @@ public class CommentRepository : BaseEntityRepository<APPDomain.Evidences.Commen
         query = query
             .Where(c => c.VehicleViolationId == vehicleViolationId)
             .Where(c => c.ParentCommentId == null) // Filter comments with empty or null ParentCommentId
-            //.OrderBy(comment => comment.CreatedAt)
-            .OrderBy(comment => comment.Id);
+            .OrderBy(comment => comment.CreatedAt);
         return (await query.ToListAsync()).Select(comment => Mapper.Map(comment));
         
     }
@@ -56,8 +48,7 @@ public class CommentRepository : BaseEntityRepository<APPDomain.Evidences.Commen
         var res = await query.ToListAsync();
         query = query
             .Where(c => c.ParentCommentId == parentCommentId)
-            //.OrderBy(comment => comment.CreatedAt)
-            .OrderBy(comment => comment.Id);
+            .OrderBy(comment => comment.CreatedAt);
         return (await query.ToListAsync()).Select(comment => Mapper.Map(comment));
         
     }
