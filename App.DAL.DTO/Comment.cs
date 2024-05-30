@@ -10,7 +10,7 @@ public class Comment : IDomainEntityId
     
     public Guid? ParentCommentId { get; set; }
     
-    public Guid AccountId { get; set; }
+    public Guid AppUserId { get; set; }
     
     public Guid VehicleViolationId { get; set; }
     

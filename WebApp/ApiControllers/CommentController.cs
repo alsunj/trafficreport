@@ -56,6 +56,25 @@ namespace TrafficReport.ApiControllers
                 .ToList();
             return Ok(bllCommentResult);
         }
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(List<App.DTO.v1_0.Comment>),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<App.DTO.v1_0.Comment>> GetComment(Guid id)
+        {
+            var comment = await _bll.Comments.FirstOrDefaultAsync(id);
+
+            if (comment == null)
+            {
+                return NotFound();
+            }
+
+            var res = _mapper.Map(comment);
+            
+            return Ok(res);
+        }
+
         
         [HttpGet("GetAllCommentsWithParentCommentId/{ParentCommentId}")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Comment>),(int)HttpStatusCode.OK)]
@@ -129,7 +148,7 @@ namespace TrafficReport.ApiControllers
 
             }
 
-            if (comment.AccountId != Guid.Parse(_userManager.GetUserId(User)))
+            if (comment.AppUserId != Guid.Parse(_userManager.GetUserId(User)))
             {
                 return Unauthorized();
             }
@@ -146,7 +165,7 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="comment"></param>
         /// <returns></returns>
-        [HttpDelete("delete/{id}")]
+        [HttpPost("post")]
         [ProducesResponseType(typeof(App.DTO.v1_0.Comment),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
@@ -158,7 +177,7 @@ namespace TrafficReport.ApiControllers
             _bll.Comments.Add(mappedComment);
             await _bll.SaveChangesAsync();
 
-            return CreatedAtAction("GetAllVehicleViolationComments", new { id = mappedComment.VehicleViolationId }, comment);
+            return CreatedAtAction("GetComment", new { id = mappedComment.Id }, comment);
         }
 
         /// <summary>
@@ -169,7 +188,7 @@ namespace TrafficReport.ApiControllers
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         [Produces("application/json")]
         [Consumes("application/json")] 
         public async Task<IActionResult> DeleteComment(Guid id)
@@ -179,7 +198,7 @@ namespace TrafficReport.ApiControllers
             {
                 return NotFound();
             }
-            if (comment.AccountId != Guid.Parse(_userManager.GetUserId(User)))
+            if (comment.AppUserId != Guid.Parse(_userManager.GetUserId(User)))
             {
                 return Unauthorized();
             }

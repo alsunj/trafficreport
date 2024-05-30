@@ -197,9 +197,9 @@ namespace TrafficReport.ApiControllers
             _bll.VehicleViolations.Add(mappedVehicleViolation);
             
             
-            var vehicle = await _bll.Vehicles.FirstOrDefaultAsync(vehicleViolation.VehicleId);
-            vehicle!.Rating = (decimal) _bll.Vehicles.CalculateVehicleRatingByLicensePlate(vehicle!.RegNr!);
-            _bll.Vehicles.Update(vehicle);
+         //   var vehicle = await _bll.Vehicles.FirstOrDefaultAsync(vehicleViolation.VehicleId);
+          //  vehicle!.Rating = (decimal) _bll.Vehicles.CalculateVehicleRatingByLicensePlate(vehicle!.RegNr!);
+           // _bll.Vehicles.Update(vehicle);
             
             await _bll.SaveChangesAsync();
 
