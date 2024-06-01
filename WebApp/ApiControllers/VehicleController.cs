@@ -134,8 +134,10 @@ namespace TrafficReport.ApiControllers
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.Vehicle>> PostVehicle(App.DTO.v1_0.VehicleModifyDTO vehicleModifyDto)
         {
-            
-            // add constraint for regnr
+            if (await _bll.Vehicles.GetByLicensePlateAsync(vehicleModifyDto.RegNr) == null )
+            {
+                return Conflict("Vehicle with that license plate is already in the system.");
+            }
             vehicleModifyDto.Id = Guid.NewGuid();
             var mappedVehicle = _mapperMod.Map(vehicleModifyDto);
             mappedVehicle!.Rating = (decimal) 5.0;
