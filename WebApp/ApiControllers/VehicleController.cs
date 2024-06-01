@@ -130,11 +130,12 @@ namespace TrafficReport.ApiControllers
         [HttpPost("post")]
         [ProducesResponseType(typeof(App.DTO.v1_0.Vehicle),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.Conflict)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.Vehicle>> PostVehicle(App.DTO.v1_0.VehicleModifyDTO vehicleModifyDto)
         {
-            if (await _bll.Vehicles.GetByLicensePlateAsync(vehicleModifyDto.RegNr) == null )
+            if (_bll.Vehicles.GetByLicensePlateAsync(vehicleModifyDto.RegNr).Result != null )
             {
                 return Conflict("Vehicle with that license plate is already in the system.");
             }
