@@ -135,6 +135,7 @@ namespace TrafficReport.ApiControllers
         public async Task<ActionResult<App.DTO.v1_0.Vehicle>> PostVehicle(App.DTO.v1_0.VehicleModifyDTO vehicleModifyDto)
         {
             
+            // add constraint for regnr
             vehicleModifyDto.Id = Guid.NewGuid();
             var mappedVehicle = _mapperMod.Map(vehicleModifyDto);
             mappedVehicle!.Rating = (decimal) 5.0;

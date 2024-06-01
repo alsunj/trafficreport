@@ -18,7 +18,7 @@ namespace TrafficReport.ApiControllers
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
-   // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class VehicleViolationController : ControllerBase
     {
@@ -191,7 +191,7 @@ namespace TrafficReport.ApiControllers
             
             vehicleViolation.Id = Guid.NewGuid();
 
-          //vehicleViolation.AppUserId = Guid.Parse(_userManager.GetUserId(User)!);
+           vehicleViolation.AppUserId = Guid.Parse(_userManager.GetUserId(User)!);
             
             var mappedVehicleViolation = _mapper.Map(vehicleViolation);
             _bll.VehicleViolations.Add(mappedVehicleViolation);
