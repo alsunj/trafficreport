@@ -17,5 +17,5 @@ public class Evidence : BaseEntityId
     [MaxLength(256)] 
     public string? Description { get; set; }
     
-    public DateTime CreatedAt = DateTime.Now;
+    public DateTime CreatedAt  { get; set; }
 }

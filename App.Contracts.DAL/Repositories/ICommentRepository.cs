@@ -12,5 +12,10 @@ public interface ICommentRepositoryCustom<TEntity>
 {
     Task<IEnumerable<TEntity>> GetAllSortedAsync(Guid userId);
     Task<IEnumerable<TEntity>> GetAllViolationCommentsSortedAsync(Guid violationId);
-    
+
+    Task<IEnumerable<TEntity>> GetAllViolationCommentsWithParentCommentAsync(Guid parentCommentId);
+
+    Task<IEnumerable<TEntity>> GetAllViolationCommentsWithNoParentCommentAsync(Guid vehicleViolationId);
+
+
 }

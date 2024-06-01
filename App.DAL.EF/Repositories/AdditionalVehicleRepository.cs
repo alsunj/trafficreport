@@ -20,5 +20,14 @@ public class AdditionalVehicleRepository : BaseEntityRepository<APPDomain.Vehicl
                                                                                                                                                                                    
         return (await query.ToListAsync()).Select(e => Mapper.Map(e));
         
-    }                                                                                                                                                                                       
+    }
+    public async Task<IEnumerable<DALDTO.AdditionalVehicle>> GetAllByVehicleViolationSortedAsync(Guid vehicleViolationId)                                                                                              
+    {                                                                                                                                                                              
+        var query = CreateQuery(vehicleViolationId);                                                                                                                                           
+        var res = await query.ToListAsync();                                                                                                                                       
+        query = query.Where(c => c.VehicleViolationId == vehicleViolationId);                                                                                                                               
+                                                                                                                                                                                   
+        return (await query.ToListAsync()).Select(e => Mapper.Map(e));
+        
+    }    
 }                                                                                                                                                                                  

@@ -16,12 +16,13 @@ public class VehicleViolation : BaseEntityId
 
     public Guid AppUserId { get; set; }
     public AppUser? AppUser { get; set; }
+    
     public string? Description { get; set; }
     
     public string? Coordinates { get; set; }
 
     public string LocationName { get; set; } = default!;
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; }
 
     public ICollection<AdditionalVehicle>? AdditionalVehicles { get; set; }
     public ICollection<Comment>? Comments { get; set; }

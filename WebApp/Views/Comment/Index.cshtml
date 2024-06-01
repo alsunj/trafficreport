@@ -1,4 +1,3 @@
-@using System.Security.Claims
 @model IEnumerable<App.Domain.Evidences.Comment>
 
 @{
@@ -25,6 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.VehicleViolation)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -35,23 +37,22 @@
                 @Html.DisplayFor(modelItem => item.CommentText)
             </td>
             <td>
-                @item.ParentComment?.CommentText
+                @Html.DisplayFor(modelItem => item.ParentComment!.CommentText)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AppUser!.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VehicleViolation!.Id)
+                @Html.DisplayFor(modelItem => item.VehicleViolation!.LocationName)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                @if (!string.IsNullOrEmpty(User.FindFirstValue(ClaimTypes.NameIdentifier)) && Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)) == item.AppUserId)
-                {
-                    <a asp-action="Edit" asp-route-id="@item.Id">| Edit | </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                }
+                @Html.DisplayFor(modelItem => item.CreatedAt)
             </td>
-            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
         </tr>
 }
     </tbody>

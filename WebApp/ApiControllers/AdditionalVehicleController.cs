@@ -11,7 +11,7 @@ namespace TrafficReport.ApiControllers
 {
     [ApiVersion("1.0")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+  //  [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/v{version:apiVersion}/[controller]/")]
     public class AdditionalVehicleController : ControllerBase
     {
@@ -28,7 +28,7 @@ namespace TrafficReport.ApiControllers
         /// Get additional vehicles
         /// </summary>
         /// <returns>List of additional vehicles</returns>
-        [HttpGet]
+        [HttpGet("GetAdditionalVehicles")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.AdditionalVehicle>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
@@ -62,6 +62,29 @@ namespace TrafficReport.ApiControllers
             var res = _mapper.Map(additionalVehicle);
 
             return Ok(res);
+        }
+        /// <summary>
+        /// Get additional vehicle by id.
+        /// </summary>
+        /// <param name="id">Additional vehicle id.</param>
+        /// <returns>App.DTO.v1_0.AdditionalVehicle</returns>
+        [HttpGet("GetAdditionalVehicleByVehicleViolation/{vehicleViolationId}")]
+        [ProducesResponseType(typeof(App.DTO.v1_0.AdditionalVehicle),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [Produces("application/json")]
+        [Consumes("application/json")]
+        public async Task<ActionResult<App.DTO.v1_0.AdditionalVehicle>> GetAdditionalVehicleByVehicleViolation(Guid vehicleViolationId)
+        {
+            var additionalVehicles = await _bll.AdditionalVehicles.GetAllByVehicleViolationSortedAsync(vehicleViolationId);
+
+            if (additionalVehicles == null)
+            {
+                return NotFound();
+            }
+
+            additionalVehicles = additionalVehicles.ToList();
+
+            return Ok(additionalVehicles);
         }
 
         /// <summary>

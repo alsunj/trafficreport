@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using App.DAL.EF;
 using App.Domain.Evidences;
 
-namespace TrafficReports.Controllers
+namespace WebApp.Controllers
 {
     public class CommentController : Controller
     {
@@ -51,8 +51,8 @@ namespace TrafficReports.Controllers
         public IActionResult Create()
         {
             ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["ParentCommentId"] = new SelectList(_context.Comments, "Id", "Id");
-            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "Id");
+            ViewData["ParentCommentId"] = new SelectList(_context.Comments, "Id", "CommentText");
+            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "LocationName");
             return View();
         }
 
@@ -61,7 +61,7 @@ namespace TrafficReports.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CommentText,ParentCommentId,AppUserId,VehicleViolationId,Id")] Comment comment)
+        public async Task<IActionResult> Create([Bind("CommentText,ParentCommentId,AppUserId,VehicleViolationId,CreatedAt,Id")] Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -71,8 +71,8 @@ namespace TrafficReports.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", comment.AppUserId);
-            ViewData["ParentCommentId"] = new SelectList(_context.Comments, "Id", "Id", comment.ParentCommentId);
-            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "Id", comment.VehicleViolationId);
+            ViewData["ParentCommentId"] = new SelectList(_context.Comments, "Id", "CommentText", comment.ParentCommentId);
+            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "LocationName", comment.VehicleViolationId);
             return View(comment);
         }
 
@@ -90,8 +90,8 @@ namespace TrafficReports.Controllers
                 return NotFound();
             }
             ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", comment.AppUserId);
-            ViewData["ParentCommentId"] = new SelectList(_context.Comments, "Id", "Id", comment.ParentCommentId);
-            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "Id", comment.VehicleViolationId);
+            ViewData["ParentCommentId"] = new SelectList(_context.Comments, "Id", "CommentText", comment.ParentCommentId);
+            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "LocationName", comment.VehicleViolationId);
             return View(comment);
         }
 
@@ -100,7 +100,7 @@ namespace TrafficReports.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("CommentText,ParentCommentId,AppUserId,VehicleViolationId,Id")] Comment comment)
+        public async Task<IActionResult> Edit(Guid id, [Bind("CommentText,ParentCommentId,AppUserId,VehicleViolationId,CreatedAt,Id")] Comment comment)
         {
             if (id != comment.Id)
             {
@@ -128,8 +128,8 @@ namespace TrafficReports.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", comment.AppUserId);
-            ViewData["ParentCommentId"] = new SelectList(_context.Comments, "Id", "Id", comment.ParentCommentId);
-            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "Id", comment.VehicleViolationId);
+            ViewData["ParentCommentId"] = new SelectList(_context.Comments, "Id", "CommentText", comment.ParentCommentId);
+            ViewData["VehicleViolationId"] = new SelectList(_context.VehicleViolations, "Id", "LocationName", comment.VehicleViolationId);
             return View(comment);
         }
 

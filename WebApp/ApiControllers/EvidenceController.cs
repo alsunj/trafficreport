@@ -9,45 +9,59 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using TrafficReport.Helpers;
+using WebApp;
 
 namespace TrafficReport.ApiControllers
 {
     [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/v{version:apiVersion}/evidences/[controller]/[action]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Route("api/v{version:apiVersion}/[controller]")]
+   // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class EvidenceController : ControllerBase
     {
+        private readonly appSettings _appSettings;
         private readonly IAppBLL _bll;
         private readonly PublicDTOBllMapper<App.DTO.v1_0.Evidence, App.BLL.DTO.Evidence> _mapper; 
         private readonly UserManager<AppUser> _userManager;
+        private readonly string _uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
 
 
-        public EvidenceController(IAppBLL bll, IMapper autoMapper, UserManager<AppUser> userManager)
+
+        public EvidenceController(IAppBLL bll, IMapper autoMapper, UserManager<AppUser> userManager, appSettings appSettings)
         {
+            _appSettings = appSettings;
             _bll = bll;
             _userManager = userManager;
             _mapper = new PublicDTOBllMapper<App.DTO.v1_0.Evidence, App.BLL.DTO.Evidence>(autoMapper);
         }
 
         /// <summary>
-        /// Get all evidences for current user.
+        /// Get all evidences.
         /// </summary>
         /// <returns>List of evidences.</returns>
-        [HttpGet]
+        [HttpGet("GetEvidences")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Evidence>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<List<App.DTO.v1_0.Evidence>>> GetUserEvidences()
         { 
-            var bllEvidenceResult = (await _bll.Evidences.GetAllSortedAsync(
-                    Guid.Parse(_userManager.GetUserId(User))
-                ))
-                .Select(e => _mapper.Map(e))
-                .ToList();
-            return Ok(bllEvidenceResult);
+            var evidences = await _bll.Evidences.GetAllAsync();
+
+            if (evidences.IsNullOrEmpty())
+            {
+                return NotFound();
+            }    
+            var baseUrl = _appSettings.BaseUrl;
+            var fullUrlEvidences = evidences.Select(evidence =>
+            {
+                evidence.File = new Uri(new Uri(baseUrl), evidence.File).ToString();
+                return evidence;
+            }).ToList();
+            
+
+            return Ok(fullUrlEvidences);
         }
 
         /// <summary>
@@ -55,7 +69,7 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="vehicleViolationId"></param>
         /// <returns>List of evidences.</returns>
-        [HttpGet("{id}")]
+        [HttpGet("GetAllEvidencesByVehicleViolationId/{vehicleViolationId}")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Evidence>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
@@ -67,10 +81,20 @@ namespace TrafficReport.ApiControllers
             if (evidences.IsNullOrEmpty())
             {
                 return NotFound();
-            }
+            }           
             
-            return Ok(evidences);
+            var baseUrl = _appSettings.BaseUrl;
+            
+            var fullUrlEvidences = evidences.Select(evidence =>
+            {
+                evidence.File = new Uri(new Uri(baseUrl), evidence.File).ToString();
+                Console.WriteLine( evidence.File);
+                return evidence;
+            }).ToList();
+
+            return Ok(fullUrlEvidences);
         }
+    
 
         /// <summary>
         /// Edit evidence.
@@ -78,7 +102,7 @@ namespace TrafficReport.ApiControllers
         /// <param name="id">Evidence id</param>
         /// <param name="evidence"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("put/{id}")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
@@ -116,22 +140,58 @@ namespace TrafficReport.ApiControllers
         /// <summary>
         /// Add new evidence.
         /// </summary>
+        ///         /// <param name="file"></param>
+
         /// <param name="evidence"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("post")]
         [ProducesResponseType(typeof(App.DTO.v1_0.Evidence),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
-        [Consumes("application/json")]
-        public async Task<ActionResult<App.DTO.v1_0.Evidence>> PostEvidence(App.DTO.v1_0.Evidence evidence)
-        {
-            evidence.Id = Guid.NewGuid();
-            var mappedEvidenceType = _mapper.Map(evidence);
-            _bll.Evidences.Add(mappedEvidenceType);
-            await _bll.SaveChangesAsync();
+        [Consumes("multipart/form-data")]
 
-            return CreatedAtAction("GetAllEvidenceForVehicleViolation", new { id = mappedEvidenceType.VehicleViolationId }, evidence);
+        public async Task<ActionResult<App.DTO.v1_0.Evidence>> PostEvidence([FromForm] IFormFile file, [FromForm] App.DTO.v1_0.Evidence evidence)
+        {
+            try
+            {
+                if (file.Length > 0 && file.Length <= 25 * 1024 * 1024) // 25MB limit
+                {
+                    if (!Directory.Exists(_uploadPath))
+                    {
+                        Directory.CreateDirectory(_uploadPath);
+                    }
+        
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    var filePath = Path.Combine(_uploadPath, fileName);
+        
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+        
+                    evidence.Id = Guid.NewGuid();
+                    evidence.File = Path.Combine("/uploads", fileName).Replace("~", ""); // Remove tilde (~)
+        
+                    var mappedEvidence = _mapper.Map(evidence);
+                    _bll.Evidences.Add(mappedEvidence);
+                    await _bll.SaveChangesAsync();
+        
+                    return CreatedAtAction("GetAllEvidenceForVehicleViolation", new { id = mappedEvidence.VehicleViolationId }, evidence);
+                }
+                else
+                {
+                    return BadRequest("File is too large or empty.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the error
+                Console.WriteLine($"Error in PostEvidence method: {ex.Message}");
+                // Return an error response
+                return StatusCode(500, "Internal server error");
+            }
         }
+
 
         /// <summary>
         /// Delete evidence by id.
@@ -140,7 +200,7 @@ namespace TrafficReport.ApiControllers
         /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         [Produces("application/json")]
         [Consumes("application/json")] 
         public async Task<IActionResult> DeleteEvidence(Guid id)

@@ -16,6 +16,6 @@ public class VehicleViolation
     
     public string? LocationName { get; set; }
 
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
 }

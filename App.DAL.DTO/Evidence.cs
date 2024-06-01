@@ -12,6 +12,7 @@ public class Evidence : IDomainEntityId
     public Guid VehicleViolationId{ get; set; }
     
     //public Blob Media { get; set; }
+    public string? File { get; set; }
 
     
     public string? Description { get; set; }

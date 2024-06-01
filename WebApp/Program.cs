@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using App.BLL;
@@ -47,6 +48,10 @@ builder.Services.
     .AddDefaultTokenProviders();
 
 JwtSecurityTokenHandler.DefaultInboundClaimFilter.Clear();
+
+var baseUrl = builder.Configuration.GetValue<string>("AppSettings:BaseUrl");
+builder.Services.AddSingleton(new appSettings { BaseUrl = baseUrl });
+
 builder.Services
     .AddAuthentication()
     .AddCookie(options => { options.SlidingExpiration = true; })
@@ -177,6 +182,7 @@ static void SetupAppData(WebApplication app)
     {
         context.Database.Migrate();
     }
+
 
     using var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
     using var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<AppRole>>();

@@ -12,8 +12,8 @@ namespace TrafficReport.ApiControllers
 {
     [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/v{version:apiVersion}/vehicles/[controller]/[action]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Route("api/v{version:apiVersion}/[controller]")]
+   // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class VehicleTypeController : ControllerBase
     {
         private readonly IAppBLL _bll;
@@ -29,7 +29,7 @@ namespace TrafficReport.ApiControllers
         /// Get all vehicle types.
         /// </summary>
         /// <returns>List of vehicle types.</returns>
-        [HttpGet]
+        [HttpGet("GetVehicleTypes")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.VehicleType>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
@@ -71,19 +71,19 @@ namespace TrafficReport.ApiControllers
         /// <param name="id"></param>
         /// <param name="vehicleType"></param>
         /// <returns></returns>
-        [HttpPut("{vehicleTypeId}")]
+        [HttpPut("put/{id}")]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<IActionResult> PutVehicleType(Guid vehicleTypeId, App.DTO.v1_0.VehicleType vehicleType)
+        public async Task<IActionResult> PutVehicleType(Guid id, App.DTO.v1_0.VehicleType vehicleType)
         {
-            if (vehicleTypeId != vehicleType.Id)
+            if (id != vehicleType.Id)
             {
                 return BadRequest("bad request");
             }
-            if (!await _bll.VehicleTypes.ExistsAsync(vehicleTypeId))
+            if (!await _bll.VehicleTypes.ExistsAsync(id))
             {
                 return NotFound("id doesnt exist");
             }
@@ -101,7 +101,7 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="vehicleType"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("post")]
         [ProducesResponseType(typeof(App.DTO.v1_0.VehicleType),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         [Produces("application/json")]
@@ -109,6 +109,7 @@ namespace TrafficReport.ApiControllers
         public async Task<ActionResult<App.DTO.v1_0.VehicleType>> PostVehicleType(App.DTO.v1_0.VehicleType vehicleType)
         {
             vehicleType.Id = Guid.NewGuid();
+            vehicleType.VehicleTypeName = vehicleType.Make + ' ' + vehicleType.Model;
             var mappedVehicleType = _mapper.Map(vehicleType);
             _bll.VehicleTypes.Add(mappedVehicleType);
             await _bll.SaveChangesAsync();
@@ -124,7 +125,7 @@ namespace TrafficReport.ApiControllers
         /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         [Produces("application/json")]
         [Consumes("application/json")] 
         public async Task<IActionResult> DeleteVehicleType(Guid id)

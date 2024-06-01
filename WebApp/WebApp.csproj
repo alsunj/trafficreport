@@ -193,6 +193,11 @@
       <UpToDateCheckInput Remove="Areas\Admin\Views\ViolationType\Details.cshtml" />
       <UpToDateCheckInput Remove="Areas\Admin\Views\ViolationType\Edit.cshtml" />
       <UpToDateCheckInput Remove="Areas\Admin\Views\ViolationType\Index.cshtml" />
+      <UpToDateCheckInput Remove="Views\Comment\Create.cshtml" />
+      <UpToDateCheckInput Remove="Views\Comment\Delete.cshtml" />
+      <UpToDateCheckInput Remove="Views\Comment\Details.cshtml" />
+      <UpToDateCheckInput Remove="Views\Comment\Edit.cshtml" />
+      <UpToDateCheckInput Remove="Views\Comment\Index.cshtml" />
     </ItemGroup>
 
     <ItemGroup>

@@ -30,6 +30,17 @@ namespace App.BLL.Services
             return (await Repository.GetAllViolationCommentsSortedAsync(violationId))
                 .Select(e => Mapper.Map(e));
         }
+
+        public async Task<IEnumerable<Comment>> GetAllViolationCommentsWithParentCommentAsync(Guid parentCommentId)
+        {
+            return (await Repository.GetAllViolationCommentsWithParentCommentAsync(parentCommentId)).Select(e =>
+                Mapper.Map(e));
+        }
+        
+        public async Task<IEnumerable<Comment>> GetAllViolationCommentsWithNoParentCommentAsync(Guid violationId)
+        {
+            return (await Repository.GetAllViolationCommentsWithNoParentCommentAsync(violationId)).Select(e => Mapper.Map(e));
+        }
         
     }
 }
