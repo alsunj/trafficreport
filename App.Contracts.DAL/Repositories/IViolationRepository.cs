@@ -6,7 +6,6 @@ namespace App.Contracts.DAL.Repositories;
 
 public interface IViolationRepository :  IEntityRepository<DALDTO.Violation>, IViolationRepositoryCustom<DALDTO.Violation>
 {
-   // public Task<IEnumerable<DALDTO.Violation>> GetAllWithViolationTypesAsync();
 }
 
 public interface IViolationRepositoryCustom<TEntity>

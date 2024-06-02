@@ -1,4 +1,5 @@
 ﻿using App.Contracts.DAL.Repositories;
+using App.Domain.Violations;
 using AutoMapper;
 using Base.DAL.EF;
 using DALDTO = App.DAL.DTO;
@@ -22,4 +23,5 @@ public class ViolationRepository : BaseEntityRepository<APPDomain.Violations.Vio
         
         return (await query.ToListAsync()).Select(e => Mapper.Map(e));
     }
+  
 }

@@ -29,7 +29,7 @@ public class VehicleRepository : BaseEntityRepository<APPDomain.Vehicles.Vehicle
         return Mapper.Map(vehicle)!;
     }
     
-    public double CalculateVehicleRatingByLicensePlate(string licensePlate)
+    public double CalculateVehicleRatingByLicensePlate(string licensePlate, decimal? severity)
     {
         var vehicle = GetByLicensePlateAsync(licensePlate).Result;
         var violations = _violationRepository.GetAllViolationIdsByVehicleId(vehicle.Id).Result;
@@ -40,8 +40,10 @@ public class VehicleRepository : BaseEntityRepository<APPDomain.Vehicles.Vehicle
         {
             totalRating += 5 * (1 - (double) violation.Severity!);
         }
+        
+        totalRating += 5 * (1 - (double) severity!);
 
-        var averageRating = totalRating / (violations.Count + 5);
+        var averageRating = totalRating / (violations.Count + 6);
 
         vehicle.Rating = (decimal) averageRating;
         

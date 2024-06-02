@@ -9,8 +9,6 @@ public class Violation: IDomainEntityId
     public int ViolationType { get; set; }
     
     public string? ViolationName { get; set; }
-    
-    public decimal? Severity { get; set; }
 
-
+    public decimal? Severity { get; set; } 
 }

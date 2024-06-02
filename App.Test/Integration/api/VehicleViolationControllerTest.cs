@@ -19,7 +19,7 @@ namespace App.Test.Integration.api;
 
 [Collection("NonParallel")]
 public class VehicleViolationControllerTest : IClassFixture<CustomWebApplicationFactory<Program>>
-{/*
+{
     private readonly HttpClient _client;
     private Guid VehicleId130Thn;
     private readonly CustomWebApplicationFactory<Program> _factory;
@@ -537,7 +537,7 @@ public class VehicleViolationControllerTest : IClassFixture<CustomWebApplication
     {
         var vehicleTypeId = JsonSerializer.Deserialize<App.BLL.DTO.Vehicle>(await AddVehicleType(jwtData!), _camelCaseJsonSerializerOptions)!.Id;
         
-        var url = "/api/v1/Vehicle/post";
+        var url = "/api/v1/Vehicle/post?test=true";
         var vehicle = new Vehicle()
         {
             VehicleTypeId = vehicleTypeId,
@@ -563,7 +563,7 @@ public class VehicleViolationControllerTest : IClassFixture<CustomWebApplication
         var vehicleTypeId = JsonSerializer.Deserialize<App.BLL.DTO.Vehicle>(await AddVehicleType(jwtData!), _camelCaseJsonSerializerOptions)!.Id;
 
         
-        var url = "api/v1/Vehicle/post";
+        var url = "/api/v1/Vehicle/post?test=true";
         var vehicle = new Vehicle()
         {
             ///TODO: idd
@@ -587,7 +587,7 @@ public class VehicleViolationControllerTest : IClassFixture<CustomWebApplication
 
     private async Task<string> AddViolation(JWTResponse jwtData)
     {
-        var url = "/api/v1/violations/Violation/PostViolation";
+        var url = "/api/v1/Violation/post";
         var violation = new App.BLL.DTO.Violation()
         {
             ViolationType = (int) EViolationType.Minor,
@@ -611,7 +611,7 @@ public class VehicleViolationControllerTest : IClassFixture<CustomWebApplication
     public async Task<string> AddVehicleType(JWTResponse jwtData)
     {
     
-        var url = "/api/v1/vehicles/VehicleType/PostVehicleType";
+        var url = "/api/v1/VehicleType/post";
         var vehicleType = new App.BLL.DTO.VehicleType()
         {
             VehicleTypeName = "Sedan",
@@ -632,53 +632,4 @@ public class VehicleViolationControllerTest : IClassFixture<CustomWebApplication
         var responseContent = await response.Content.ReadAsStringAsync();
         return responseContent;
     }
-    
-    // public async Task<string> AddVehicleViolationLevel(JWTResponse jwtData)
-    // {
-    //
-    //     var url = "/api/v1.0/VehicleViolationLevels";
-    //     var VehicleViolationType = new VehicleViolationLevel()
-    //     {
-    //         VehicleViolationLevelName = "Elite",
-    //     };
-    //     var data =  JsonContent.Create(VehicleViolationType);
-    //
-    //     _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtData!.Jwt);
-    //     
-    //     // Act
-    //     var response = await _client.PostAsync(url, data);
-    //     
-    //     // Assert
-    //     Assert.True(response.IsSuccessStatusCode);
-    //
-    //     var responseContent = await response.Content.ReadAsStringAsync();
-    //     return responseContent;
-    // }
-    //
-    // public async Task<string> AddSpot(JWTResponse jwtData)
-    // {
-    //
-    //     var url = "/api/v1.0/Spots";
-    //     var spot = new Spot()
-    //     {
-    //         Name = "Taltech Spordihoone",
-    //         Country = "Eesti",
-    //         City = "Tallinn",
-    //         Street = "Manniliiva",
-    //         House = "7",
-    //         Description = "Entrance from the parking lot side.",
-    //     };
-    //     var data =  JsonContent.Create(spot);
-    //
-    //     _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtData!.Jwt);
-    //     
-    //     // Act
-    //     var response = await _client.PostAsync(url, data);
-    //     
-    //     // Assert
-    //     Assert.True(response.IsSuccessStatusCode);
-    //
-    //     var responseContent = await response.Content.ReadAsStringAsync();
-    //     return responseContent;
-    // }*/
 }

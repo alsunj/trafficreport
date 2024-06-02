@@ -38,7 +38,7 @@ namespace TrafficReport.Controllers
         // GET: /VehicleViolations
         public async Task<IActionResult> Index()
         {
-            var res = await _uow.VehicleViolationRepository.GetAllSortedAsync(
+            var res = await _uow.VehicleViolationRepository.GetAllAsync(
                 Guid.Parse(_userManager.GetUserId(User)));
             return View(res);
         }
@@ -82,7 +82,9 @@ namespace TrafficReport.Controllers
                 
                 var vehicle = await _uow.VehicleRepository.FirstOrDefaultAsync(vehicleViolation.VehicleId);
                 
-                vehicle!.Rating = (decimal) _uow.VehicleRepository.CalculateVehicleRatingByLicensePlate(vehicle.RegNr!);
+                
+                var violation = await _uow.ViolationRepository.FirstOrDefaultAsync(vehicleViolation.ViolationId);
+                vehicle!.Rating = (decimal) _uow.VehicleRepository.CalculateVehicleRatingByLicensePlate(vehicle!.RegNr!, violation!.Severity!);
                 
                 _uow.VehicleRepository.Update(vehicle);
                 

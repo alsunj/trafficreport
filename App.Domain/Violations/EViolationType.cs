@@ -2,10 +2,10 @@
 {
     public enum EViolationType
     {
-        NonMoving,
-        Minor,
-        Moderate,
-        Severe,
-        Reckless
+        NonMoving = 1,
+        Minor = 2,
+        Moderate = 3,
+        Severe = 4,
+        Reckless = 5
     }
 }

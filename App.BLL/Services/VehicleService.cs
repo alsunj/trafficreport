@@ -30,9 +30,9 @@ public class VehicleService :
         return Mapper.Map(vehicle)!;
     }
 
-    public double CalculateVehicleRatingByLicensePlate(string licensePlate)
+    public double CalculateVehicleRatingByLicensePlate(string licensePlate, decimal? severity)
     {
-        var rating = Repository.CalculateVehicleRatingByLicensePlate(licensePlate);
+        var rating = Repository.CalculateVehicleRatingByLicensePlate(licensePlate, severity);
         return rating;
     }
 }

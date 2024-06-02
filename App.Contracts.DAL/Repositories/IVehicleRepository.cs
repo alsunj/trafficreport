@@ -11,5 +11,5 @@ public interface IVehicleRepositoryCustom<TEntity>
 {
     Task<IEnumerable<TEntity>> GetAllSortedAsync(Guid userId);
     Task<TEntity> GetByLicensePlateAsync(string licensePlate);
-    double CalculateVehicleRatingByLicensePlate(string licensePlate);
+    double CalculateVehicleRatingByLicensePlate(string licensePlate, decimal? severity);
 }

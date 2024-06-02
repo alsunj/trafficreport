@@ -24,4 +24,5 @@ public class ViolationService :
         return (await Repository.GetAllSortedAsync(userId)).Select(e => Mapper.Map(e));
         
     }
+   
 }

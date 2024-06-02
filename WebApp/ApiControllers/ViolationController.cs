@@ -16,7 +16,7 @@ namespace TrafficReports.ApiControllers
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
-   // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class ViolationController : ControllerBase
     {
@@ -101,6 +101,7 @@ namespace TrafficReports.ApiControllers
             }
 
             var res = _mapper.Map(violation);
+            violation.Severity = (decimal) violation.ViolationType / 10;
 
             _bll.Violations.Update(res);
             await _bll.SaveChangesAsync();
@@ -122,6 +123,8 @@ namespace TrafficReports.ApiControllers
         public async Task<ActionResult<App.DTO.v1_0.Violation>> PostViolation(App.DTO.v1_0.Violation violation)
         {
             violation.Id = Guid.NewGuid();
+            violation.Severity = (decimal) violation.ViolationType / 10;
+            
             var mappedViolation = _mapper.Map(violation);
             _bll.Violations.Add(mappedViolation);
             await _bll.SaveChangesAsync();

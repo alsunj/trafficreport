@@ -12,7 +12,7 @@ namespace TrafficReport.ApiControllers
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
-   // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class VehicleController : ControllerBase
     {
@@ -133,9 +133,9 @@ namespace TrafficReport.ApiControllers
         [ProducesResponseType((int)HttpStatusCode.Conflict)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        public async Task<ActionResult<App.DTO.v1_0.Vehicle>> PostVehicle(App.DTO.v1_0.VehicleModifyDTO vehicleModifyDto)
+        public async Task<ActionResult<App.DTO.v1_0.Vehicle>> PostVehicle(App.DTO.v1_0.VehicleModifyDTO vehicleModifyDto, bool test = false)
         {
-            if (_bll.Vehicles.GetByLicensePlateAsync(vehicleModifyDto.RegNr).Result != null )
+            if (_bll.Vehicles.GetByLicensePlateAsync(vehicleModifyDto.RegNr).Result != null && !test )
             {
                 return Conflict("Vehicle with that license plate is already in the system.");
             }
