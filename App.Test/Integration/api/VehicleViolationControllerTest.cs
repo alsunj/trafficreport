@@ -216,7 +216,8 @@ public class VehicleViolationControllerTest : IClassFixture<CustomWebApplication
             Assert.Equal(entry.AppUserId, violation2.AppUserId);
         }
     }
-
+    
+    
     [Fact(DisplayName = "GET - get VehicleViolations for a specific license plate")]
     public async Task GetVehicleViolationsForSpecificLicensePlate()
     {
@@ -251,6 +252,7 @@ public class VehicleViolationControllerTest : IClassFixture<CustomWebApplication
             var vehicle = JsonSerializer.Deserialize<Vehicle>(vehicleContent, _camelCaseJsonSerializerOptions)!;
 
             Assert.Equal("130THN", vehicle.RegNr);
+            Assert.True(vehicle.Rating < 5, "Vehicle rating should drop below 5 after a violation is added.");
             
             Assert.NotNull(entry.Description);
             Assert.NotNull(entry.Coordinates);
@@ -458,9 +460,6 @@ public class VehicleViolationControllerTest : IClassFixture<CustomWebApplication
         }
     }
     
-    
-    
-    
     public async Task<string> CreateVehicleViolation(JWTResponse jwtData)
     {
         var vehicleId = JsonSerializer.Deserialize<App.BLL.DTO.Vehicle>(await AddVehicle(jwtData!), _camelCaseJsonSerializerOptions)!.Id;
@@ -553,6 +552,7 @@ public class VehicleViolationControllerTest : IClassFixture<CustomWebApplication
         
         // Assert
         Assert.True(response.IsSuccessStatusCode);
+        
 
         var responseContent = await response.Content.ReadAsStringAsync();
         return responseContent;
@@ -566,7 +566,6 @@ public class VehicleViolationControllerTest : IClassFixture<CustomWebApplication
         var url = "/api/v1/Vehicle/post?test=true";
         var vehicle = new Vehicle()
         {
-            ///TODO: idd
             VehicleTypeId = vehicleTypeId,
             Color = "Grey",
             RegNr = "130THN"
@@ -592,7 +591,7 @@ public class VehicleViolationControllerTest : IClassFixture<CustomWebApplication
         {
             ViolationType = (int) EViolationType.Minor,
             ViolationName = "Traffic violation",
-            Severity = (decimal) 0.2
+            Severity = 0
         };
         var data =  JsonContent.Create(violation);
 
