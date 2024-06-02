@@ -12,7 +12,7 @@ namespace TrafficReport.ApiControllers
     [ApiVersion("1.0")]
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class VehicleController : ControllerBase
     {
@@ -160,6 +160,7 @@ namespace TrafficReport.ApiControllers
         public async Task<IActionResult> DeleteVehicle(Guid id)
         {
             var vehicle = await _bll.Vehicles.FirstOrDefaultAsync(id);
+            Console.WriteLine(vehicle);
             if (vehicle == null)
             {
                 return NotFound();
@@ -175,8 +176,9 @@ namespace TrafficReport.ApiControllers
         /// </summary>
         /// <param name="licensePlate"></param>
         /// <returns></returns>
-        [HttpDelete("delete/{licensePlate}")]
+        [HttpDelete("deleteByLicensePlate/{licensePlate}")]
         [ProducesResponseType ((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int) HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<IActionResult> DeleteVehicleByLicensePlate(string licensePlate)
