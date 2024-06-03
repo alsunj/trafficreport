@@ -17,6 +17,13 @@
             <param name="id">Additional vehicle id.</param>
             <returns>App.DTO.v1_0.AdditionalVehicle</returns>
         </member>
+        <member name="M:TrafficReport.ApiControllers.AdditionalVehicleController.GetAdditionalVehicleByVehicleViolation(System.Guid)">
+            <summary>
+            Get additional vehicle by id.
+            </summary>
+            <param name="id">Additional vehicle id.</param>
+            <returns>App.DTO.v1_0.AdditionalVehicle</returns>
+        </member>
         <member name="M:TrafficReport.ApiControllers.AdditionalVehicleController.PutAdditionalVehicle(System.Guid,App.DTO.v1_0.AdditionalVehicle)">
             <summary>
             Edit Additional vehicle.
@@ -83,7 +90,7 @@
         </member>
         <member name="M:TrafficReport.ApiControllers.EvidenceController.GetUserEvidences">
             <summary>
-            Get all evidences for current user.
+            Get all evidences.
             </summary>
             <returns>List of evidences.</returns>
         </member>
@@ -102,10 +109,11 @@
             <param name="evidence"></param>
             <returns></returns>
         </member>
-        <member name="M:TrafficReport.ApiControllers.EvidenceController.PostEvidence(App.DTO.v1_0.Evidence)">
+        <member name="M:TrafficReport.ApiControllers.EvidenceController.PostEvidence(Microsoft.AspNetCore.Http.IFormFile,App.DTO.v1_0.Evidence)">
             <summary>
             Add new evidence.
             </summary>
+                    /// <param name="file"></param>
             <param name="evidence"></param>
             <returns></returns>
         </member>
@@ -229,7 +237,7 @@
             <param name="vehicleModifyDto"></param>
             <returns></returns>
         </member>
-        <member name="M:TrafficReport.ApiControllers.VehicleController.PostVehicle(App.DTO.v1_0.VehicleModifyDTO)">
+        <member name="M:TrafficReport.ApiControllers.VehicleController.PostVehicle(App.DTO.v1_0.VehicleModifyDTO,System.Boolean)">
             <summary>
             Add vehicleDto.
             </summary>
