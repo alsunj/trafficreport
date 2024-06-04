@@ -48,6 +48,11 @@ namespace TrafficReport.ApiControllers
                 .ToList();
             return Ok(bllCommentResult);
         }
+        
+        /// <summary>
+        /// Get comments by id.
+        /// </summary>
+        /// <returns>comment.</returns>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(App.DTO.v1_0.Comment),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -68,7 +73,10 @@ namespace TrafficReport.ApiControllers
             return Ok(res);
         }
 
-        
+        /// <summary>
+        /// Get comments by parentcommentid.
+        /// </summary>
+        /// <returns>List of comments.</returns>
         [HttpGet("GetAllCommentsWithParentCommentId/{ParentCommentId}")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Comment>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
@@ -86,6 +94,10 @@ namespace TrafficReport.ApiControllers
             }
             return Ok(bllCommentResult);
         }
+        /// <summary>
+        /// Get comments by vehicleviolatonid.
+        /// </summary>
+        /// <returns>List of comments</returns>
         [HttpGet("GetAllVehicleViolationCommentsWithNoParentCommentId/{vehicleViolationId}")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Comment>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]

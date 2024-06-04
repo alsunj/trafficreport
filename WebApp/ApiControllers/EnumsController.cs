@@ -20,6 +20,10 @@ public class EnumsController: ControllerBase
     {
         _uow = uow;
     }
+    /// <summary>
+    /// Get all violationType enums
+    /// </summary>
+    /// <returns>List of violationType enums</returns>
     [HttpGet("GetViolationTypeEnums")]
     [ProducesResponseType(typeof(List<App.DTO.v1_0.EViolationType>), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int) HttpStatusCode.Unauthorized)]
@@ -30,7 +34,10 @@ public class EnumsController: ControllerBase
         var violationTypes = (await _uow.EViolationTypeRepository.GetAllAsync()).ToList();
         return Ok(violationTypes);
     }
-    
+    /// <summary>
+    /// Get all vehicleSize enums
+    /// </summary>
+    /// <returns>List of vehicleSize enums</returns>
     [HttpGet("GetVehicleSizeEnums")]
     [ProducesResponseType(typeof(List<App.DTO.v1_0.EVehicleSize>), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int) HttpStatusCode.Unauthorized)]

@@ -18,6 +18,8 @@ namespace TrafficReport.ApiControllers
     [Route("api/v{version:apiVersion}/[controller]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
+    
+    
     public class EvidenceController : ControllerBase
     {
         private readonly appSettings _appSettings;
