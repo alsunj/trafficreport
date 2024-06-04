@@ -39,7 +39,8 @@ namespace App.BLL.Services
         
         public async Task<IEnumerable<Comment>> GetAllViolationCommentsWithNoParentCommentAsync(Guid violationId)
         {
-            return (await Repository.GetAllViolationCommentsWithNoParentCommentAsync(violationId)).Select(e => Mapper.Map(e));
+            return (await Repository.GetAllViolationCommentsWithNoParentCommentAsync(violationId)).Select(e =>
+                Mapper.Map(e));
         }
         
     }

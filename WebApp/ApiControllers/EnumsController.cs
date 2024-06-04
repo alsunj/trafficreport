@@ -27,7 +27,7 @@ public class EnumsController: ControllerBase
     [Consumes("application/json")]
     public async Task<ActionResult<List<App.DTO.v1_0.EViolationType>>> GetViolationTypeEnums()
     {
-        var violationTypes = await _uow.EViolationTypeRepository.GetAllAsync();
+        var violationTypes = (await _uow.EViolationTypeRepository.GetAllAsync()).ToList();
         return Ok(violationTypes);
     }
     
@@ -38,7 +38,8 @@ public class EnumsController: ControllerBase
     [Consumes("application/json")]
     public async Task<ActionResult<List<App.DTO.v1_0.EVehicleSize>>> GetVehicleSizeEnums()
     {
-        var vehicleSizes = await _uow.EVehicleSizeRepository.GetAllAsync();
+        var vehicleSizes = (await _uow.EVehicleSizeRepository.GetAllAsync())
+            .ToList();
         return Ok(vehicleSizes);
     }
 }

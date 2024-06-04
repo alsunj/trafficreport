@@ -60,6 +60,7 @@ namespace TrafficReports.ApiControllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(App.DTO.v1_0.Violation), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.Violation>> GetViolation(Guid id)
@@ -86,6 +87,7 @@ namespace TrafficReports.ApiControllers
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<IActionResult> PutViolation(Guid id, App.DTO.v1_0.Violation violation)
@@ -118,6 +120,7 @@ namespace TrafficReports.ApiControllers
         [HttpPost("post")]
         [ProducesResponseType(typeof(App.DTO.v1_0.Violation), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.Violation>> PostViolation(App.DTO.v1_0.Violation violation)
@@ -143,6 +146,7 @@ namespace TrafficReports.ApiControllers
         /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [HttpDelete("delete/{id}")]
         [Produces("application/json")]
         [Consumes("application/json")]

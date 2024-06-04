@@ -47,6 +47,7 @@ namespace TrafficReport.ApiControllers
       
         [HttpGet("GetVehicleViolations")]
         [ProducesResponseType<List<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<List<App.DTO.v1_0.VehicleViolation>>> GetVehicleViolations()
@@ -83,6 +84,7 @@ namespace TrafficReport.ApiControllers
         [HttpGet("{id}")]
         [ProducesResponseType<App.DTO.v1_0.VehicleViolation>((int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.VehicleViolation>> GetVehicleViolation(Guid id)
@@ -106,6 +108,7 @@ namespace TrafficReport.ApiControllers
         [HttpGet("GetVehicleViolationsByLicensePlate/{licensePlate}")]
         [ProducesResponseType<List<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<List<App.DTO.v1_0.VehicleViolation>>> GetVehicleViolationsByLicensePlate(string licensePlate)
@@ -131,6 +134,7 @@ namespace TrafficReport.ApiControllers
         [HttpGet("GetAllVehicleViolationsByVehicleId/{vehicleId}")]
         [ProducesResponseType<List<App.DTO.v1_0.VehicleViolation>>((int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<List<App.DTO.v1_0.VehicleViolation>>> GetAllVehicleViolationsByVehicleId(Guid vehicleId)
@@ -158,6 +162,7 @@ namespace TrafficReport.ApiControllers
         //[ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<IActionResult> PutVehicleViolation(Guid id, App.DTO.v1_0.VehicleViolation vehicleViolation)
@@ -189,6 +194,7 @@ namespace TrafficReport.ApiControllers
         [HttpPost("post")]
         [ProducesResponseType<App.DTO.v1_0.VehicleViolation>((int) HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.VehicleViolation>> PostVehicleViolation(App.DTO.v1_0.VehicleViolation vehicleViolation)
@@ -223,6 +229,7 @@ namespace TrafficReport.ApiControllers
         /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [HttpDelete("delete/{id}")]
         [Produces("application/json")]
         [Consumes("application/json")]

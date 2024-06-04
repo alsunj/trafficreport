@@ -72,6 +72,7 @@ namespace TrafficReport.ApiControllers
         [HttpGet("GetAllEvidencesByVehicleViolationId/{vehicleViolationId}")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Evidence>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<List<App.DTO.v1_0.Evidence>>> GetAllEvidenceForVehicleViolation(Guid vehicleViolationId)
@@ -147,6 +148,7 @@ namespace TrafficReport.ApiControllers
         [HttpPost("post")]
         [ProducesResponseType(typeof(App.DTO.v1_0.Evidence),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("multipart/form-data")]
 
@@ -200,6 +202,7 @@ namespace TrafficReport.ApiControllers
         /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [HttpDelete("delete/{id}")]
         [Produces("application/json")]
         [Consumes("application/json")] 

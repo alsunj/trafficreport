@@ -51,6 +51,7 @@ namespace TrafficReport.ApiControllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(App.DTO.v1_0.EvidenceType),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.EvidenceType>> GetEvidenceType(Guid id)
@@ -76,6 +77,7 @@ namespace TrafficReport.ApiControllers
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<IActionResult> PutEvidenceType(Guid id, App.DTO.v1_0.EvidenceType evidenceType)
@@ -106,6 +108,7 @@ namespace TrafficReport.ApiControllers
         [HttpPost("post")]
         [ProducesResponseType(typeof(App.DTO.v1_0.EvidenceType),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.EvidenceType>> PostEvidenceType(App.DTO.v1_0.EvidenceType evidenceType)
@@ -125,6 +128,7 @@ namespace TrafficReport.ApiControllers
         /// <returns></returns>
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [HttpDelete("delete/{id}")]
         [Produces("application/json")]
         [Consumes("application/json")] 

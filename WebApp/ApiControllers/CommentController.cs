@@ -1,14 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using App.Contracts.BLL;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using App.DAL.EF;
-using App.Domain.Evidences;
 using App.Domain.Identity;
 using Asp.Versioning;
 using AutoMapper;
@@ -57,8 +49,9 @@ namespace TrafficReport.ApiControllers
             return Ok(bllCommentResult);
         }
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(List<App.DTO.v1_0.Comment>),(int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(App.DTO.v1_0.Comment),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.Comment>> GetComment(Guid id)
@@ -79,16 +72,24 @@ namespace TrafficReport.ApiControllers
         [HttpGet("GetAllCommentsWithParentCommentId/{ParentCommentId}")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Comment>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<List<App.DTO.v1_0.Comment>>> GetAllCommentsWithParentCommentId(Guid ParentCommentId)
         {
-            var bllCommentResult = await _bll.Comments.GetAllViolationCommentsWithParentCommentAsync(ParentCommentId);
+            var bllCommentResult = (await _bll.Comments.GetAllViolationCommentsWithParentCommentAsync(ParentCommentId))
+                .ToList();
+            if (bllCommentResult.Count == 0)
+            {
+                return NoContent();
+
+            }
             return Ok(bllCommentResult);
         }
         [HttpGet("GetAllVehicleViolationCommentsWithNoParentCommentId/{vehicleViolationId}")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Comment>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<List<App.DTO.v1_0.Comment>>> GetAllCommentsWithNoParentCommentId(Guid vehicleViolationId)
@@ -96,6 +97,11 @@ namespace TrafficReport.ApiControllers
             var bllCommentResult = (await _bll.Comments.GetAllViolationCommentsWithNoParentCommentAsync(vehicleViolationId))
                 .Select(e => _mapper.Map(e))
                 .ToList();
+            if (bllCommentResult.Count == 0)
+            {
+                return NoContent();
+
+            }
             return Ok(bllCommentResult);
         }
 
@@ -105,13 +111,15 @@ namespace TrafficReport.ApiControllers
         /// <param name="vehicleViolationId"></param>
         /// <returns>List of comments.</returns>
         [HttpGet("GetAllCommentsByVehicleViolationId/{vehicleViolationId}")]
-        [ProducesResponseType(typeof(App.DTO.v1_0.Comment),(int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(List<App.DTO.v1_0.Comment>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<List<App.DTO.v1_0.Comment>>> GetAllVehicleViolationComments(Guid vehicleViolationId)
         {
-            var comments = await _bll.Comments.GetAllViolationCommentsSortedAsync(vehicleViolationId);
+            var comments = (await _bll.Comments.GetAllViolationCommentsSortedAsync(vehicleViolationId))
+                    .ToList();
 
             if (comments.IsNullOrEmpty())
             {
@@ -168,6 +176,7 @@ namespace TrafficReport.ApiControllers
         [HttpPost("post")]
         [ProducesResponseType(typeof(App.DTO.v1_0.Comment),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.Comment>> PostComment(App.DTO.v1_0.Comment comment)

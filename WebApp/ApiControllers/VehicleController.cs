@@ -33,6 +33,7 @@ namespace TrafficReport.ApiControllers
         /// <returns>List of vehicles.</returns>
         [HttpGet("GetVehicles")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Vehicle>),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<List<App.DTO.v1_0.Vehicle>>> GetVehicles()
@@ -50,6 +51,7 @@ namespace TrafficReport.ApiControllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(List<App.DTO.v1_0.Vehicle>),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
         public async Task<ActionResult<App.DTO.v1_0.Vehicle>> GetVehicle(Guid id)
