@@ -155,7 +155,6 @@ namespace TrafficReport.ApiControllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
-        
         public async Task<IActionResult> PutComment(Guid id, App.DTO.v1_0.Comment comment)
         {
             if (id != comment.Id)

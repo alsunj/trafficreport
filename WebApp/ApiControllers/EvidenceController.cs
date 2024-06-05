@@ -47,6 +47,7 @@ namespace TrafficReport.ApiControllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Produces("application/json")]
         [Consumes("application/json")]
+        
         public async Task<ActionResult<List<App.DTO.v1_0.Evidence>>> GetUserEvidences()
         { 
             var evidences = await _bll.Evidences.GetAllAsync();
