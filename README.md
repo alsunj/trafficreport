@@ -135,16 +135,3 @@ docker build -t webapp:latest2 .
 
 
 
-SUBJECTS TO CHANGE:
-
---Comment
-----Fix ParentcommentId
-
-
-
-
-
-
-
-
-
